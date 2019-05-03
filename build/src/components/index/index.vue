@@ -8,12 +8,21 @@
         <div class="main-body">
           <div class="news-report">
             <div class="news-pic">
-
+              <v-slide></v-slide>
             </div>
             <div class="news-tab">
-
+              <v-tab></v-tab>
             </div>
           </div>
+        </div>
+      </div>
+      <div class="public-container">
+        <div class="main-head">
+          <span>>>>&nbsp;警务公开</span>
+        </div>
+        <div class="main-body">
+          <div class="public-leader"></div>
+          <div class="public-report"></div>
         </div>
       </div>
       <div class="interact-container">
@@ -33,7 +42,13 @@
 </template>
 
 <script>
+import slide from './slide/slide.vue'
+import tab from './tab/tab.vue'
 export default {
+  components: {
+    'v-slide': slide,
+    'v-tab': tab
+  }
 }
 </script>
 
