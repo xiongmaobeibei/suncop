@@ -8,12 +8,21 @@
         <div class="main-body">
           <div class="news-report">
             <div class="news-pic">
-              <myswiper></myswiper>
+              <v-slide></v-slide>
             </div>
             <div class="news-tab">
-
+              <v-tab></v-tab>
             </div>
           </div>
+        </div>
+      </div>
+      <div class="public-container">
+        <div class="main-head">
+          <span>>>>&nbsp;警务公开</span>
+        </div>
+        <div class="main-body">
+          <div class="public-leader"></div>
+          <div class="public-report"></div>
         </div>
       </div>
       <div class="interact-container">
@@ -33,15 +42,12 @@
 </template>
 
 <script>
-import swiper from '../rotationchart/swiper'
+import slide from './slide/slide.vue'
+import tab from './tab/tab.vue'
 export default {
-  data () {
-    return {
-
-    }
-  },
   components: {
-    myswiper: swiper
+    'v-slide': slide,
+    'v-tab': tab
   }
 }
 </script>
@@ -65,13 +71,12 @@ export default {
         display flex
         flex-direction row
         justify-content space-between
-        flex-wrap wrap
         background-color pink
         .news-pic
           width 48%
-          height 0
+          height 500px
           background-color red
-          padding-bottom 35%
+          // overflow hidden
         .news-tab
           width 48%
           margin-right 0

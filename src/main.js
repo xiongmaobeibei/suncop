@@ -4,6 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import VueResource from 'vue-resource'
 import router from './router'
+// 引入flexible
 import 'lib-flexible'
 import axios from 'axios'
 import VueAxios from 'vue-axios'

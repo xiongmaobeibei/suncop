@@ -7,12 +7,12 @@ import router from './router'
 // 引入flexible
 import 'lib-flexible'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
-
+import 'swiper/dist/css/swiper.css'
 
 Vue.config.productionTip = false
 
 Vue.use(VueResource)
-Vue.use(VueAwesomeSwiper)
+Vue.use(VueAwesomeSwiper,)
 require('./util/mock')
 
 /* eslint-disable no-new */

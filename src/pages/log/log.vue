@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="wrapper">
         <div class="tab">
             <div class="item-title">用户中心</div>
             <div class="tab-item">
@@ -31,27 +31,35 @@ export default {
 </script>
 
 <style lang="stylus" scoped rel="stylesheet/stylus">
+  .wrapper
+    overflow hidden
+    background rgb(248,242,242)
     .tab
-        float left
-        width 20%
-        margin-left 15%
-        height 500px
-        .item-title
-            height 70px
-            line-height 70px
-            font-size 35px
-            text-align center
-            background rgb(33,82,126)
-        .tab-item
-            height 40px
-            line-height 40px
-            font-size 23px
-            text-align center
-            background rgb(242,242,242)
-            &:active
-                background rgb(255,255,255)
+      float left
+      width 30%
+      margin-top 20px
+      .item-title
+          height 80px
+          line-height 80px
+          font-size 35px
+          text-align center
+          background rgb(33,82,126)
+      .tab-item
+          height 50px
+          line-height 60px
+          font-size 23px
+          text-align center
+          background rgb(248,242,242)
+          margin 1px
     .right-wrapper
+<<<<<<< HEAD
         float left
         width 60%
         background rgb(82,130,170)
+=======
+      margin-top 20px
+      float left
+      width 70%
+      background rgb(82,130,170)
+>>>>>>> 2931724efad20276cebbe3660e694f84c461ffd0
 </style>

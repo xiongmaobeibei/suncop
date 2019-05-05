@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="wrapper">
         <div class="top">
             <div class="search-wrapper">
                 <div class="button"></div>
@@ -43,15 +43,26 @@ export default {
         margin 0
         padding 0
         width 100%
+<<<<<<< HEAD
         height 50px
         line-height 50px
         background-color rgb(0,94,154)
         .search-wrapper
             width 25%
             margin-left 2%
+=======
+        height 80px
+        line-height 80px
+        background-color rgb(0,94,154)
+        .search-wrapper
+            width 400px
+            margin-left 10px
+            float left
+>>>>>>> 2931724efad20276cebbe3660e694f84c461ffd0
             display inline-block
             margin-top 10px
             .button
+<<<<<<< HEAD
                 width 25px
                 height 25px
                 background-image url(u162.png)
@@ -76,8 +87,34 @@ export default {
             display inline-block
             margin-top 10px
             float right
+=======
+                width 40px
+                height 38px
+                background-image url(u162.png)
+                background-size 40px 38px
+                background-repeat no-repeat
+                float left
+                margin 18px 5px 9px 35px
+            .text
+                width 250px
+                height 40px
+                border 0px
+                border-radius 5px
+                float left
+                margin 20px 3px 13px 13px
+        .time
+            display inline-block
+            width 220px
+            font-size 24px
+            position absolute
+            right 168px
+            color white
+        .button-group
+            right 15px
+            position absolute
+>>>>>>> 2931724efad20276cebbe3660e694f84c461ffd0
             input
-              font-size 15px
+              font-size 25px
               display inline-block
               float right
               border 0px
@@ -85,31 +122,53 @@ export default {
     .bottom
         background-color rgb(14,30,45)
         width 100%
+<<<<<<< HEAD
         .title
             color:#99FFFF
             height 150px
             line-height 150px
+=======
+        height 680px
+        .title
+            color:#99FFFF
+            height 150px
+            line-height 170px
+>>>>>>> 2931724efad20276cebbe3660e694f84c461ffd0
             .left-content
                 float left
                 width 50%
+<<<<<<< HEAD
                 text-align center
                 .title-icon
                     width 70px
                     height 70px
                     background-size 70px 70px
+=======
+                float left
+                text-align center
+                .title-icon
+                    width 90px
+                    height 90px
+                    background-size 90px 90px
+>>>>>>> 2931724efad20276cebbe3660e694f84c461ffd0
                     background-repeat no-repeat
                     bg-image('u10')
                     display inline-block
                 .title-text
                     font-family '宋体'
                     font-weight bold
+<<<<<<< HEAD
                     font-size 2.4em
+=======
+                    font-size 55px
+>>>>>>> 2931724efad20276cebbe3660e694f84c461ffd0
                     display inline-block
                     margin-left 10px
                     letter-spacing 6px
             .right-content
                 float right
                 width 50%
+<<<<<<< HEAD
                 text-align left
                 font-family '楷体'
                 font-size 1.5em
@@ -117,5 +176,15 @@ export default {
             height 350px
             bg-image('u2')
             background-size 100% 300px
+=======
+                float right
+                font-family '楷体'
+                font-size 30px
+                text-align left
+        .image-wrapper
+            height 650px
+            bg-image('u2')
+            background-size 100% 430px
+>>>>>>> 2931724efad20276cebbe3660e694f84c461ffd0
             background-repeat no-repeat
 </style>
