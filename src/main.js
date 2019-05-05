@@ -16,11 +16,7 @@ Vue.use(VueAwesomeSwiper)
 Vue.config.productionTip = false
 
 Vue.use(VueResource)
-<<<<<<< HEAD
 Vue.use(VueAxios, axios)
-=======
-// Vue.use(VueAxios, axios)
->>>>>>> cb9b66779057d4ea62a995a49a4390a348fc23a4
 
 /* eslint-disable no-new */
 new Vue({
