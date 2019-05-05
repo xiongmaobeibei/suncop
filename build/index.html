@@ -14,6 +14,19 @@
       }
     </style>
   </head>
+  <!-- REM -->
+  <script type="text/javascript">
+    var maxW = 750, minW = 320
+    var setFontSize = function(){
+      var width = document.documentElement.clientWidth, w
+      w = width > maxW ? maxW : width
+      w = w < minW ? minW : w
+      var fontSize = w / maxW * 200
+      document.getElementsByTagName("html")[0].style.fontSize = fontSize + "px"
+    }
+    setFontSize()
+    window.onresize = setFontSize
+  </script>
   <body>
     <div id="app"></div>
     <!-- built files will be auto injected -->

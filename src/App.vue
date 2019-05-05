@@ -6,7 +6,6 @@
     <v-footer class="footer"/>
   </div>
 </template>
-
 <script>
 import header from './components/header/header.vue'
 import footer from './components/footer/footer.vue'
@@ -38,11 +37,12 @@ export default {
 <style lang="stylus" rel="stylesheet/stylus">
   .header
     width 100%
+    height auto
     min-height 100%
   .footer
     position relative
     width 100%
-    height 150px
+    height 280px
     margin 0px auto 0 auto
     clear both
 </style>
