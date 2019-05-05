@@ -8,10 +8,10 @@
         <div class="main-body">
           <div class="news-report">
             <div class="news-pic">
-              <v-slide></v-slide>
+              <v-slide />
             </div>
             <div class="news-tab">
-              <v-tab></v-tab>
+              <v-tab />
             </div>
           </div>
         </div>

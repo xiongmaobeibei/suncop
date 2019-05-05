@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <v-header class="header" @jump='jumptolog'/>
-    <!-- <v-index class="index"/> -->
-    <component :is='isshow'></component>
+    <v-index class="index"/>
+    <!-- <component :is='isshow'></component> -->
     <v-footer class="footer"/>
   </div>
 </template>
