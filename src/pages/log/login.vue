@@ -28,9 +28,9 @@ export default {
   },
   methods: {
     login () {
-      this.$http.get('api/log').then(response => {
-        console.log(response.body)
-      })
+      // this.$http.get('api/log').then(response => {
+      //  console.log(response.body)
+      // })
       // console.log(this.creditid + this.password)
       // let data = {'id': this.creditid, 'password': this.password}
       // 请求后台接口
