@@ -2,15 +2,9 @@
     <div class="wrapper">
         <form action="GET" class="form">
             <p v-show="showtip">{{showtip}}</p>
-<<<<<<< HEAD
-            <input type="text" v-model="creditid" placeholder="   请输入身份证号码"  class="inputtext"/><br>
-            <input type="password" v-model="password" placeholder="   请输入密码" class="inputtext"/><br>
-            <input type="button" value="登录" class="button" @click="login">
-=======
             <input type="text" v-model="creditid"  class="inputtext"/><br>
             <input type="password" v-model="password" value="请输入密码" class="inputtext"/><br>
             <input type="button" value="登录" width="30px" class="button" @click="login">
->>>>>>> 2931724efad20276cebbe3660e694f84c461ffd0
         </form>
     </div>
 </template>
@@ -24,18 +18,12 @@ export default {
   },
   data () {
     return {
-<<<<<<< HEAD
-      showtip: '',
-      creditid: '',
-      password: ''
-=======
       tip: '',
       showtip: false,
       creditid: '',
       password: '',
       param: 1,
       myuser: {}
->>>>>>> 2931724efad20276cebbe3660e694f84c461ffd0
     }
   },
   methods: {
@@ -43,8 +31,6 @@ export default {
       this.$http.get('api/log').then(response => {
         console.log(response.body)
       })
-<<<<<<< HEAD
-=======
       // console.log(this.creditid + this.password)
       // let data = {'id': this.creditid, 'password': this.password}
       // 请求后台接口
@@ -63,7 +49,6 @@ export default {
       //   //   //   }.bind(this), 1000)
       //   // }
       // })
->>>>>>> 2931724efad20276cebbe3660e694f84c461ffd0
     }
   }
 }
@@ -75,26 +60,6 @@ export default {
     height 600px
     .form
       width 50%
-<<<<<<< HEAD
-      height 400px
-      margin 150px auto 150px auto
-      padding-top 60px
-      background white
-      border-radius 30px
-      text-align center
-      line-height 80px
-      font-size 18px
-      -webkit-box-shadow 14px 12px 16px #333333
-      -moz-box-shadow 13px 12px 16px #333333
-      .inputtext
-        height 40px
-        width 60%
-      .button
-        height 50px
-        width 60%
-        font-size 20px
-        color blue
-=======
       height 300px
       margin 150px auto 150px auto
       padding-top 50px
@@ -109,6 +74,5 @@ export default {
       .button
         height 40px
         font-size 20px
->>>>>>> 2931724efad20276cebbe3660e694f84c461ffd0
         border 0px
 </style>
