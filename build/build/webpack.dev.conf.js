@@ -19,6 +19,7 @@ const app = express()
 var apiRouter = express.Router()
 app.use('/api',apiRouter)
 
+
 const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
 

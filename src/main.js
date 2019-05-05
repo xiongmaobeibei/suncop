@@ -10,10 +10,9 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 
 Vue.config.productionTip = false
-require('./mock')
 
 Vue.use(VueResource)
-Vue.use(VueAxios,axios)
+Vue.use(VueAxios, axios)
 
 /* eslint-disable no-new */
 new Vue({

@@ -1,5 +1,4 @@
 <template>
-<<<<<<< HEAD
     <div>
         <div class="wrapper">
             <form action="" class="formbox">
@@ -18,9 +17,6 @@
             </form>
         </div>
     </div>
-=======
-    <div></div>
->>>>>>> 2931724efad20276cebbe3660e694f84c461ffd0
 </template>
 <script>
 export default {

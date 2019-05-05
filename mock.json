@@ -29,7 +29,7 @@
             "sex": "FM",
             "nation": "汉族",
             "address": "四川省成都市",
-            "identity": "1",
+            "identity": "1"
         }
     ],
     "permit": [
@@ -53,7 +53,36 @@
                     "permit_url": "/backToindex"
                 }
             ]
-        }
+        },
+        {
+          "identity": "3",
+          "permit_list": [
+              {
+                  "permit_name": "个人资料",
+                  "permit_url": "/personalInfo"
+              },
+              {
+                  "permit_name": "我的信件",
+                  "permit_url": "/myletter"
+              },
+              {
+                  "permit_name": "注销",
+                  "permit_url": "/logout"
+              },
+              {
+                  "permit_name": "返回首页",
+                  "permit_url": "/backToindex"
+              },
+              {
+                "permit_name": "管理登录用户信息",
+                "permit_url": "/manageUserInfo"
+              },
+              {
+                "permit_name": "添加工作动态",
+                "permit_url": "/addWorkNews"
+              }
+          ]
+      }
     ]
-}
+  }
 }
