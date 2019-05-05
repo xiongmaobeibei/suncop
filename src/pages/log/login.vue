@@ -2,15 +2,9 @@
     <div>
         <form action="GET" class="form">
             <p v-show="showtip">{{showtip}}</p>
-            您的身份：
-            <input type="radio" name="radios" value="1" v-model="param">居民
-            <input type="radio" name="radios" value="2" v-model="param">警察<br>
-            <input type="radio" name="radios" value="3" v-model="param">片区管理员
-            <input type="radio" name="radios" value="4" v-model="param">局长
-            <input type="radio" name="radios" value="5" v-model="param">超级管理员<br>
-            身份证号码：<input type="text" width="50px" v-model="creditid"><br>
-            密码：<input type="password" width="50px" v-model="password"><br>
-            <input type="button" value="登录" width="30px" @click="login">
+            <input type="text" v-model="creditid" placeholder="   请输入身份证号码"  class="inputtext"/><br>
+            <input type="password" v-model="password" placeholder="   请输入密码" class="inputtext"/><br>
+            <input type="button" value="登录" class="button" @click="login">
         </form>
     </div>
 </template>
@@ -23,38 +17,16 @@ export default {
   },
   data () {
     return {
-      radio: '0',
-      tip: '',
-      showtip: false,
-      creditid: '请输入',
-      password: '密码',
-      param: 1
+      showtip: '',
+      creditid: '',
+      password: ''
     }
   },
   methods: {
     login () {
-      console.log('sdfsdf')
-      console.log(this.creditid + this.password)
-      // let data = {'id': this.creditid, 'password': this.password}
-      // this.$emit('childFn', this.tip)
-      // 请求后台端口
-      /*
-      this.$http.post('/api/login', data).then((response) => {
-        console.log(response.data)
-        console.log(this.tip)
-        if (response.data === 0) {
-          this.tip = '该用户不存在'
-          this.showtip = false
-        } else if (response.data === 1) {
-          this.tip = '登录成功'
-          this.showtip = true
-          this.$emit('childFn', this.tip)
-          //   setCookie('creditid', this.creditid, 1000 * 60)
-          //   setTimeout(function () {
-          //     this.$router.push('/mater')
-          //   }.bind(this), 1000)
-        }
-      }) */
+      this.$http.get('api/log').then(response => {
+        console.log(response.body)
+      })
     }
   }
 }
@@ -62,12 +34,24 @@ export default {
 
 <style lang="stylus" scoped rel="stylesheet/stylus">
     .form
-        width 400px
-        height 300px
-        margin 60px auto 40px auto
-        background white
-        border-radius 30px
-        text-align center
-        line-height 40px
-        font-size 18px
+      width 50%
+      height 400px
+      margin 150px auto 150px auto
+      padding-top 60px
+      background white
+      border-radius 30px
+      text-align center
+      line-height 80px
+      font-size 18px
+      -webkit-box-shadow 14px 12px 16px #333333
+      -moz-box-shadow 13px 12px 16px #333333
+      .inputtext
+        height 40px
+        width 60%
+      .button
+        height 50px
+        width 60%
+        font-size 20px
+        color blue
+        border 0px
 </style>

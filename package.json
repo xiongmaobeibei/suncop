@@ -15,6 +15,7 @@
     "koa": "^2.7.0",
     "koa2-cors": "^2.0.6",
     "lib-flexible": "^0.3.2",
+    "mockjs": "^1.0.1-beta3",
     "px2rem-loader": "^0.1.9",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",

@@ -53,6 +53,5 @@ export default {
     .right-wrapper
         float left
         width 60%
-        height 500px
         background rgb(82,130,170)
 </style>
