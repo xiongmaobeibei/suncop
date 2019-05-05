@@ -5,11 +5,14 @@ import App from './App'
 import VueResource from 'vue-resource'
 import router from './router'
 import 'lib-flexible'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
 
 Vue.config.productionTip = false
-require('mock.js')
+require('./mock')
 
 Vue.use(VueResource)
+Vue.use(VueAxios,axios)
 
 /* eslint-disable no-new */
 new Vue({
