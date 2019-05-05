@@ -6,14 +6,14 @@ import VueResource from 'vue-resource'
 import router from './router'
 // 引入flexible
 import 'lib-flexible'
-import VueAwesomeSwiper from 'vue-awesome-swiper'
-import 'swiper/dist/css/swiper.css'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
 
 Vue.config.productionTip = false
+require('./mock')
 
 Vue.use(VueResource)
-Vue.use(VueAwesomeSwiper)
-require('./util/mock')
+Vue.use(VueAxios,axios)
 
 /* eslint-disable no-new */
 new Vue({
