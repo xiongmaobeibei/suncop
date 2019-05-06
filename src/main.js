@@ -11,6 +11,8 @@ import 'lib-flexible'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 import 'swiper/dist/css/swiper.css'
 
+import VModal from 'vue-js-modal'
+
 Vue.use(VueAwesomeSwiper)
 
 Vue.config.productionTip = false
@@ -18,6 +20,7 @@ require('./mock')
 
 Vue.use(VueResource)
 // Vue.use(VueAxios, axios)
+Vue.use(VModal)
 
 /* eslint-disable no-new */
 new Vue({
