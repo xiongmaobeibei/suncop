@@ -52,14 +52,7 @@ export default {
           background rgb(248,242,242)
           margin 1px
     .right-wrapper
-<<<<<<< HEAD
         float left
         width 60%
         background rgb(82,130,170)
-=======
-      margin-top 20px
-      float left
-      width 70%
-      background rgb(82,130,170)
->>>>>>> cb9b66779057d4ea62a995a49a4390a348fc23a4
 </style>

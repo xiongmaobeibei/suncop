@@ -25,9 +25,12 @@ export default {
   },
   methods: {
     login () {
-      this.$http.get('api/log').then(response => {
-        console.log(response.body)
-      })
+      this.$http.get('/api/data')// 代替http://localhost:3000/getNewsList
+        .then((res) => {
+          console.log(res.data)
+        }, (err) => {
+          console.log(err)
+        })
     }
   }
 }
@@ -36,7 +39,6 @@ export default {
 <style lang="stylus" scoped rel="stylesheet/stylus">
   .wrapper
     background rgb(82,130,170)
-    height 600px
     .form
       width 50%
       height 400px

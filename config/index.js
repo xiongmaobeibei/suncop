@@ -10,25 +10,25 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
+    // proxyTable: {
+    //   '/api': {
+    //     changeOrigin: true, // 如果接口跨域，需要进行这个参数配置
+    //     target: 'http://localhost:/3000', // 接口的域名
+    //     // secure: false,  // 如果是https接口，需要配置这个参数
+    //     pathRewrite: {
+    //       '^/api': ''
+    //     }
+    //   }
+    // },
     proxyTable: {
-      // '/api': {
-      //   target: 'http://localhost:/8080', // 接口的域名
-      //   // secure: false,  // 如果是https接口，需要配置这个参数
-      //   changeOrigin: true, // 如果接口跨域，需要进行这个参数配置
-      //   pathRewrite: {
-      //     '^/api': '/api'
-      //   }
-      // }
-      '*': {
-        target: 'http://localhost:3002/',
-        filter: function (pathname, req) {
-          return pathname.match('^\api')
-        },
+      '/api': {
+        changeOrigin: true,// 如果接口跨域，需要进行这个参数配置
+        target: 'http://localhost:3000',// 接口的域名
         pathRewrite: {
-          '^/api': '',
+          '^/api': ''//后面可以使重写的新路径，一般不做更改
         }
-      }
-    },
+    }
+  },
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST
