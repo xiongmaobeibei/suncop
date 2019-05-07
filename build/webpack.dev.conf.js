@@ -9,6 +9,18 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
+<<<<<<< HEAD
+=======
+
+var appData = require('../data.json')
+var user = appData.user
+
+const express = require('express')
+const app = express()
+
+var apiRouter = express.Router()
+app.use('/api',apiRouter)
+>>>>>>> 5293695edd1ad8b60cc8fe38141c44b8cb54b065
 
 const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
@@ -42,6 +54,17 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     quiet: true, // necessary for FriendlyErrorsPlugin
     watchOptions: {
       poll: config.dev.poll,
+<<<<<<< HEAD
+=======
+    },
+    before(app) {
+      app.get('/api/user'),(req,res) => {
+        res.json({
+          errno: 0,
+          data: user
+        })
+      }
+>>>>>>> 5293695edd1ad8b60cc8fe38141c44b8cb54b065
     }
   },
   plugins: [

@@ -8,8 +8,12 @@ import router from './router'
 import 'lib-flexible'
 import axios from 'axios'
 // import VueAxios from 'vue-axios'
+// Swiper
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 import 'swiper/dist/css/swiper.css'
+
+import { List, Avatar, Icon } from 'ant-design-vue'
+[List, Avatar, Icon].forEach(item => Vue.use(item))
 
 Vue.use(VueAwesomeSwiper)
 
