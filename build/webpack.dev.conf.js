@@ -9,14 +9,6 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
-var logdata = require('../data.json')
-var login = logdata.data.Router
-
-const express = require('express')
-const app = express()
-
-var apiRoutes = express.Router()
-app.use('/api',apiRoutes)
 
 const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
@@ -50,14 +42,6 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     quiet: true, // necessary for FriendlyErrorsPlugin
     watchOptions: {
       poll: config.dev.poll,
-    },
-    before(app) {
-      app.get('/api/login',(req,res) => {
-        res.json({
-          errno: 0,
-          data: login
-        })
-      })
     }
   },
   plugins: [
@@ -108,4 +92,16 @@ module.exports = new Promise((resolve, reject) => {
       resolve(devWebpackConfig)
     }
   })
+})
+
+/**新闻接口的数据调用 */
+const jsonServer = require('json-server')
+const apiServer = jsonServer.create()
+const apiRouter = jsonServer.router('db.json')
+const middlewares = jsonServer.defaults()
+
+apiServer.use(middlewares)
+apiServer.use(apiRouter)
+apiServer.listen(3001, () => {
+  console.log('json server is running')
 })

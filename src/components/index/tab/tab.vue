@@ -1,49 +1,83 @@
 <template>
-  <div class="tab-box">
-    <div class="tab-head">
-      <a href="#" :class="{'now':index==1}" @click="index=1"></a>
-      <a href="#" :class="{'now':index==2}" @click="index=2"></a>
-      <a href="#" :class="{'now':index==3}" @click="index=3"></a>
-      <a href="#" :class="{'now':index==4}" @click="index=4"></a>
-      <a href="#" :class="{'now':index==5}" @click="index=5"></a>
-    </div>
-    <div class="tab-content">
-      <div class="tab-item" v-show="index==1">1111111</div>
-      <div class="tab-item" v-show="index==2">1111112</div>
-      <div class="tab-item" v-show="index==3">1111113</div>
-      <div class="tab-item" v-show="index==4">111114</div>
-      <div class="tab-item" v-show="index==5">1111115</div>
-    </div>
+  <div class="app">
+      <ul class="tab-tilte">
+          <li v-for="(title,index) in tabtit" :key="title" @click="cur=index" :class="{active:cur==index}">{{title}}</li>
+      </ul>
+      <div class="tab-content">
+          <div>
+            <span>{{cont}}</span>
+            <select class="tab-select" multiple>
+              <option  v-for="cont in tabmain" :key="cont.id" v-show="cont.type==cur" >{{cont.title}}</option>
+            </select>
+          </div>
+      </div>
   </div>
 </template>
 
 <script>
-
+export default {
+  data () {
+    return {
+      cur: 0,
+      tabtit: ['警务报道', '通知公告', '警方提示', '分局警讯', '国务院信息'],
+      tabmain: []
+    }
+  },
+  mounted: function () {
+    this.getNews()
+  },
+  methods: {
+    getNews () {
+      this.$ajax.get('api/all').then((res) => {
+        this.tabmain = res.data.news
+        console(res.data.news)
+      })
+    }
+  }
+}
 </script>
 
 <style lang="stylus">
-.tab-box
+.app
   width 100%
   height 100%
-  .tab-head
-    position relative
-    height 36px
-    margin 15px 0
-    border-bottom 1px solid #ddd
-    a
+  margin 0 auto
+  .tab-tilte
+    width 100%
+    margin 0
+    background-color red
+    padding 0
+    li
       float left
-      padding 8px 20px
-      margin-right -1px
-      background #fbfaf8
-      border 1px solid #ddd
-    &:hover
-      background #ffffff
-  .tab-content
-  .now
-    padding 8px 20px 7px
-    border-top 2px solid #4998df
-    border-bottom 1px solid #fff
-    background #fff
-    z-index 2
+      width 20%
+      padding 10px 0
+      text-align center
+      background-color #f4f4f4
+      margin 0
+      list-style none
+      font-size 13px
+      font-weight 400
+.active
+  background-color white
+  color red
+.tab-content
+  width 100%
+  height 100%
+  div
+    float left
+    width 100%
+    height 100%
+    line-height 100%
+    text-align center
+    overflow-y hidden
+    .tab-select
+      height 91%
+      width 100%
+      font-family '仿宋'
+      font-weight 400
+      font-style normal
+      font-size 20px
+      text-decoration none
+      color #000000
 
 </style>
