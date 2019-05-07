@@ -58,6 +58,7 @@ export default {
   .wrapper
     background rgb(82,130,170)
     height 600px
+    width 100%
     .form
       width 50%
       height 300px

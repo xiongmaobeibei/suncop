@@ -8,10 +8,14 @@ import router from './router'
 import 'lib-flexible'
 // import axios from 'axios'
 // import VueAxios from 'vue-axios'
+// Swiper
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 import 'swiper/dist/css/swiper.css'
 
 import VModal from 'vue-js-modal'
+
+import { List, Avatar, Icon, Table, Tag, Divider } from 'ant-design-vue'
+[List, Avatar, Icon, Table, Tag, Divider].forEach(item => Vue.use(item))
 
 Vue.use(VueAwesomeSwiper)
 

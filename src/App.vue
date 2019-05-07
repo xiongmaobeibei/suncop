@@ -1,7 +1,10 @@
 <template>
-  <div id="app">
+  <div :style="{height: '100%', display: 'flex', flexDirection: 'column'}" id="app">
     <v-header class="header" @jump='jumptolog'/>
-    <v-index class="index"/>
+    <!-- <v-index class="index"/> -->
+    <div class="body">
+      <router-view></router-view>
+    </div>
     <!-- <component :is='isshow'></component> -->
     <v-footer class="footer"/>
   </div>
@@ -37,12 +40,16 @@ export default {
 <style lang="stylus" rel="stylesheet/stylus">
   .header
     width 100%
-    height auto
-    min-height 100%
+    // height auto
+    // min-height 100%
   .footer
     position relative
     width 100%
     height 280px
     margin 0px auto 0 auto
     clear both
+  .body
+   display flex
+   flex 1
+   background #5282aa
 </style>
