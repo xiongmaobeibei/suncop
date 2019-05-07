@@ -8,10 +8,10 @@
         <div class="main-body">
           <div class="news-report">
             <div class="news-pic">
-              <v-slide></v-slide>
+              <v-slide />
             </div>
             <div class="news-tab">
-              <v-tab></v-tab>
+              <v-tab />
             </div>
           </div>
         </div>
@@ -71,18 +71,15 @@ export default {
         display flex
         flex-direction row
         justify-content space-between
-        background-color pink
         .news-pic
           width 48%
-          height 500px
-          background-color red
+          height auto
           // overflow hidden
         .news-tab
           width 48%
           margin-right 0
-          height 0
+          height auto
           background-color blue
-          padding-bottom 35%
     .interact-container
       width 100%
       height auto

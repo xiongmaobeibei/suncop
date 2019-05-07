@@ -16,19 +16,16 @@
 <script>
 import header from './components/header/header.vue'
 import footer from './components/footer/footer.vue'
-import index from './components/index/index.vue'
 import log from './pages/log/log.vue'
 export default {
   name: 'App',
   data () {
     return {
-      isshow: index
     }
   },
   components: {
     'v-header': header,
     'v-footer': footer,
-    'v-index': index,
     'v-log': log
   },
   methods: {

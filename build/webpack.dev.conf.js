@@ -10,6 +10,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
 
+<<<<<<< HEAD
 
 // const express = require('express')
 // const app = express()
@@ -30,6 +31,8 @@ apiServer.listen(3000, () => {
   console.log('JSON Server is running')
 })
 
+=======
+>>>>>>> 4f26062dbd74f91e2f6c8063ef9552e60faa2ad4
 const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
 
@@ -112,4 +115,16 @@ module.exports = new Promise((resolve, reject) => {
       resolve(devWebpackConfig)
     }
   })
+})
+
+/**新闻接口的数据调用 */
+const jsonServer = require('json-server')
+const apiServer = jsonServer.create()
+const apiRouter = jsonServer.router('db.json')
+const middlewares = jsonServer.defaults()
+
+apiServer.use(middlewares)
+apiServer.use(apiRouter)
+apiServer.listen(3001, () => {
+  console.log('json server is running')
 })
