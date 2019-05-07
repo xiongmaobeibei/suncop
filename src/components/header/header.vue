@@ -90,6 +90,7 @@ export default {
             color:#99FFFF
             height 150px
             line-height 170px
+            overflow hidden
             .left-content
                 width 50%
                 float left

@@ -19,10 +19,6 @@ export const constantRoutes = [
   {
     path: '/updateCode',
     component: () => import('../pages/log/updateCode')
-  },
-  {
-    path: '/master',
-    component: () => import('../pages/users/master/master')
   }
 ]
 
