@@ -39,6 +39,11 @@ export default {
 <style lang="stylus" scoped rel="stylesheet/stylus">
   .wrapper
     background rgb(82,130,170)
+<<<<<<< HEAD
+=======
+    height 600px
+    width 100%
+>>>>>>> 5293695edd1ad8b60cc8fe38141c44b8cb54b065
     .form
       width 50%
       height 400px

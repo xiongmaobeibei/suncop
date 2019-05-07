@@ -3,7 +3,7 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
-export const constantRoutes = [
+const constantRoutes = [
   {
     path: 'log',
     component: () => import('../pages/log/log')
@@ -19,6 +19,17 @@ export const constantRoutes = [
   {
     path: '/updateCode',
     component: () => import('../pages/log/updateCode')
+<<<<<<< HEAD
+=======
+  },
+  {
+    path: '/master',
+    component: () => import('../pages/users/master/master')
+  },
+  {
+    path: '/test',
+    component: () => import('../pages/test')
+>>>>>>> 5293695edd1ad8b60cc8fe38141c44b8cb54b065
   }
 ]
 
