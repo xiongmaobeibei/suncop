@@ -6,7 +6,7 @@ import VueResource from 'vue-resource'
 import router from './router'
 // 引入flexible
 import 'lib-flexible'
-// import axios from 'axios'
+import axios from 'axios'
 // import VueAxios from 'vue-axios'
 // Swiper
 import VueAwesomeSwiper from 'vue-awesome-swiper'
@@ -18,6 +18,8 @@ import { List, Avatar, Icon, Table, Tag, Divider, Input, Button, Modal } from 'a
 [List, Avatar, Icon, Table, Tag, Divider, Input, Button, Modal].forEach(item => Vue.use(item))
 
 Vue.use(VueAwesomeSwiper)
+
+Vue.prototype.$ajax = axios
 
 Vue.config.productionTip = false
 require('./mock')
