@@ -1,9 +1,9 @@
 <template>
-  <div class='receiveBox'>
-    <p>收件箱</p>
+  <div class='sendBox'>
+    <p>发件箱</p>
     <a-table :columns="columns" :dataSource="data" size='small'>
       <a slot="name" slot-scope="text" href="javascript:">{{text}}</a>
-      <span slot="customTitle">来源</span>
+      <span slot="source">To.</span>
       <span slot="content" slot-scope="text, record" class="content">{{text}}</span>
       <span slot="action" slot-scope="text, record">
         <a href="javascript:" @click="onPressCheck(record)">详情</a>
@@ -19,7 +19,7 @@ const columns = [{
   slots: { title: 'customTitle' },
   scopedSlots: { customRender: 'source' }
 }, {
-  title: '发件人',
+  title: '收件人',
   dataIndex: 'name',
   key: 'name'
 }, {
@@ -36,17 +36,17 @@ const columns = [{
 const data = [{
   key: '1',
   source: 'admin',
-  name: 'John Brown',
+  name: 'admin',
   content: 'New York No. 1 Lake Park'
 }, {
   key: '2',
   source: 'user',
-  name: 'Jim Green',
+  name: 'admin',
   content: 'London No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake Park'
 }, {
   key: '3',
   source: 'user',
-  name: 'Joe Black',
+  name: 'admin',
   content: 'Sidney No. 1 Lake Park'
 }]
 
@@ -78,10 +78,9 @@ export default {
 }
 </script>
 <style lang="stylus" scoped>
-.receiveBox
+.sendBox
   width 8rem
   background-color #fff
-  margin-top 55px
   margin-bottom 55px
   border-radius 10px
   p

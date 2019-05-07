@@ -14,8 +14,8 @@ import 'swiper/dist/css/swiper.css'
 
 import VModal from 'vue-js-modal'
 
-import { List, Avatar, Icon, Table, Tag, Divider } from 'ant-design-vue'
-[List, Avatar, Icon, Table, Tag, Divider].forEach(item => Vue.use(item))
+import { List, Avatar, Icon, Table, Tag, Divider, Input, Button, Modal } from 'ant-design-vue'
+[List, Avatar, Icon, Table, Tag, Divider, Input, Button, Modal].forEach(item => Vue.use(item))
 
 Vue.use(VueAwesomeSwiper)
 
@@ -24,7 +24,8 @@ require('./mock')
 
 Vue.use(VueResource)
 // Vue.use(VueAxios, axios)
-Vue.use(VModal)
+// Vue.use(VModal)
+Vue.use(VModal, { dialog: true })
 
 /* eslint-disable no-new */
 new Vue({
