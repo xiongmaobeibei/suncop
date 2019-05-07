@@ -91,10 +91,12 @@ export default {
             color:#99FFFF
             height 150px
             line-height 170px
+            width 100%
+            display flex
+            justify-content center
             .left-content
                 float left
-                width 50%
-                float left
+                width 800px
                 text-align center
                 .title-icon
                     width 90px
@@ -105,18 +107,19 @@ export default {
                     display inline-block
                 .title-text
                     font-family '宋体'
-                    font-weight bold
-                    font-size 55px
+                    font-weight 1000
+                    font-size 45px
                     display inline-block
                     margin-left 10px
                     letter-spacing 6px
             .right-content
                 float right
-                width 50%
+                width 1000px
                 float right
                 font-family '楷体'
-                font-size 30px
+                font-size 25px
                 text-align left
+                overflow hidden
         .image-wrapper
             height 650px
             bg-image('u2')
