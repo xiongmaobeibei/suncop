@@ -17,6 +17,10 @@ const constantRoutes = [
     component: () => import('../pages/log/regist')
   },
   {
+    path: '/index',
+    component: () => import('../pages/index/index')
+  },
+  {
     path: '/updateCode',
     component: () => import('../pages/log/updateCode')
   },

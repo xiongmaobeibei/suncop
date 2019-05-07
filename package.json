@@ -9,7 +9,7 @@
     "start": "npm run dev",
     "lint": "eslint --ext .js,.vue src",
     "build": "node build/build.js",
-    "jsonsv":"json-sever --watch db.json"
+    "jsonsv": "json-sever --watch db.json"
   },
   "dependencies": {
     "@babel/polyfill": "^7.4.4",
