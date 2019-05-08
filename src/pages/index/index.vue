@@ -21,15 +21,25 @@
           <span>>>>&nbsp;警务公开</span>
         </div>
         <div class="main-body">
-          <div class="public-leader"></div>
-          <div class="public-report"></div>
+          <div class="news-report">
+            <div class="public-container">
+              <div class="p-container"><p>领导介绍</p></div>
+              <v-leader />
+            </div>
+            <div class="public-container">
+              <div class="p-container"><p>网上公示</p></div>
+              <v-report />
+            </div>
+          </div>
         </div>
       </div>
       <div class="interact-container">
         <div class="main-head">
           <span>>>>&nbsp;警民互动</span>
         </div>
-        <div class="main-body"></div>
+        <div class="main-body">
+          <v-interact />
+        </div>
       </div>
       <div class="feedback-container">
         <div class="main-head">
@@ -44,10 +54,16 @@
 <script>
 import slide from './slide/slide.vue'
 import tab from './tab/tab.vue'
+import leader from './leader/leader.vue'
+import report from './report/report.vue'
+import interact from './interact/interact.vue'
 export default {
   components: {
     'v-slide': slide,
-    'v-tab': tab
+    'v-tab': tab,
+    'v-leader': leader,
+    'v-report': report,
+    'v-interact': interact
   }
 }
 </script>
@@ -65,21 +81,6 @@ export default {
     .news-container
       width 100%
       height auto
-      .news-report
-        width 100%
-        height auto
-        display flex
-        flex-direction row
-        justify-content space-between
-        .news-pic
-          width 48%
-          height auto
-          // overflow hidden
-        .news-tab
-          width 48%
-          margin-right 0
-          height auto
-          background-color blue
     .interact-container
       width 100%
       height auto
@@ -104,4 +105,33 @@ export default {
     height auto
     background-color white
     padding 20px 1%
+    .news-report
+      width 100%
+      height auto
+      display flex
+      flex-direction row
+      justify-content space-between
+      .news-pic
+        width 48%
+        height auto
+        // overflow hidden
+      .news-tab
+        width 48%
+        margin-right 0
+        height auto
+      .p-container
+        width 100%
+        height 10%
+        margin-top 5%
+        padding 0 38%
+        font-size 20px
+        font-weight 1000
+        color #99FFFF
+      .public-container
+        background-image url('./public.png')
+        background-size 100% auto
+        background-repeat no-repeat
+        width 48%
+        height auto
+        padding-bottom 5%
 </style>

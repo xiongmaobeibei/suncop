@@ -12,8 +12,8 @@ import axios from 'axios'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 import 'swiper/dist/css/swiper.css'
 
-import { List, Avatar, Icon } from 'ant-design-vue'
-[List, Avatar, Icon].forEach(item => Vue.use(item))
+import { List, Avatar, Icon, Tabs } from 'ant-design-vue'
+[List, Avatar, Icon, Tabs].forEach(item => Vue.use(item))
 
 Vue.use(VueAwesomeSwiper)
 
