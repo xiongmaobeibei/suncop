@@ -45,7 +45,9 @@
         <div class="main-head">
           <span>>>>&nbsp;联系反馈</span>
         </div>
-        <div class="main-body"></div>
+        <div class="main-body">
+          <v-feedback />
+        </div>
       </div>
     </div>
   </div>
@@ -57,13 +59,15 @@ import tab from './tab/tab.vue'
 import leader from './leader/leader.vue'
 import report from './report/report.vue'
 import interact from './interact/interact.vue'
+import feedback from './feedback/feedback.vue'
 export default {
   components: {
     'v-slide': slide,
     'v-tab': tab,
     'v-leader': leader,
     'v-report': report,
-    'v-interact': interact
+    'v-interact': interact,
+    'v-feedback': feedback
   }
 }
 </script>
@@ -74,7 +78,7 @@ export default {
   height auto
   width 100%
   .all-container
-    width 85%
+    width 80%
     height auto
     margin 0 auto
     margin-top -20px
@@ -90,7 +94,7 @@ export default {
   .main-head
     height 74px
     line-height 74px
-    width 100%
+    width 98%
     margin 0 0
     background-image url(main-head.png)
     background-repeat no-repeat

@@ -74,26 +74,63 @@ export default {
   width 100%
   height 100%
   .inter-btn
-    width 20%
+    width 25%
     height 100%
     display inline-block
     text-align center
     img
-      width 100px
-      height 100px
+      width 90px
+      height 90px
   .inter-tab
     display inline-block
-    width 75%
+    width 70%
     height 100%
     background-image url('./back-tabs.png')
     background-size 100% auto
     background-repeat no-repeat
     top 5%
     .tab-btn
-      width 80%
       margin 20% 7%
-      .tabBarStyle
-        background-color red
       .tab-content
-        background-color red
+        background-color white
+        width 100%
+        height 100%
+        ul
+          padding 0
+          width 100%
+          list-style none
+          display flex
+          justify-content flex-start
+          flex-wrap wrap
+          li
+            width 30%
+            padding 1% 0
+            margin 3% 1%
+            line-height 40px
+            font-size 17px
+            text-align center
+            background-color #6699CC
+            a
+              color white
+  .ant-tabs .ant-tabs-left-bar {
+    float: left;
+    width: 18%;
+    border-right: 0.013333rem solid #e8e8e8;
+    margin-right: -0.013333rem;
+    margin-bottom: 0;
+  }
+  .ant-tabs-vertical.ant-tabs-card.ant-tabs-left .ant-tabs-card-bar.ant-tabs-left-bar .ant-tabs-tab {
+    border-right: 0;
+    border-radius: 0.053333rem 0 0 0.053333rem;
+    margin-right: 0.013333rem;
+    width:100%;
+    height:100%;
+    text-align:center;
+    background-color: #6699CC;
+    color:white;
+  }
+  .ant-tabs-vertical.ant-tabs-card.ant-tabs-left .ant-tabs-card-bar.ant-tabs-left-bar .ant-tabs-tab-active {
+    background-color: white;
+    color:black;
+  }
 </style>
