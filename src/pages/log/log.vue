@@ -3,13 +3,13 @@
         <div class="tab">
             <div class="item-title">用户中心</div>
             <div class="tab-item">
-                <router-link to="/login">登录</router-link>
+              <router-link to="/log/login">登录</router-link>
             </div>
             <div class="tab-item">
-            <router-link to="/regist">注册</router-link>
+              <router-link to="/log/regist">注册</router-link>
             </div>
             <div class="tab-item">
-                <router-link to="/updateCode">修改密码</router-link>
+              <router-link to="/log/updateCode">修改密码</router-link>
             </div>
         </div>
         <router-view class="right-wrapper" @childFn='parentFn'></router-view>
@@ -32,12 +32,12 @@ export default {
 
 <style lang="stylus" scoped rel="stylesheet/stylus">
   .wrapper
-    overflow hidden
+    width 100%
     background rgb(248,242,242)
     .tab
       float left
       width 30%
-      margin-top 20px
+      padding-top 20px
       .item-title
           height 80px
           line-height 80px
@@ -52,7 +52,7 @@ export default {
           background rgb(248,242,242)
           margin 1px
     .right-wrapper
-        float left
-        width 60%
+        float right
+        width 70%
         background rgb(82,130,170)
 </style>

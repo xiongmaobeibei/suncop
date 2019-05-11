@@ -21,22 +21,29 @@ export default {
   background white
   width 80%
   height 500px
-  margin 80px auto 40px auto
+  margin 120px auto 40px auto
+  border-radius 30px
   .formbox
     padding-top 80px
-    width 60%
-    font-size 24px
-    line-height 60px
+    width 80%
+    font-size 22px
+    line-height 70px
     margin auto
     .title
         display inline-block
-        width 30%
+        width 25%
     .input-box
-        width 60%
+        width 75%
+        height 35px
     .input-box-confirm
         width 25%
+        height 35px
     .confirm-button
-        margin-left 40px
+        margin-left 20px
+        font-size 22px
+        width 40%
+        height 40px
+        line-height 35px
     .button
         width 80%
         margin-left 5%

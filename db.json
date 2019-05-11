@@ -1,6 +1,5 @@
 {
-  "all": {
-    "user": [
+  "user": [
       {
           "id": 1,
           "citicreditid": "512000328",
@@ -22,7 +21,7 @@
           "identity": "2"
       },
       {
-          "id": 1,
+          "id": 3,
           "citicreditid": "512000330",
           "citiname": "樊琳",
           "password": "123456",
@@ -32,7 +31,7 @@
           "identity": "1"
       }
     ],
-    "news": [
+  "news": [
       {
         "id": 1,
         "type": 0,
@@ -105,6 +104,41 @@
         "author": "asdf",
         "date": "asfds"
       }
-    ]
-  }
+    ],
+  "permit": [
+      {
+          "id": "4",
+          "permit_list": [
+            {
+              "name": "个人资料",
+              "path": "/user/personality"
+            },
+            {
+              "name": "我的信件",
+              "path": "/user/myletter"
+            }
+          ]
+      },
+      {
+        "id": "3",
+        "permit_list": [
+            {
+                "permit_name": "个人资料",
+                "permit_url": "/user/personalInfo"
+            },
+            {
+                "permit_name": "我的信件",
+                "permit_url": "/user/myletter"
+            },
+            {
+              "permit_name": "管理登录用户信息",
+              "permit_url": "/user/manageUserInfo"
+            },
+            {
+              "permit_name": "添加工作动态",
+              "permit_url": "/user/addWorkNews"
+            }
+        ]
+    }
+  ]
 }

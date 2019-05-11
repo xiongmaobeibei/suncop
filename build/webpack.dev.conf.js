@@ -10,29 +10,20 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
 
-<<<<<<< HEAD
+// /*引入json-server*/
+// const jsonServer = require('json-server')
+// /*搭建一个server*/
+// const apiServer = jsonServer.create()
+// /*将db.json关联到server*/
+// const apiRouter = jsonServer.router('mock.json')
+// const middlewares = jsonServer.defaults()
+// apiServer.use(middlewares)
+// apiServer.use(apiRouter)
+// /*监听端口*/
+// apiServer2.listen(3000, () => {
+//   console.log('JSON Server is running')
+// })
 
-// const express = require('express')
-// const app = express()
-
-// var apiRoutes = express.Router()
-// app.use('/api',apiRoutes)
-/*引入json-server*/
-const jsonServer = require('json-server')
-/*搭建一个server*/
-const apiServer = jsonServer.create()
-/*将db.json关联到server*/
-const apiRouter = jsonServer.router('mock.json')
-const middlewares = jsonServer.defaults()
-apiServer.use(middlewares)
-apiServer.use(apiRouter)
-/*监听端口*/
-apiServer.listen(3000, () => {
-  console.log('JSON Server is running')
-})
-
-=======
->>>>>>> 4f26062dbd74f91e2f6c8063ef9552e60faa2ad4
 const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
 
@@ -125,6 +116,6 @@ const middlewares = jsonServer.defaults()
 
 apiServer.use(middlewares)
 apiServer.use(apiRouter)
-apiServer.listen(3001, () => {
+apiServer.listen(3000, () => {
   console.log('json server is running')
 })

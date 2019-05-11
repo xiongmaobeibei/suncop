@@ -31,8 +31,7 @@
 export default {
   methods: {
     jumpLog () {
-      this.$emit('jump', 'jumped')
-      console.log('点击了')
+      this.$router.push('/log')
     }
   }
 }
@@ -43,8 +42,8 @@ export default {
         margin 0
         padding 0
         width 100%
-        height 80px
-        line-height 80px
+        height 70px
+        line-height 70px
         background-color rgb(0,94,154)
         .search-wrapper
             width 400px
@@ -57,15 +56,15 @@ export default {
                 background-image url(u162.png)
                 background-size 40px 38px
                 background-repeat no-repeat
+                margin 15px 0px 15px 15px
                 float left
-                margin 18px 5px 9px 35px
             .text
                 width 250px
-                height 40px
+                height 36px
                 border 0px
+                margin 15px 8px 15px 8px
                 border-radius 5px
                 float left
-                margin 20px 3px 13px 13px
         .time
             display inline-block
             width 220px
@@ -77,11 +76,13 @@ export default {
             right 15px
             position absolute
             input
-              font-size 25px
+              font-size 22px
+              height 40px
+              line-height 40px
               display inline-block
               border 0px
-              text-align center
               border-radius 15px
+              background-color orange
     .bottom
         background-color rgb(14,30,45)
         width 100%
@@ -90,19 +91,10 @@ export default {
             color:#99FFFF
             height 150px
             line-height 170px
-<<<<<<< HEAD
             overflow hidden
             .left-content
                 width 50%
                 float left
-=======
-            width 100%
-            display flex
-            justify-content center
-            .left-content
-                float left
-                width 800px
->>>>>>> 4f26062dbd74f91e2f6c8063ef9552e60faa2ad4
                 text-align center
                 .title-icon
                     width 90px
@@ -119,12 +111,7 @@ export default {
                     margin-left 10px
                     letter-spacing 6px
             .right-content
-<<<<<<< HEAD
                 width 50%
-=======
-                float right
-                width 1000px
->>>>>>> 4f26062dbd74f91e2f6c8063ef9552e60faa2ad4
                 float right
                 font-family '楷体'
                 font-size 25px

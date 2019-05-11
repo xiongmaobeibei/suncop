@@ -1,5 +1,5 @@
 <template>
-    <div>我是userManage</div>
+    <div>404</div>
 </template>
 <script>
 export default {

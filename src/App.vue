@@ -1,22 +1,15 @@
 <template>
   <div :style="{height: '100%', display: 'flex', flexDirection: 'column'}" id="app">
-    <v-header class="header" @jump='jumptolog'/>
-    <!-- <v-index class="index"/> -->
-<<<<<<< HEAD
-    <component :is='isshow'></component>
-=======
+    <v-header class="header"/>
     <div class="body">
-      <router-view></router-view>
+      <router-view @touser='jumptouser'></router-view>
     </div>
-    <!-- <component :is='isshow'></component> -->
->>>>>>> 5293695edd1ad8b60cc8fe38141c44b8cb54b065
     <v-footer class="footer"/>
   </div>
 </template>
 <script>
 import header from './components/header/header.vue'
 import footer from './components/footer/footer.vue'
-import log from './pages/log/log.vue'
 export default {
   name: 'App',
   data () {
@@ -25,13 +18,17 @@ export default {
   },
   components: {
     'v-header': header,
-    'v-footer': footer,
-    'v-log': log
+    'v-footer': footer
   },
   methods: {
     jumptolog (mes) {
       if (mes === 'jumped') {
-        this.isshow = log
+        this.$router.push('/log')
+      }
+    },
+    jumptouser (mes) {
+      if (mes === 'logged') {
+        this.$router.push('/user')
       }
     }
   }

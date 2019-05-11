@@ -9,28 +9,40 @@
     </div>
 </template>
 <script>
-// const ERR_OK = 0
+import {mapActions} from 'vuex'
 export default {
-  props: {
-    user: {
-      type: Object
-    }
-  },
   data () {
     return {
       showtip: '',
-      creditid: '',
-      password: ''
+      user: {
+        citicreditid: '',
+        password: ''
+      },
+      loading: false
     }
   },
   methods: {
+    ...mapActions({add_Routes: 'add_Routes'}),
     login () {
-      this.$http.get('/api/data')// 代替http://localhost:3000/getNewsList
-        .then((res) => {
-          console.log(res.data)
-        }, (err) => {
-          console.log(err)
-        })
+      this.loading = true
+      this.$http.get('/api/user?citicreditid=' + this.creditid).then((res) => {
+        console.log(res.body)
+        var user = res.body[0]
+        console.log(user)
+        if (res) {
+          this.$http.get('/api/permit?id=' + user.identity).then((re) => {
+            // 将路由信息，用户信息存到sessionStorage里面
+            console.log(re.data[0].permit_list)
+            sessionStorage.setItem('menuData', JSON.stringify(re.data[0].permit_list))
+            sessionStorage.setItem('user', this.user.creditid)
+            this.$router.push('/user')
+            // 触发vuex里面增加的路由
+            // this.add_Routes(re.data[0].permit_list)
+          })
+        }
+      }, (err) => {
+        console.log(err)
+      })
     }
   }
 }
@@ -39,30 +51,25 @@ export default {
 <style lang="stylus" scoped rel="stylesheet/stylus">
   .wrapper
     background rgb(82,130,170)
-<<<<<<< HEAD
-=======
-    height 600px
-    width 100%
->>>>>>> 5293695edd1ad8b60cc8fe38141c44b8cb54b065
     .form
       width 50%
       height 400px
       margin 150px auto 150px auto
-      padding-top 60px
       background white
+      padding-top 80px
       border-radius 30px
       text-align center
+      font-size 20px
       line-height 80px
-      font-size 18px
       -webkit-box-shadow 14px 12px 16px #333333
       -moz-box-shadow 13px 12px 16px #333333
       .inputtext
-        height 40px
-        width 60%
-      .button
         height 50px
         width 60%
-        font-size 20px
+      .button
+        width 60%
+        height 50px
+        line-height 50px
         color blue
         border 0px
 </style>
