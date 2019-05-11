@@ -5,9 +5,8 @@
       </ul>
       <div class="tab-content">
           <div>
-            <span>{{cont}}</span>
             <select class="tab-select" multiple>
-              <option  v-for="cont in tabmain" :key="cont.id" v-show="cont.type==cur" >{{cont.title}}</option>
+              <option v-for="cont in tabmain" :key="cont.infoID" v-show="cont.infoType==cur" >{{cont.infoTitle}}</option>
             </select>
           </div>
       </div>
@@ -28,10 +27,18 @@ export default {
   },
   methods: {
     getNews () {
-      this.$ajax.get('api/all').then((res) => {
-        this.tabmain = res.data.news
-        console(res.data.news)
+      this.$ajax.get('http://localhost:3003/news').then((res) => {
+        this.tabmain = res.data
+        console.log(res.data)
       })
+      // this.$ajax({
+      //   url: "",
+      //   dataType: 'json',
+      //   type: 'GET',
+      //   success:function(data){
+      //     this.tabmain = data;
+      //   }
+      // })
     }
   }
 }
@@ -45,11 +52,11 @@ export default {
   .tab-tilte
     width 100%
     margin 0
-    background-color red
     padding 0
     li
       float left
       width 20%
+      height 45px
       padding 10px 0
       text-align center
       background-color #f4f4f4
@@ -57,8 +64,9 @@ export default {
       list-style none
       font-size 13px
       font-weight 400
+      cursor pointer
+      overflow hidden
 .active
-  background-color white
   color red
 .tab-content
   width 100%
@@ -76,8 +84,9 @@ export default {
       font-family '仿宋'
       font-weight 400
       font-style normal
-      font-size 20px
+      font-size 22px
       text-decoration none
       color #000000
-
+      option
+        border-bottom gray thin solid
 </style>
