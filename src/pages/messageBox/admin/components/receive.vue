@@ -3,7 +3,7 @@
     <p style="padding-left: 1em">收件箱</p>
     <a-table :columns="columns" :dataSource="data" :pagination="pagination" size='middle'>
       <a slot="name" slot-scope="text" href="javascript:">{{text}}</a>
-      <span slot="identify" slot-scope="text" class="content">{{text}}</span>
+      <span slot="identify" slot-scope="text" class="content">{{identifyObj[text]}}</span>
       <span slot="content" slot-scope="text" class="content">{{text}}</span>
       <span slot="letterTitle" slot-scope="text" class="content">{{text}}</span>
       <span slot="action" slot-scope="text, record">
@@ -42,6 +42,11 @@
   </div>
 </template>
 <script>
+const identifyObj = {
+  'admin': '管理员',
+  'police': '警察',
+  'resident': '居民'
+}
 const columns = [{
   dataIndex: 'identify',
   title: '身份',
@@ -65,7 +70,7 @@ const columns = [{
   dataIndex: 'letterTime',
   key: 'letterTime',
   // 按发件日期长度排序
-  sorter: (a, b) => new Date(a.letterTime).getDate - new Date(b.letterTime).getDate
+  sorter: (a, b) => new Date(a.letterTime).getTime() - new Date(b.letterTime).getTime()
 }, {
   title: '简要内容',
   dataIndex: 'letterTitle',
@@ -92,7 +97,8 @@ export default {
         source: '',
         content: '',
         userName: ''
-      }
+      },
+      identifyObj
     }
   },
   methods: {
