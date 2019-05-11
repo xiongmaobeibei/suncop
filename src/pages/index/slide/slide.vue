@@ -1,7 +1,7 @@
 <template>
   <swiper :options="swiperOption" class="swiper-box">
     <swiper-slide v-for="(item, index) in imgArr" v-bind:key="index">
-      <img class="swiper-img" :src="item"/>
+      <div class="swiper-img" :style="{'background-image': `url(${item})`}" />
     </swiper-slide>
     <div class="swiper-pagination" slot="pagination"></div>
     <div class="swiper-button-prev" slot="button-prev"></div>
@@ -53,4 +53,7 @@ export default {
 .swiper-img
   width 100%
   height 100%
+  background-size contain
+  background-repeat no-repeat
+  background-position center
 </style>
