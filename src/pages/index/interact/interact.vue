@@ -1,5 +1,5 @@
 <template>
-  <div class="interact-container">
+  <div class="interact-box">
     <div class="inter-btn">
       <div v-for="(item,index) in aArr" :key="index" >
         <a href="item.ahref"><img :src="item.images"></a>
@@ -70,7 +70,7 @@ export default {
 </script>
 
 <style lang="stylus">
-.interact-container
+.interact-box
   width 100%
   height 100%
   display flex
