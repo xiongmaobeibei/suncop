@@ -6,7 +6,7 @@
       <div class="tab-content">
           <div>
             <select class="tab-select" multiple>
-              <option v-for="cont in tabmain" :key="cont.id" v-show="cont.type==cur" >{{cont.title}}</option>
+              <option v-for="cont in tabmain" :key="cont.infoID" v-show="cont.infoType==cur" >{{cont.infoTitle}}</option>
             </select>
           </div>
       </div>
@@ -31,6 +31,14 @@ export default {
         this.tabmain = res.data
         console.log(res.data)
       })
+      // this.$ajax({
+      //   url: "",
+      //   dataType: 'json',
+      //   type: 'GET',
+      //   success:function(data){
+      //     this.tabmain = data;
+      //   }
+      // })
     }
   }
 }

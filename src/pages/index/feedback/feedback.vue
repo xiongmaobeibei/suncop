@@ -2,7 +2,7 @@
   <div class="feedback-body">
     <div class="coll-advise">
       <select class="ad-select" size="20" multiple>
-        <option v-for="cont in tabmain" :key="cont.id" >·{{cont.title}}</option>
+        <option v-for="cont in tabmain" :key="cont.infoID" >{{cont.infoTitle}}</option>
       </select>
     </div>
     <div class="coll-pic">

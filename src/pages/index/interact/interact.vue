@@ -73,24 +73,30 @@ export default {
 .interact-container
   width 100%
   height 100%
+  display flex
+  align-items center
+  justify-content space-around
   .inter-btn
     width 25%
     height 100%
-    display inline-block
-    text-align center
+    display flex
+    flex-direction column
+    justify-content space-around
+    align-items flex-start
     img
+      flex 1
       width 90px
       height 90px
   .inter-tab
-    display inline-block
-    width 70%
+    width 100%
     height 100%
-    background-image url('./back-tabs.png')
-    background-size 100% auto
-    background-repeat no-repeat
     top 5%
+    display inline-block
     .tab-btn
-      margin 20% 7%
+      padding 20% 7%
+      background-image url('./back-tabs.png')
+      background-size 100% auto
+      background-repeat no-repeat
       .tab-content
         background-color white
         width 100%

@@ -4,7 +4,7 @@
     <a-table :columns="columns" :dataSource="data" size='small'>
       <a slot="name" slot-scope="text" href="javascript:">{{text}}</a>
       <span slot="customTitle">来源</span>
-      <span slot="content" slot-scope="text, record" class="content">{{text}}</span>
+      <span slot="content" slot-scope="text" class="content">{{text}}</span>
       <span slot="action" slot-scope="text, record">
         <a href="javascript:" @click="onPressCheck(record)">详情</a>
       </span>
