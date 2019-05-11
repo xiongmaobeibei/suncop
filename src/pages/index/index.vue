@@ -81,7 +81,6 @@ export default {
     width 80%
     height auto
     margin 0 auto
-    margin-top -20px
     .news-container
       width 100%
       height auto
@@ -116,9 +115,8 @@ export default {
       flex-direction row
       justify-content space-between
       .news-pic
-        width 48%
-        height auto
-        // overflow hidden
+        width 520px
+        height 520px
       .news-tab
         width 48%
         margin-right 0
