@@ -11,16 +11,11 @@ import axios from 'axios'
 import store from './store/store'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 import 'swiper/dist/css/swiper.css'
-<<<<<<< HEAD
-import { List, Avatar, Icon } from 'ant-design-vue'
-[List, Avatar, Icon].forEach(item => Vue.use(item))
-=======
 
 import VModal from 'vue-js-modal'
 
 import { List, Avatar, Icon, Table, Tag, Divider, Input, Button, Modal } from 'ant-design-vue'
 [List, Avatar, Icon, Table, Tag, Divider, Input, Button, Modal].forEach(item => Vue.use(item))
->>>>>>> 63eaeb47706c64f67e46311df5350a96df10fa6d
 
 Vue.use(VueAwesomeSwiper)
 
