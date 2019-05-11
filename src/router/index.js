@@ -27,6 +27,22 @@ const constantRoutes = [
     component: () => import('../pages/index/index')
   },
   {
+    path: '/updateCode',
+    component: () => import('../pages/log/updateCode')
+  },
+  {
+    path: '/master',
+    component: () => import('../pages/users/master/master')
+  },
+  {
+    path: '/message/resident',
+    component: () => import('../pages/messageBox/resident')
+  },
+  {
+    path: '/message/admin',
+    component: () => import('../pages/messageBox/admin')
+  },
+  {
     path: '/test',
     component: () => import('../pages/test')
   },
