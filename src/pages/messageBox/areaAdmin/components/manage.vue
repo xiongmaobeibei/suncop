@@ -134,7 +134,7 @@ export default {
           key: 'all-data',
           text: 'Select All Data',
           onSelect: () => {
-            this.selectedRowKeys = [0] // 0...45
+          // this.selectedRowKeys = [0] // 0...45
           }
         }],
         onSelection: this.onSelection

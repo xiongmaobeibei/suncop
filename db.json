@@ -1,6 +1,5 @@
 {
-  "all": {
-    "user": [
+  "user": [
       {
           "id": 1,
           "citicreditid": "512000328",
@@ -22,7 +21,7 @@
           "identity": "2"
       },
       {
-          "id": 1,
+          "id": 3,
           "citicreditid": "512000330",
           "citiname": "樊琳",
           "password": "123456",
@@ -32,7 +31,7 @@
           "identity": "1"
       }
     ],
-    "news": [
+  "news": [
       {
         "id": 1,
         "type": 0,
@@ -201,6 +200,137 @@
         "author": "asdf",
         "date": "asfds"
       }
-    ]
-  }
+    ],
+  "permit": [
+      {
+          "id": "4",
+          "identity": "居民",
+          "permit_list": [
+            {
+              "name": "个人资料",
+              "path": "/user/personality"
+            },
+            {
+              "name": "我的信件",
+              "path": "/user/myletter"
+            }
+          ]
+      },
+      {
+        "id": "3",
+        "identity": "警察",
+        "permit_list": [
+            {
+                "name": "个人资料",
+                "path": "/user/personality"
+            },
+            {
+                "name": "我的信件",
+                "path": "/user/myletter"
+            },
+            {
+              "name": "添加工作动态",
+              "path": "/user/addWorkNews"
+            }
+          ]
+      },
+      {
+        "id": "2",
+        "identity": "片区管理员",
+        "permit_list": [
+            {
+                "name": "个人资料",
+                "path": "/user/personality"
+            },
+            {
+                "name": "我的信件",
+                "path": "/user/myletter"
+            },
+            {
+              "name": "管理登录用户信息",
+              "path": "/user/manageUserInfo"
+            },
+            {
+              "name": "添加工作动态",
+              "path": "/user/addWorkNews"
+            },
+            {
+              "name": "投票管理",
+              "path": "/user/voteManage"
+            },
+            {
+              "name": "信件管理",
+              "path": "/user/area_letterManage"
+            }
+          ]
+      },
+      {
+        "id": "1",
+        "identity": "系统管理员",
+        "permit_list": [
+            {
+                "name": "个人资料",
+                "path": "/user/personality"
+            },
+            {
+                "name": "我的信件",
+                "path": "/user/myletter"
+            },
+            {
+              "name": "管理登录用户信息",
+              "path": "/user/manageUserInfo"
+            },
+            {
+              "name": "系统管理",
+              "path": "/user/voteManage"
+            }
+          ]
+      },
+      {
+        "id": "0",
+        "identity": "局长",
+        "permit_list": [
+            {
+                "name": "个人资料",
+                "path": "/user/personality"
+            },
+            {
+                "name": "我的信件",
+                "path": "/user/myletter"
+            },
+            {
+              "name": "添加工作动态",
+              "path": "/user/addWorkNews"
+            },
+            {
+              "name": "收件箱",
+              "path": "/user/myletter"
+            },
+            {
+              "name": "信件回复",
+              "path": "/user/letterReturn"
+            }
+          ]
+      }
+  ],
+  "voteMes": [
+    {
+      "voteID": 1,
+      "vitename": "年度最佳警察",
+      "voteType": "单选",
+      "voteintro": "这是年度最佳警察",
+      "votetimebegin": "2019/05/19",
+      "votetimeend": "2019/08/30",
+      "ResultId": "001"
+    },
+    {
+      "voteID": 2,
+      "vitename": "年度最佳处理事件",
+      "voteType": "单选",
+      "voteintro": "年度最佳处理事件",
+      "votetimebegin": "2019/05/30",
+      "votetimeend": "2019/09/30",
+      "ResultId": "001"
+    }
+  ]
 }

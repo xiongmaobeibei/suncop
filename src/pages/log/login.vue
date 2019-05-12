@@ -2,52 +2,57 @@
     <div class="wrapper">
         <form action="GET" class="form">
             <p v-show="showtip">{{showtip}}</p>
-            <input type="text" v-model="creditid"  class="inputtext"/><br>
-            <input type="password" v-model="password" value="请输入密码" class="inputtext"/><br>
-            <input type="button" value="登录" width="30px" class="button" @click="login">
+            <input type="text" v-model="creditid" placeholder="   请输入身份证号码"  class="inputtext"/><br>
+            <input type="password" v-model="password" placeholder="   请输入密码" class="inputtext"/><br>
+            <input type="button" value="登录" class="button" @click="login">
         </form>
     </div>
 </template>
 <script>
-// const ERR_OK = 0
+import {mapActions} from 'vuex'
 export default {
-  props: {
-    user: {
-      type: Object
-    }
-  },
   data () {
     return {
-      tip: '',
-      showtip: false,
+      showtip: '',
       creditid: '',
       password: '',
-      param: 1,
-      myuser: {}
+      user: {
+        citicreditid: '',
+        password: ''
+      },
+      loading: false
     }
   },
   methods: {
+    ...mapActions({add_Routes: 'add_Routes'}),
     login () {
-      // this.$http.get('api/log').then(response => {
-      //  console.log(response.body)
-      // })
-      // console.log(this.creditid + this.password)
-      // let data = {'id': this.creditid, 'password': this.password}
-      // 请求后台接口
-      // this.$http.get('/api/dolog').then(response => {
-      //   console.log(response.data)
-      //   // if (response.data === 0) {
-      //   //   this.tip = '该用户不存在'
-      //   //   this.showtip = false
-      //   // } else if (response.data === 1) {
-      //   //   this.tip = '登录成功'
-      //   //   this.showtip = true
-      //   //   this.$emit('childFn', this.tip)
-      //   //   //   setCookie('creditid', this.creditid, 1000 * 60)
-      //   //   //   setTimeout(function () {
-      //   //   //     this.$router.push('/mater')
-      //   //   //   }.bind(this), 1000)
-      //   // }
+      this.loading = true
+      this.$http.get('/api/user?citicreditid=' + this.creditid).then((res) => {
+        console.log(res.body)
+        var user = res.body[0]
+        console.log(user)
+        if (res) {
+          this.$http.get('/api/permit?id=' + user.identity).then((re) => {
+            // 将路由信息，用户信息存到sessionStorage里面
+            console.log(re.data[0].permit_list)
+            sessionStorage.setItem('menuData', JSON.stringify(re.data[0].permit_list))
+            sessionStorage.setItem('user', this.user.creditid)
+            this.$router.push('/user')
+            // 触发vuex里面增加的路由
+            // this.add_Routes(re.data[0].permit_list)
+          })
+        }
+      }, (err) => {
+        console.log(err)
+      })
+      // this.$http.get('/api/user', this.user).then((res) => {
+      //   // 将路由信息，用户信息存到sessionStorage里面
+      //   console.log(res.data[0].permit_list)
+      //   sessionStorage.setItem('menuData', JSON.stringify(res.data[0].permit_list))
+      //   sessionStorage.setItem('user', this.user.creditid)
+      //   this.$router.push('/user')
+      //   // 触发vuex里面增加的路由
+      //   // this.add_Routes(re.data[0].permit_list)
       // })
     }
   }
@@ -57,23 +62,25 @@ export default {
 <style lang="stylus" scoped rel="stylesheet/stylus">
   .wrapper
     background rgb(82,130,170)
-    height 600px
-    width 100%
     .form
       width 50%
-      height 300px
+      height 400px
       margin 150px auto 150px auto
-      padding-top 50px
       background white
+      padding-top 80px
       border-radius 30px
       text-align center
-      line-height 40px
-      font-size 18px
+      font-size 20px
+      line-height 80px
+      -webkit-box-shadow 14px 12px 16px #333333
+      -moz-box-shadow 13px 12px 16px #333333
       .inputtext
-        height 15px
-        width 180px
+        height 50px
+        width 60%
       .button
-        height 40px
-        font-size 20px
+        width 60%
+        height 50px
+        line-height 50px
+        color blue
         border 0px
 </style>
