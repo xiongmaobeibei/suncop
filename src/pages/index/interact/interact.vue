@@ -92,7 +92,7 @@ export default {
       height 663px
       display flex
       align-items flex-start
-      padding 20% 7% 0
+      padding 20% 10% 0
       background-image url('./back-tabs.png')
       background-size 100% 100%
       background-repeat no-repeat
@@ -140,4 +140,6 @@ export default {
     background-color: white;
     color:black;
   }
+  .ant-tabs .ant-tabs-left-content
+    width 100%
 </style>
