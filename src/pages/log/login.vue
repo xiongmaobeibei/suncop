@@ -14,6 +14,8 @@ export default {
   data () {
     return {
       showtip: '',
+      creditid: '',
+      password: '',
       user: {
         citicreditid: '',
         password: ''
@@ -43,6 +45,15 @@ export default {
       }, (err) => {
         console.log(err)
       })
+      // this.$http.get('/api/user', this.user).then((res) => {
+      //   // 将路由信息，用户信息存到sessionStorage里面
+      //   console.log(res.data[0].permit_list)
+      //   sessionStorage.setItem('menuData', JSON.stringify(res.data[0].permit_list))
+      //   sessionStorage.setItem('user', this.user.creditid)
+      //   this.$router.push('/user')
+      //   // 触发vuex里面增加的路由
+      //   // this.add_Routes(re.data[0].permit_list)
+      // })
     }
   }
 }

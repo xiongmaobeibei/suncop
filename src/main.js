@@ -14,8 +14,8 @@ import 'swiper/dist/css/swiper.css'
 
 import VModal from 'vue-js-modal'
 
-import { List, Avatar, Icon, Table, Tag, Divider, Input, Button, Modal } from 'ant-design-vue'
-[List, Avatar, Icon, Table, Tag, Divider, Input, Button, Modal].forEach(item => Vue.use(item))
+import { List, Avatar, Icon, Table, Tag, Divider, Input, Button, Modal, Tabs, Card } from 'ant-design-vue'
+[List, Avatar, Icon, Table, Tag, Divider, Input, Button, Modal, Tabs, Card].forEach(item => Vue.use(item))
 
 Vue.use(VueAwesomeSwiper)
 

@@ -1,10 +1,11 @@
 <template>
   <div class='receiveBox'>
     <p style="padding-left: 1em">收件箱</p>
-    <a-table :columns="columns" :dataSource="data" size='small'>
+    <a-table :columns="columns" :dataSource="data" :pagination="pagination" size='middle'>
       <a slot="name" slot-scope="text" href="javascript:">{{text}}</a>
-      <span slot="customTitle">来源</span>
-      <span slot="content" slot-scope="text, record" class="content">{{text}}</span>
+      <span slot="identify" slot-scope="text" class="content">{{text}}</span>
+      <span slot="content" slot-scope="text" class="content">{{text}}</span>
+      <span slot="letterTitle" slot-scope="text" class="content">{{text}}</span>
       <span slot="action" slot-scope="text, record">
         <a href="javascript:" @click="onPressDel(record)">删除</a>
         <a href="javascript:" @click="onPressCheck(record)">详情</a>
@@ -42,58 +43,64 @@
 </template>
 <script>
 const columns = [{
-  dataIndex: 'source',
-  key: 'source',
-  slots: { title: 'customTitle' },
-  scopedSlots: { customRender: 'source' }
+  dataIndex: 'identify',
+  title: '身份',
+  key: 'identify',
+  scopedSlots: { customRender: 'identify' },
+  // 筛选发件人的身份
+  filters: [
+    { text: '管理员', value: 'admin' },
+    { text: '警察', value: 'police' },
+    { text: '居民', value: 'resident' }
+  ],
+  onFilter: (value, record) => record.identify.indexOf(value) === 0
 }, {
   title: '发件人',
-  dataIndex: 'name',
-  key: 'name'
+  dataIndex: 'ownerEmail',
+  key: 'ownerEmail',
+  // 按名字长度排序
+  sorter: (a, b) => a.ownerEmail.length - b.ownerEmail.length
+}, {
+  title: '日期',
+  dataIndex: 'letterTime',
+  key: 'letterTime',
+  // 按发件日期长度排序
+  sorter: (a, b) => new Date(a.letterTime).getDate - new Date(b.letterTime).getDate
 }, {
   title: '简要内容',
-  dataIndex: 'content',
-  key: 'content',
-  scopedSlots: { customRender: 'content' }
+  dataIndex: 'letterTitle',
+  key: 'letterTitle',
+  scopedSlots: { customRender: 'letterTitle' }
 }, {
   title: '操作',
   key: 'action',
   scopedSlots: { customRender: 'action' }
 }]
 
-const data = [{
-  key: '1',
-  source: 'admin',
-  name: 'John Brown',
-  content: 'New York No. 1 Lake Park'
-}, {
-  key: '2',
-  source: 'user',
-  name: 'Jim Green',
-  content: 'London No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake Park'
-}, {
-  key: '3',
-  source: 'user',
-  name: 'Joe Black',
-  content: 'Sidney No. 1 Lake Park'
-}]
-
 export default {
+  mounted: function () {
+    this.getLetters()
+  },
   data () {
     return {
-      data,
+      data: [],
       columns,
       visible: false,
       inputValue: '',
       loading: false,
       modal: {
-        title: '',
+        source: '',
         content: '',
         userName: ''
       }
     }
   },
   methods: {
+    getLetters () {
+      this.$ajax.get('http://localhost:3003/letters').then((res) => {
+        this.data = res.data
+      })
+    },
     onPressDel (e) {
       const i = this.data.findIndex(item => item.key === e.key)
       // TODO: 这里需要后端提供方法真正的删除数据
@@ -101,9 +108,9 @@ export default {
     },
     onPressCheck (e) {
       this.modal = {
-        title: e.source,
-        content: e.content,
-        userName: e.name
+        source: e.identify,
+        content: e.letterContent,
+        userName: e.ownerEmail
       }
       this.$modal.show('message-detail')
     },
@@ -117,6 +124,7 @@ export default {
 </script>
 <style lang="stylus" scoped>
 .receiveBox
+  min-height 600px
   width 8rem
   background-color #fff
   margin-top 55px

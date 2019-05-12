@@ -1,9 +1,37 @@
 <template>
     <div>
       <div class="wrapper">
-        <div v-for="item in user" :key="item.id" class="item">
-          <div class="itemtitle">{{list[item.id]}}</div>
-          <div class="itemcontent">{{item}}</div>
+        <div class="item">
+          <div class="item-title">姓名</div>
+          <div class="item-content">{{user.citiname}}</div>
+        </div>
+        <div class="item">
+          <div class="item-title">身份证号码</div>
+          <div class="item-content">{{user.citicreditid}}</div>
+        </div>
+        <div class="item">
+          <div class="item-title">性别</div>
+          <div class="item-content">{{user.sex}}</div>
+        </div>
+        <div class="item">
+          <div class="item-title">民族</div>
+          <div class="item-content">{{user.nation}}</div>
+        </div>
+        <div class="item">
+          <div class="item-title">出生日期</div>
+          <div class="item-content">{{user.birthday}}</div>
+        </div>
+        <div class="item">
+          <div class="item-title">联系电话</div>
+          <div class="item-content">{{user.phonenumber}}</div>
+        </div>
+        <div class="item">
+          <div class="item-title">电子邮箱</div>
+          <div class="item-content">{{user.email}}</div>
+        </div>
+        <div class="item">
+          <div class="item-title">居住地址</div>
+          <div class="item-content">{{user.address}}</div>
         </div>
       </div>
     </div>
@@ -14,27 +42,39 @@ export default {
     return {
       credit: '',
       user: {
-        'sex': 'FM',
+        'sex': '女',
         'citiname': '谭靖薇',
+        'citicreditid': '512000328',
         'password': '123456',
         'nation': '汉族',
-        'address': '四川省成都市'
-      },
-      list: ['姓名', '身份证号', '性别', '民族', '居住地址', '联系电话', '籍贯', '出生日期']
+        'address': '四川省成都市',
+        'email': '12312@126.com',
+        'birthday': '1998年X年X月',
+        'phonenumber': '37647263'
+      }
     }
   },
   created () {
-    // let listname = ['姓名','身份证号','性别','民族','居住地址','联系电话','籍贯','出生日期']
-    // this.credit = sessionStorage.getItem('user')
-    // this.$http.get('/user',this.credit).then((res) => {
-    //   if(res!==200){
-    //     this.user = res.data
-    //   }
-    // })
   }
 }
 </script>
 
 <style lang="stylus" scoped rel="stylesheet/stylus">
-
+.wrapper
+  width 80%
+  margin 50px auto 80px auto
+  .item
+    width 100%
+    line-height 70px
+    height 70px
+    font-size 24px
+    .item-title
+      float left
+      width 30%
+    .item-content
+      width 70%
+      float right
+      height 90%
+      text-align center
+      border 2px dashed black
 </style>

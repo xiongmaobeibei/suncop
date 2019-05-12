@@ -1,7 +1,7 @@
 <template>
     <div class="wrapper">
         <ul class="tab">
-            <li class="item-title">用户界面</li>
+            <li class="item-title">>>> 个人中心</li>
             <li v-for="item in currentNavItem" :key="item" class="tab-item">
               <router-link :to="item.path">{{item.name}}</router-link>
               </li>
@@ -41,13 +41,16 @@ export default {
 </script>
 <style lang="stylus" scoped rel="stylesheet/stylus">
 .wrapper
-  width 100%
+  width 80%
+  margin auto
+  margin-top -30px
   background rgb(248,242,242)
   .tab
     float left
     width 30%
     height 500px
     list-style none
+    padding 0px
     .item-title
       height 80px
       line-height 70px
@@ -63,8 +66,6 @@ export default {
       &:active
         background rgb(255,255,255)
   .right-wrapper
-    float left
+    float right
     width 70%
-    height 500px
-    background rgb(82,130,170)
 </style>
