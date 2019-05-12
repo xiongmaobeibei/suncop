@@ -37,8 +37,9 @@ module.exports = function() {
         letterTitle: Random.cword(6,18),
         letterTime: Random.date(),
         letterContent: content,
-        backMessage: '', //回复的信息
-        Ispermit: Random.integer(0,1),
+        backMessage: Random.cparagraph(0,10),
+        returnTime:Random.date(),
+        Ispermit: Random.integer(0,1), //0表示没有回复
         identify: Random.pick(['admin','police','resident'])
       })
     }

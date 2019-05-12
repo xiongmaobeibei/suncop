@@ -117,7 +117,10 @@ export default {
       .news-pic
         width 520px
         height 520px
+        margin-right 20px
+        flex 1
       .news-tab
+        flex 1
         width 48%
         margin-right 0
         height auto
