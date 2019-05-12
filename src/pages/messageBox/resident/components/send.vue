@@ -1,78 +1,91 @@
 <template>
   <div class='sendBox'>
     <p>发件箱</p>
-    <a-table :columns="columns" :dataSource="data" size='small'>
+    <a-table :columns="columns" :dataSource="data" :pagination="pagination" size='middle'>
       <a slot="name" slot-scope="text" href="javascript:">{{text}}</a>
-      <span slot="source">To.</span>
-      <span slot="content" slot-scope="text, record" class="content">{{text}}</span>
+      <span slot="identify" slot-scope="text" class="content">{{identifyObj[text]}}</span>
+      <span slot="content" slot-scope="text" class="content">{{text}}</span>
+      <span slot="letterTitle" slot-scope="text" class="content">{{text}}</span>
       <span slot="action" slot-scope="text, record">
+        <a href="javascript:" @click="onPressDel(record)">删除</a>
         <a href="javascript:" @click="onPressCheck(record)">详情</a>
       </span>
     </a-table>
-    <v-dialog/>
+    <modal name="message-detail" height="auto" :scrollable="true">
+      <div class="modal-box">
+        <header>
+          <p>发件人: {{modal.userName}}</p>
+        </header>
+        <main>
+          <p>内容</p>
+          <p style="font-weight: 400">{{modal.content}}</p>
+        </main>
+        <footer>
+          <p class="p-time">{{modal.letterTime}}</p>
+        </footer>
+      </div>
+    </modal>
   </div>
 </template>
 <script>
 const columns = [{
-  dataIndex: 'source',
-  key: 'source',
-  slots: { title: 'customTitle' },
-  scopedSlots: { customRender: 'source' }
+  title: '发件人',
+  dataIndex: 'ownerEmail',
+  key: 'ownerEmail',
+  // 按名字长度排序
+  sorter: (a, b) => a.ownerEmail.length - b.ownerEmail.length
 }, {
-  title: '收件人',
-  dataIndex: 'name',
-  key: 'name'
+  title: '日期',
+  dataIndex: 'letterTime',
+  key: 'letterTime',
+  // 按发件日期长度排序
+  sorter: (a, b) => new Date(a.letterTime).getTime() - new Date(b.letterTime).getTime()
 }, {
   title: '简要内容',
-  dataIndex: 'content',
-  key: 'content',
-  scopedSlots: { customRender: 'content' }
+  dataIndex: 'letterTitle',
+  key: 'letterTitle',
+  scopedSlots: { customRender: 'letterTitle' }
 }, {
   title: '操作',
   key: 'action',
   scopedSlots: { customRender: 'action' }
 }]
 
-const data = [{
-  key: '1',
-  source: 'admin',
-  name: 'admin',
-  content: 'New York No. 1 Lake Park'
-}, {
-  key: '2',
-  source: 'user',
-  name: 'admin',
-  content: 'London No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake ParkLondon No. 1 Lake Park'
-}, {
-  key: '3',
-  source: 'user',
-  name: 'admin',
-  content: 'Sidney No. 1 Lake Park'
-}]
-
 export default {
+  mounted: function () {
+    this.getLetters()
+  },
   data () {
     return {
-      data,
+      data: [],
       columns,
       modal: {
         title: '',
         content: '',
-        userName: ''
+        userName: '',
+        letterTime: ''
       }
     }
   },
   methods: {
-    onPressCheck (e) {
-      this.$modal.show('dialog', {
-        title: `From. ${e.name} (${e.source})`,
-        text: e.content,
-        buttons: [
-          {
-            title: 'Close'
-          }
-        ]
+    getLetters () {
+      this.$ajax.get('http://localhost:3003/letters').then((res) => {
+        this.data = res.data
       })
+    },
+    onPressDel (e) {
+      const i = this.data.findIndex(item => item.key === e.key)
+      // TODO: 这里需要后端提供方法真正的删除数据
+      this.data.splice(i, 1)
+    },
+    onPressCheck (e) {
+      this.modal = {
+        source: e.identify,
+        content: e.letterContent,
+        userName: e.ownerEmail,
+        letterTime: e.letterTime
+      }
+      this.$modal.show('message-detail')
     }
   }
 }
@@ -100,4 +113,7 @@ export default {
   max-height 53px
   white-space nowrap
   display block
+.p-time
+  text-align right
+  margin-right 30px
 </style>

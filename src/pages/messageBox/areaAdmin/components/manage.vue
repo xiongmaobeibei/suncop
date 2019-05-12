@@ -1,7 +1,28 @@
 <template>
   <div class='receiveBox'>
     <p style="padding-left: 1em">收件箱</p>
-    <a-table :columns="columns" :dataSource="data" :pagination="pagination" size='middle'>
+    <div style="margin-bottom: 16px">
+    <a-button
+        type="primary"
+        @click="startDel"
+        :disabled="!hasSelected"
+      >
+        删除
+      </a-button>
+    <a-button
+        type="primary"
+        @click="startPass"
+        :disabled="!hasSelected"
+      >
+        通过
+      </a-button>
+      <span style="margin-left: 8px">
+        <template v-if="hasSelected">
+          {{`Selected ${selectedRowKeys.length} items`}}
+        </template>
+      </span>
+    </div>
+    <a-table :rowSelection="rowSelection" :columns="columns" :dataSource="data" :pagination="pagination" size='middle'>
       <a slot="name" slot-scope="text" href="javascript:">{{text}}</a>
       <span slot="identify" slot-scope="text" class="content">{{identifyObj[text]}}</span>
       <span slot="content" slot-scope="text" class="content">{{text}}</span>
@@ -93,6 +114,7 @@ export default {
       visible: false,
       inputValue: '',
       loading: false,
+      selectedRowKeys: [],
       modal: {
         source: '',
         content: '',
@@ -101,7 +123,29 @@ export default {
       identifyObj
     }
   },
+  computed: {
+    rowSelection () {
+      const { selectedRowKeys } = this
+      return {
+        selectedRowKeys,
+        onChange: this.onSelectChange,
+        hideDefaultSelections: true,
+        selections: [{
+          key: 'all-data',
+          text: 'Select All Data',
+          onSelect: () => {
+            this.selectedRowKeys = [0] // 0...45
+          }
+        }],
+        onSelection: this.onSelection
+      }
+    }
+  },
   methods: {
+    onSelectChange (selectedRowKeys) {
+      console.log('selectedRowKeys changed: ', selectedRowKeys)
+      this.selectedRowKeys = selectedRowKeys
+    },
     getLetters () {
       this.$ajax.get('http://localhost:3003/letters').then((res) => {
         this.data = res.data

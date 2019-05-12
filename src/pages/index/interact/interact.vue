@@ -1,5 +1,5 @@
 <template>
-  <div class="interact-container">
+  <div class="interact-box">
     <div class="inter-btn">
       <div v-for="(item,index) in aArr" :key="index" >
         <a href="item.ahref"><img :src="item.images"></a>
@@ -70,33 +70,33 @@ export default {
 </script>
 
 <style lang="stylus">
-.interact-container
+.interact-box
   width 100%
   height 100%
   display flex
   align-items center
   justify-content space-around
   .inter-btn
-    width 25%
-    height 100%
+    flex 1
     display flex
     flex-direction column
     justify-content space-around
-    align-items flex-start
+    align-items center
     img
       flex 1
       width 90px
       height 90px
   .inter-tab
-    width 100%
-    height 100%
-    top 5%
-    display inline-block
+    flex 5
     .tab-btn
-      padding 20% 7%
+      height 663px
+      display flex
+      align-items flex-start
+      padding 20% 10% 0
       background-image url('./back-tabs.png')
-      background-size 100% auto
+      background-size 100% 100%
       background-repeat no-repeat
+      background-position center
       .tab-content
         background-color white
         width 100%
@@ -124,6 +124,7 @@ export default {
     border-right: 0.013333rem solid #e8e8e8;
     margin-right: -0.013333rem;
     margin-bottom: 0;
+    height auto
   }
   .ant-tabs-vertical.ant-tabs-card.ant-tabs-left .ant-tabs-card-bar.ant-tabs-left-bar .ant-tabs-tab {
     border-right: 0;
@@ -139,4 +140,6 @@ export default {
     background-color: white;
     color:black;
   }
+  .ant-tabs .ant-tabs-left-content
+    width 100%
 </style>

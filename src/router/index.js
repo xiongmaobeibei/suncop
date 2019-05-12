@@ -39,6 +39,10 @@ const constantRoutes = [
     component: () => import('../pages/messageBox/admin')
   },
   {
+    path: '/message/areaAdmin',
+    component: () => import('../pages/messageBox/areaAdmin')
+  },
+  {
     path: '/test',
     component: () => import('../pages/test')
   },
