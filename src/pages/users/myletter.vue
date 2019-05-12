@@ -1,5 +1,7 @@
 <template>
-    <div>我的信件</div>
+    <div>
+        <div></div>
+    </div>
 </template>
 <script>
 export default {
