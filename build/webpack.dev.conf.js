@@ -26,7 +26,6 @@ const portfinder = require('portfinder')
 
 const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
-
 const devWebpackConfig = merge(baseWebpackConfig, {
   module: {
     rules: utils.styleLoaders({ sourceMap: config.dev.cssSourceMap, usePostCSS: true })
@@ -46,7 +45,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     contentBase: false, // since we use CopyWebpackPlugin.
     compress: true,
     host: HOST || config.dev.host,
-    port: PORT || config.dev.port,
+    port: '8080', //PORT || config.dev.port,
     open: config.dev.autoOpenBrowser,
     overlay: config.dev.errorOverlay
       ? { warnings: false, errors: true }
@@ -109,13 +108,13 @@ module.exports = new Promise((resolve, reject) => {
 })
 
 /**新闻接口的数据调用 */
-const jsonServer = require('json-server')
-const apiServer = jsonServer.create()
-const apiRouter = jsonServer.router('db.json')
-const middlewares = jsonServer.defaults()
+// const jsonServer = require('json-server')
+// const apiServer = jsonServer.create()
+// const apiRouter = jsonServer.router('db.json')
+// const middlewares = jsonServer.defaults()
 
-apiServer.use(middlewares)
-apiServer.use(apiRouter)
-apiServer.listen(3000, () => {
-  console.log('json server is running')
-})
+// apiServer.use(middlewares)
+// apiServer.use(apiRouter)
+// apiServer.listen(3000, () => {
+//   console.log('json server is running')
+// })

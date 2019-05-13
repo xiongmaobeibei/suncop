@@ -27,33 +27,33 @@ export default {
     ...mapActions({add_Routes: 'add_Routes'}),
     login () {
       this.loading = true
-      this.$http.get('/api/user?citicreditid=' + this.creditid).then((res) => {
-        console.log(res.body)
-        var user = res.body[0]
-        console.log(user)
-        if (res) {
-          this.$http.get('/api/permit?id=' + user.identity).then((re) => {
-            // 将路由信息，用户信息存到sessionStorage里面
-            console.log(re.data[0].permit_list)
-            sessionStorage.setItem('menuData', JSON.stringify(re.data[0].permit_list))
-            sessionStorage.setItem('user', this.user.creditid)
-            this.$router.push('/user')
-            // 触发vuex里面增加的路由
-            // this.add_Routes(re.data[0].permit_list)
-          })
-        }
-      }, (err) => {
-        console.log(err)
-      })
-      // this.$http.get('/api/user', this.user).then((res) => {
-      //   // 将路由信息，用户信息存到sessionStorage里面
-      //   console.log(res.data[0].permit_list)
-      //   sessionStorage.setItem('menuData', JSON.stringify(res.data[0].permit_list))
-      //   sessionStorage.setItem('user', this.user.creditid)
-      //   this.$router.push('/user')
-      //   // 触发vuex里面增加的路由
-      //   // this.add_Routes(re.data[0].permit_list)
+      // this.$http.get('/api/user?citicreditid=' + this.creditid).then((res) => {
+      //   console.log(res.body)
+      //   var user = res.body[0]
+      //   console.log(user)
+      //   if (res) {
+      //     this.$http.get('/api/permit?id=' + user.identity).then((re) => {
+      //       // 将路由信息，用户信息存到sessionStorage里面
+      //       console.log(re.data[0].permit_list)
+      //       sessionStorage.setItem('menuData', JSON.stringify(re.data[0].permit_list))
+      //       sessionStorage.setItem('user', this.user.creditid)
+      //       this.$router.push('/user')
+      //       // 触发vuex里面增加的路由
+      //       // this.add_Routes(re.data[0].permit_list)
+      //     })
+      //   }
+      // }, (err) => {
+      //   console.log(err)
       // })
+      this.$http.get('http://localhost:8080/api/citizenMes', this.user).then((res) => {
+        // 将路由信息，用户信息存到sessionStorage里面
+        console.log(res.data[0].permit_list)
+        sessionStorage.setItem('menuData', JSON.stringify(res.data[0].permit_list))
+        sessionStorage.setItem('user', this.user.creditid)
+        this.$router.push('/user')
+        // 触发vuex里面增加的路由
+        // this.add_Routes(re.data[0].permit_list)
+      })
     }
   }
 }
