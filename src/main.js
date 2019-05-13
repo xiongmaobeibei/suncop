@@ -7,6 +7,7 @@ import router from './router'
 // 引入flexible
 import 'lib-flexible'
 import axios from 'axios'
+import qs from 'qs'
 // 引入vuex
 import store from './store/store'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
@@ -35,10 +36,16 @@ Vue.use(VueAwesomeSwiper)
 //     next()
 //   }
 // })
+Vue.prototype.baseURL = 'http://localhost:8080/api'
+
+axios.defaults.withCredentials = true
+
+Vue.prototype.qs = qs
 
 Vue.prototype.$ajax = axios
 
 Vue.config.productionTip = false
+// Vue.http.options.emulateJSON = true
 
 Vue.use(VueResource)
 // Vue.use(VueAxios, axios)
