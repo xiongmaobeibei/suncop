@@ -15,16 +15,27 @@
       <h1>{{data[choiceindex].vitename}}</h1>
       <h2>{{data[choiceindex].voteintro}}</h2>
       <p>选项</p>
-
+      <a-list itemLayout="horizontal" :dataSource="itemdata">
+        <a-list-item slot="renderItem" slot-scope="">
+          <a-list-item-meta
+            description=item.itemIntro
+          >
+            <a slot="title" href="https://vue.ant.design/">item.itemName</a>
+            <a-avatar slot="avatar" src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+          </a-list-item-meta>
+        </a-list-item>
+      </a-list>
     </a-modal>
 </div>
 </template>
 <script>
 const data = []
+// const itemdata = []
 export default {
   data () {
     return {
       data,
+      itemdata: data.voteItem,
       loading: false,
       visible: false,
       choiceindex: 0
