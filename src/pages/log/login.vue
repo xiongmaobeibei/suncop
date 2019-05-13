@@ -2,7 +2,7 @@
     <div class="wrapper">
         <form action="GET" class="form">
             <p v-show="showtip">{{showtip}}</p>
-            <input type="text" v-model="creditid" placeholder="   请输入身份证号码"  class="inputtext"/><br>
+            <input type="text" v-model="citicreditid" placeholder="   请输入身份证号码"  class="inputtext"/><br>
             <input type="password" v-model="password" placeholder="   请输入密码" class="inputtext"/><br>
             <input type="button" value="登录" class="button" @click="login">
         </form>
@@ -10,16 +10,13 @@
 </template>
 <script>
 import {mapActions} from 'vuex'
+// import qs from 'qs'
 export default {
   data () {
     return {
       showtip: '',
-      creditid: '',
+      citicreditid: '',
       password: '',
-      user: {
-        citicreditid: '',
-        password: ''
-      },
       loading: false
     }
   },
@@ -45,15 +42,43 @@ export default {
       // }, (err) => {
       //   console.log(err)
       // })
-      this.$http.get('http://localhost:8080/api/citizenMes', this.user).then((res) => {
-        // 将路由信息，用户信息存到sessionStorage里面
-        console.log(res.data[0].permit_list)
-        sessionStorage.setItem('menuData', JSON.stringify(res.data[0].permit_list))
-        sessionStorage.setItem('user', this.user.creditid)
-        this.$router.push('/user')
-        // 触发vuex里面增加的路由
-        // this.add_Routes(re.data[0].permit_list)
+      // const { citicreditid, password } = this
+      // const params = qs.stringify({citicreditid, password})
+      const sunCitizenmes = {
+        // ßid: ''
+        citicreditid: this.citicreditid,
+        password: this.password
+        // citiname: '',
+        // sex: '',
+        // nation: '',
+        // address: '',
+        // phonenumber: '',
+        // nativeaddress: '',
+        // birthday: '',
+        // identity: ''
+      }
+      console.log(sunCitizenmes)
+      // const url = `api/citizenMes/sunCitizenmes` // `/api/citizenMes/login?${params}` // http://localhost:8080/api/citizenMes
+      // this.$http.get('/api/citizenMes/login', sunCitizenmes).then((res) => {
+      //   // 将路由信息，用户信息存到sessionStorage里面
+      //   console.log(res.data[0].permit_list)
+      //   sessionStorage.setItem('menuData', JSON.stringify(res.data[0].permit_list))
+      //   sessionStorage.setItem('user', this.user.creditid)
+      //   this.$router.push('/user')
+      //   // 触发vuex里面增加的路由
+      //   // this.add_Routes(re.data[0].permit_list)
+      // })
+      const params = this.qs.stringify(sunCitizenmes)
+      this.$ajax({
+        url: `/api/citizenMes/login?${params}`
+        // params: sunCitizenmes
       })
+        .then((response) => {
+          console.log(response)
+        })
+        .catch((error) => {
+          console.log(error)
+        })
     }
   }
 }
