@@ -248,7 +248,7 @@
             },
             {
               "name": "管理登录用户信息",
-              "path": "/user/manageUserInfo"
+              "path": "/user/userinfoManage"
             },
             {
               "name": "添加工作动态",
@@ -278,7 +278,7 @@
             },
             {
               "name": "管理登录用户信息",
-              "path": "/user/manageUserInfo"
+              "path": "/user/userinfoManage"
             },
             {
               "name": "系统管理",

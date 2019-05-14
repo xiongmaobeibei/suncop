@@ -9,25 +9,38 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
+    
+
+    proxyTable:{
+      '/api': {
+        target: 'http://localhost:3000',//设置你调用的接口域名和端口号 别忘了加http
+        secure: true,
+        changeOrigin: true,
+        pathRewrite: {
+          '^/api': '/',
+        //这里理解成用'/api'代替target里面的地址，后面组件中我们掉接口时直接用api代替 比如我要调用'http://xxx.xxx.xxx.xx:8081/user/add'，直接写‘/api/user/add’即可
+        }
+      }
+    },
+
     // proxyTable: {
     //   '/api': {
-    //     changeOrigin: true, // 如果接口跨域，需要进行这个参数配置
-    //     target: 'http://localhost:/3000', // 接口的域名
-    //     // secure: false,  // 如果是https接口，需要配置这个参数
+    //     target: 'http://localhost:8080',// 接口的域名
+    //     changeOrigin: true,// 如果接口跨域，需要进行这个参数配置
     //     pathRewrite: {
-    //       '^/api': ''
+    //       '^/api': ''//后面可以使重写的新路径，一般不做更改
     //     }
     //   }
     // },
-    proxyTable: {
-        '/api': {
-          changeOrigin: true,// 如果接口跨域，需要进行这个参数配置
-          target: 'http://localhost:3000',// 接口的域名
-          pathRewrite: {
-            '^/api': ''//后面可以使重写的新路径，一般不做更改
-          }
-      }
-    },
+    // proxyTable: {
+    //     '/api': {
+    //       changeOrigin: true,// 如果接口跨域，需要进行这个参数配置
+    //       target: 'http://localhost:3000',// 接口的域名
+    //       pathRewrite: {
+    //         '^/api': ''//后面可以使重写的新路径，一般不做更改
+    //       }
+    //   }
+    // },
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST

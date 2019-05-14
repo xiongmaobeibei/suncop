@@ -2,17 +2,44 @@
     <div>
         <div class="wrapper">
             <form action="" class="formbox">
-                <span class="title">身份证号:</span><input class="input-box" type="text"><br/>
+                <span class="title">身份证号:</span><input class="input-box" type="text" v-model="citicreditid"><br/>
                 <span class="title">电话号码:</span><input class="input-box" type="text"><br/>
                 <span class="title">验证码:</span><input class="input-box-confirm" type="text"><input type="button" class="confirm-button" value="获取验证码"/><br/>
-                <span class="title">新密码:</span><input class="input-box" type="text"><br/>
-                <input class="button" type="button" value="确认">
+                <span class="title">新密码:</span><input class="input-box" type="text" v-model="newcode"><br/>
+                <input class="button" type="button" value="确认" @click="doupdate">
             </form>
         </div>
     </div>
 </template>
 <script>
 export default {
+  data () {
+    return {
+      citicreditid: '',
+      newcode: ''
+    }
+  },
+  methods: {
+    doupdate () {
+      const sunCitizenmes = {
+        citicreditid: this.citicreditid,
+        password: this.newcode
+      }
+      const params = this.qs.stringify(sunCitizenmes)
+      this.$ajax({
+        url: `/api/citizenMes/modifypassword?${params}`,
+        methods: 'get'
+      })
+        .then((response) => {
+          if (response !== 200) {
+            alert('OK')
+          }
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    }
+  }
 }
 </script>
 
