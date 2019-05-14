@@ -2,18 +2,15 @@
   <div class='residentBox'>
     <Receive />
     <Send />
-    <Write />
   </div>
 </template>
 <script>
 import Send from './components/send.vue'
-import Write from './components/write.vue'
 import Receive from './components/receive.vue'
 export default {
   components: {
     Receive,
-    Send,
-    Write
+    Send
   },
   data () {
     return {

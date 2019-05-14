@@ -1,12 +1,12 @@
 <template>
   <div class="app">
       <ul class="tab-tilte">
-          <li v-for="(title,index) in tabtit" :key="title" @click="cur=index" :class="{active:cur==index}">{{title}}</li>
+          <li v-for="(title,index) in tabtit" :key="title" @click="getNews(index)" :class="{active:cur==index}">{{title}}</li>
       </ul>
       <div class="tab-content">
           <div>
             <select class="tab-select" multiple>
-              <option v-for="cont in tabmain" :key="cont.infoID" v-show="cont.infoType==cur" >{{cont.infoTitle}}</option>
+              <option v-for="cont in tabmain" :key="cont.infoid" >{{cont.infotitle}}</option>
             </select>
           </div>
       </div>
@@ -22,23 +22,23 @@ export default {
       tabmain: []
     }
   },
-  mounted: function () {
-    this.getNews()
-  },
   methods: {
-    getNews () {
-      this.$ajax.get('http://localhost:3003/news').then((res) => {
-        this.tabmain = res.data
-        console.log(res.data)
+    getNews (index) {
+      this.cur = index
+      const sunCitizenmes = {
+        type: this.cur.toString()
+      }
+      const params = this.qs.stringify(sunCitizenmes)
+      this.$ajax({
+        url: `/api/webInfo/selectBytype?${params}`
       })
-      // this.$ajax({
-      //   url: "",
-      //   dataType: 'json',
-      //   type: 'GET',
-      //   success:function(data){
-      //     this.tabmain = data;
-      //   }
-      // })
+        .then((response) => {
+          this.tabmain = response.data
+          console.log(response.data)
+        })
+        .catch((error) => {
+          console.log(error)
+        })
     }
   }
 }
