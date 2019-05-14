@@ -1,5 +1,4 @@
 <template>
-    <div>我是systemManage</div>
 </template>
 <script>
 export default {

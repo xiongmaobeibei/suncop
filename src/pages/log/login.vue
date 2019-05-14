@@ -10,7 +10,6 @@
 </template>
 <script>
 import {mapActions} from 'vuex'
-// import qs from 'qs'
 export default {
   data () {
     return {
@@ -45,17 +44,8 @@ export default {
       // const { citicreditid, password } = this
       // const params = qs.stringify({citicreditid, password})
       const sunCitizenmes = {
-        // ßid: ''
         citicreditid: this.citicreditid,
         password: this.password
-        // citiname: '',
-        // sex: '',
-        // nation: '',
-        // address: '',
-        // phonenumber: '',
-        // nativeaddress: '',
-        // birthday: '',
-        // identity: ''
       }
       console.log(sunCitizenmes)
       // const url = `api/citizenMes/sunCitizenmes` // `/api/citizenMes/login?${params}` // http://localhost:8080/api/citizenMes
@@ -71,10 +61,12 @@ export default {
       const params = this.qs.stringify(sunCitizenmes)
       this.$ajax({
         url: `/api/citizenMes/login?${params}`
-        // params: sunCitizenmes
       })
         .then((response) => {
           console.log(response)
+          sessionStorage.setItem('menuData', JSON.stringify(response.data))
+          sessionStorage.setItem('user', this.citicreditid)
+          this.$router.push('/user')
         })
         .catch((error) => {
           console.log(error)

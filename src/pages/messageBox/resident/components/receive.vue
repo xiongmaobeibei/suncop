@@ -2,9 +2,9 @@
   <div class='receiveBox'>
     <p>收件箱</p>
     <a-table :columns="columns" :dataSource="data" :pagination="pagination" size='middle'>
-      <a slot="name" slot-scope="text" href="javascript:">{{text}}</a>
-      <span slot="returnTime" slot-scope="text" class="content">{{text}}</span>
-      <span slot="letterTitle" slot-scope="text" class="content">{{text}}</span>
+      <span slot="sendp" slot-scope="text" class="content">{{text}}</span>
+      <span slot="lettertime" slot-scope="text" class="content">{{text}}</span>
+      <span slot="lettertitle" slot-scope="text" class="content">{{text}}</span>
       <span slot="action" slot-scope="text, record">
         <a href="javascript:" @click="onPressDel(record)">删除</a>
         <a href="javascript:" @click="onPressCheck(record)">详情</a>
@@ -23,7 +23,6 @@
         <main class="back-box">
           <p>回复内容:</p>
           <p style="font-weight: 400;text-indent: 2em;">{{modal.returnMessage}}</p>
-          <p class="time-box">{{modal.returnTime}}</p>
         </main>
         <footer>
           <p>from 局长</p>
@@ -36,21 +35,19 @@
 <script>
 const columns = [{
   title: '发件人',
-  dataIndex: 'ownerEmail',
-  key: 'ownerEmail',
-  // 按名字长度排序
-  sorter: (a, b) => a.ownerEmail.length - b.ownerEmail.length
+  dataIndex: 'sendp',
+  key: 'sendp'
 }, {
   title: '日期',
-  dataIndex: 'returnTime',
-  key: 'returnTime',
+  dataIndex: 'lettertime',
+  key: 'lettertime',
   // 按发件日期长度排序
-  sorter: (a, b) => new Date(a.returnTime).getTime() - new Date(b.returnTime).getTime()
+  sorter: (a, b) => new Date(a.lettertime).getTime() - new Date(b.lettertime).getTime()
 }, {
   title: '简要内容',
-  dataIndex: 'letterTitle',
-  key: 'letterTitle',
-  scopedSlots: { customRender: 'letterTitle' }
+  dataIndex: 'lettertitle',
+  key: 'lettertitle',
+  scopedSlots: { customRender: 'lettertitle' }
 }, {
   title: '操作',
   key: 'action',
@@ -65,37 +62,70 @@ export default {
     return {
       data: [],
       columns,
+      userid: '',
       modal: {
+        letterid: '',
         title: '',
         content: '',
         userName: '',
         returnMessage: '',
-        letterTime: '',
-        returnTime: ''
+        letterTime: ''
       }
     }
   },
   methods: {
     getLetters () {
-      this.$ajax.get('http://localhost:3003/letters').then((res) => {
-        this.data = res.data
+      const sunCitizenmes = {
+        userid: this.userid
+      }
+      const params = this.qs.stringify(sunCitizenmes)
+      this.$ajax({
+        url: `api/letters/resident?${params}`
       })
-    },
-    onPressDel (e) {
-      const i = this.data.findIndex(item => item.key === e.key)
-      // TODO: 这里需要后端提供方法真正的删除数据
-      this.data.splice(i, 1)
+        .then((response) => {
+          var i = 0
+          var j = 0
+          while (i < response.data.length) {
+            if (response.data[i].returninfo === '') {
+              i++
+            } else {
+              this.data[j] = response.data[i]
+              i++
+              j++
+            }
+          }
+        })
+        .catch((error) => {
+          console.log(error)
+        })
     },
     onPressCheck (e) {
       this.modal = {
-        source: e.identify,
-        content: e.letterContent,
-        userName: e.ownerEmail,
-        returnMessage: e.backMessage,
-        returnTime: e.returnTime,
-        letterTime: e.letterTime
+        letterid: e.letterid,
+        title: e.lettertitle,
+        content: e.lettercontent,
+        userName: e.owneremail,
+        returnMessage: e.returninfo,
+        letterTime: e.lettertime
       }
       this.$modal.show('message-detail')
+    },
+    onPressDel (e) {
+      const i = this.data.findIndex(item => item.key === e.key)
+      const sunCitizenmes = {
+        letterid: this.data[i].letterid
+      }
+      const params = this.qs.stringify(sunCitizenmes)
+      this.$ajax({
+        url: `/api/letters/deleteByletterid?${params}`
+      })
+        .then((response) => {
+          console.log(response.data)
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+      this.data.splice(i, 1)
     }
   }
 }

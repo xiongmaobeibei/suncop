@@ -2,10 +2,10 @@
   <div class='receiveBox'>
     <p style="padding-left: 1em">收件箱</p>
     <a-table :columns="columns" :dataSource="data" :pagination="pagination" size='middle'>
-      <a slot="name" slot-scope="text" href="javascript:">{{text}}</a>
       <span slot="identify" slot-scope="text" class="content">{{identifyObj[text]}}</span>
-      <span slot="content" slot-scope="text" class="content">{{text}}</span>
-      <span slot="letterTitle" slot-scope="text" class="content">{{text}}</span>
+      <span slot="owneremail" slot-scope="text" class="content">{{text}}</span>
+      <span slot="lettertime" slot-scope="text" class="content">{{text}}</span>
+      <span slot="lettertitle" slot-scope="text" class="content">{{text}}</span>
       <span slot="action" slot-scope="text, record">
         <a href="javascript:" @click="onPressDel(record)">删除</a>
         <a href="javascript:" @click="onPressCheck(record)">详情</a>
@@ -61,21 +61,21 @@ const columns = [{
   onFilter: (value, record) => record.identify.indexOf(value) === 0
 }, {
   title: '发件人',
-  dataIndex: 'ownerEmail',
-  key: 'ownerEmail',
+  dataIndex: 'owneremail',
+  key: 'owneremail',
   // 按名字长度排序
-  sorter: (a, b) => a.ownerEmail.length - b.ownerEmail.length
+  sorter: (a, b) => a.owneremail.length - b.owneremail.length
 }, {
   title: '日期',
-  dataIndex: 'letterTime',
-  key: 'letterTime',
+  dataIndex: 'lettertime',
+  key: 'lettertime',
   // 按发件日期长度排序
-  sorter: (a, b) => new Date(a.letterTime).getTime() - new Date(b.letterTime).getTime()
+  sorter: (a, b) => new Date(a.lettertime).getTime() - new Date(b.lettertime).getTime()
 }, {
   title: '简要内容',
-  dataIndex: 'letterTitle',
-  key: 'letterTitle',
-  scopedSlots: { customRender: 'letterTitle' }
+  dataIndex: 'lettertitle',
+  key: 'lettertitle',
+  scopedSlots: { customRender: 'lettertitle' }
 }, {
   title: '操作',
   key: 'action',
@@ -94,6 +94,7 @@ export default {
       inputValue: '',
       loading: false,
       modal: {
+        letterid: '',
         source: '',
         content: '',
         userName: ''
@@ -103,25 +104,59 @@ export default {
   },
   methods: {
     getLetters () {
-      this.$ajax.get('http://localhost:3003/letters').then((res) => {
-        this.data = res.data
+      this.$ajax({
+        url: `/api/letter/capitalseeletters`
       })
+        .then((response) => {
+          console.log(response.data)
+          this.data = response.data
+        })
+        .catch((error) => {
+          console.log(error)
+        })
     },
     onPressDel (e) {
       const i = this.data.findIndex(item => item.key === e.key)
-      // TODO: 这里需要后端提供方法真正的删除数据
+      const sunCitizenmes = {
+        letterid: this.data[i].letterid
+      }
+      const params = this.qs.stringify(sunCitizenmes)
+      this.$ajax({
+        url: `/api/letters/deleteByletterid?${params}`
+      })
+        .then((response) => {
+          console.log(response.data)
+        })
+        .catch((error) => {
+          console.log(error)
+        })
       this.data.splice(i, 1)
     },
     onPressCheck (e) {
       this.modal = {
+        letterid: e.letterid,
         source: e.identify,
-        content: e.letterContent,
-        userName: e.ownerEmail
+        content: e.lettercontent,
+        userName: e.owneremail
       }
       this.$modal.show('message-detail')
     },
     onPressSendBtn () {
       // TODO: 这里需要后端提供方法发送信息
+      const sunCitizenmes = {
+        id: this.modal.letterid,
+        returnText: this.inputValue
+      }
+      const params = this.qs.stringify(sunCitizenmes)
+      this.$ajax({
+        url: `/api/letter/return?${params}`
+      })
+        .then((response) => {
+          console.log(response.data)
+        })
+        .catch((error) => {
+          console.log(error)
+        })
       this.loading = true
       setTimeout(() => { this.loading = false }, 2000)
     }

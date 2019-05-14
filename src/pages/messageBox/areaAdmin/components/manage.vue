@@ -22,7 +22,7 @@
         </template>
       </span>
     </div>
-    <a-table :rowSelection="rowSelection" :columns="columns" :dataSource="data" :pagination="pagination" size='middle'>
+    <a-table :rowSelection="rowSelection" hideDefaultSelections=true :columns="columns" :dataSource="data" :pagination="pagination" size='middle'>
       <a slot="name" slot-scope="text" href="javascript:">{{text}}</a>
       <span slot="identify" slot-scope="text" class="content">{{identifyObj[text]}}</span>
       <span slot="content" slot-scope="text" class="content">{{text}}</span>
@@ -124,6 +124,9 @@ export default {
     }
   },
   computed: {
+    hasSelected () {
+      return this.selectedRowKeys.length > 0
+    },
     rowSelection () {
       const { selectedRowKeys } = this
       return {
@@ -134,7 +137,17 @@ export default {
           key: 'all-data',
           text: 'Select All Data',
           onSelect: () => {
-          // this.selectedRowKeys = [0] // 0...45
+            // this.selectedRowKeys = [0, 1] // 0...45
+          }
+        }, {
+          key: 'admin',
+          text: '选中管理员',
+          onSelect: (changableRowKeys) => {
+          //   let newSelectedRowKeys = []
+          //   newSelectedRowKeys = changableRowKeys.filter((value, record) =>
+          //     record.identify.indexOf(value) === 0
+          //   )
+          //   // this.selectedRowKeys = newSelectedRowKeys
           }
         }],
         onSelection: this.onSelection
@@ -150,6 +163,12 @@ export default {
       this.$ajax.get('http://localhost:3003/letters').then((res) => {
         this.data = res.data
       })
+    },
+    startDel () {
+
+    },
+    startPass () {
+
     },
     onPressDel (e) {
       const i = this.data.findIndex(item => item.key === e.key)

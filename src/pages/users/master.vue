@@ -3,7 +3,7 @@
         <ul class="tab">
             <li class="item-title">>>> 个人中心</li>
             <li v-for="item in currentNavItem" :key="item" class="tab-item">
-              <router-link :to="item.path">{{item.name}}</router-link>
+              <router-link :to="item.key">{{item.value}}</router-link>
               </li>
             <li class="tab-item">注销</li>
             <li class="tab-item" @click="backToindex">返回首页</li>
@@ -29,7 +29,7 @@ export default {
     },
     showMenu () {
       console.log(sessionStorage.getItem('menuData'))
-      this.currentNavItem = JSON.parse(sessionStorage.getItem('menuData'))
+      this.currentNavItem = JSON.parse(sessionStorage.getItem('menuData')[0])
     }
     // created () {
     //   this.user = sessionStorage.getItem('user')
