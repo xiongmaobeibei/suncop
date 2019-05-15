@@ -31,6 +31,10 @@ const constantRoutes = [
     component: () => import('../pages/index/index')
   },
   {
+    path: '/logmanage',
+    component: () => import('../pages/mylog')
+  },
+  {
     path: '/add',
     component: () => import('../pages/users/addWorknews'),
     meta: {
@@ -82,10 +86,6 @@ const constantRoutes = [
   {
     path: '/user/systemManage',
     component: () => import('../pages/users/systemManage')
-  },
-  {
-    path: '/vote',
-    component: () => import('../pages/vote/vote')
   },
   {
     path: '/user',

@@ -44,10 +44,19 @@ export default {
   },
   methods: {
     getLaws () {
-      this.$ajax.get('http://localhost:3003/news?infoType=1').then((res) => {
-        this.data = res.data
-        console.log(res.data)
+      const sunCitizenmes = {
+        type: '0'
+      }
+      const params = this.qs.stringify(sunCitizenmes)
+      this.$ajax({
+        url: `/api/webInfo/selectBytype?${params}`
       })
+        .then((response) => {
+          this.data = response.data
+        })
+        .catch((error) => {
+          console.log(error)
+        })
     }
   }
 }

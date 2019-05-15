@@ -13,10 +13,8 @@ import store from './store/store'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 import 'swiper/dist/css/swiper.css'
 import VModal from 'vue-js-modal'
-import Cookie from 'js-cookie'
-
-import { List, Avatar, Icon, Table, Tag, Divider, Input, Button, Modal, Tabs, Card, Layout, Menu, Select, Switch, Form, Cascader, notification, DatePicker } from 'ant-design-vue'
-[List, Avatar, Icon, Table, Tag, Divider, Input, Button, Modal, Tabs, Card, Layout, Menu, Select, Switch, Form, Cascader, notification, DatePicker].forEach(item => Vue.use(item))
+import { List, Dropdown, Avatar, Icon, Table, Tag, Divider, Input, Button, Modal, Tabs, Card, Layout, Menu, Select, Switch, Form, Cascader, notification, DatePicker } from 'ant-design-vue'
+[List, Dropdown, Avatar, Icon, Table, Tag, Divider, Input, Button, Modal, Tabs, Card, Layout, Menu, Select, Switch, Form, Cascader, notification, DatePicker].forEach(item => Vue.use(item))
 
 Vue.use(VueAwesomeSwiper)
 
@@ -34,10 +32,10 @@ Vue.prototype.qs = qs
 
 Vue.prototype.$ajax = axios
 
-Vue.prototype.cookie = Cookie
-Vue.prototype.getCookie = key => new Promise((resolve, reject) => {
-  resolve(Cookie.get(key))
-})
+// Vue.prototype.cookie = Cookie
+// Vue.prototype.getCookie = key => new Promise((resolve, reject) => {
+//   resolve(Cookie.get(key))
+// })
 
 Vue.config.productionTip = false
 // Vue.http.options.emulateJSON = true
@@ -45,19 +43,19 @@ Vue.config.productionTip = false
 Vue.use(VueResource)
 Vue.use(VModal, { dialog: true })
 // 登录状态判断
-router.beforeEach((to, from, next) => {
-  if (to.matched.some(record => record.meta.requireLogin)) {
-    if (sessionStorage.getItem('user')) {
-      next()
-    } else {
-      next({
-        path: '/'
-      })
-    }
-  } else {
-    next()
-  }
-})
+// router.beforeEach((to, from, next) => {
+//   if (to.matched.some(record => record.meta.requireLogin)) {
+//     if (sessionStorage.getItem('user')) {
+//       next()
+//     } else {
+//       next({
+//         path: '/'
+//       })
+//     }
+//   } else {
+//     next()
+//   }
+// })
 
 /* eslint-disable no-new */
 new Vue({

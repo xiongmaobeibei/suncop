@@ -2,8 +2,8 @@
     <div class="wrapper">
         <ul class="tab">
             <li class="item-title">>>> 个人中心</li>
-            <li v-for="item in (currentNavItem)" :key="item.name" class="tab-item">
-              <router-link :to="item.path">{{item.name}}</router-link>
+            <li v-for="(item,index) in currentNavItem" :key="index" class="tab-item">
+              <router-link :to="currentNavItem[index].path">{{currentNavItem[index].name}}</router-link>
             </li>
             <li class="tab-item" @click="logout">注销</li>
             <li class="tab-item" @click="backToindex">返回首页</li>
@@ -33,8 +33,8 @@ export default {
       })
     },
     async showMenu () {
-      // console.log(await sessionStorage.getItem('menuData'))
-      // console.log(JSON.parse(sessionStorage.getItem('menuData')))
+      console.log(await sessionStorage.getItem('menuData'))
+      console.log(JSON.parse(sessionStorage.getItem('menuData')))
       const menuData = await this.getSessionStorage('menuData')
       this.currentNavItem = JSON.parse(menuData)
     }
