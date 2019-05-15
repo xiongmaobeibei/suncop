@@ -23,31 +23,6 @@ export default {
     ...mapActions({add_Routes: 'add_Routes'}),
     login () {
       this.loading = true
-<<<<<<< HEAD
-      this.$http.get('/api/user?citicreditid=' + this.citicreditid).then((res) => {
-        console.log(res.body)
-        var user = res.body[0]
-        console.log(user)
-        if (res) {
-          this.$http.get('/api/permit?id=' + user.identity).then((re) => {
-            // 将路由信息，用户信息存到sessionStorage里面
-            console.log(re.data[0].permit_list)
-            sessionStorage.setItem('menuData', JSON.stringify(re.data[0].permit_list))
-            sessionStorage.setItem('user', this.citicreditid)
-            this.$router.push('/user')
-            // 触发vuex里面增加的路由
-            // this.add_Routes(re.data[0].permit_list)
-          })
-        }
-      }, (err) => {
-        console.log(err)
-      })
-      // const sunCitizenmes = {
-      //   citicreditid: this.citicreditid,
-      //   password: this.password
-      // }
-      // console.log(sunCitizenmes)
-=======
       // this.$http.get('/api/user?citicreditid=' + this.creditid).then((res) => {
       //   console.log(res.body)
       //   var user = res.body[0]
@@ -73,7 +48,6 @@ export default {
         password: this.password
       }
       console.log(sunCitizenmes)
->>>>>>> 14b1ea7931f48ea5fb45ffc40eca01268e5cfb36
       // const url = `api/citizenMes/sunCitizenmes` // `/api/citizenMes/login?${params}` // http://localhost:8080/api/citizenMes
       // this.$http.get('/api/citizenMes/login', sunCitizenmes).then((res) => {
       //   // 将路由信息，用户信息存到sessionStorage里面
@@ -84,23 +58,6 @@ export default {
       //   // 触发vuex里面增加的路由
       //   // this.add_Routes(re.data[0].permit_list)
       // })
-<<<<<<< HEAD
-      // const params = this.qs.stringify(sunCitizenmes)
-      // this.$ajax({
-      //   url: `/api/citizenMes/login?${params}`,
-      //   methods: "get"
-      // })
-      //   .then((response) => {
-      //     // 将路由信息，用户信息存到sessionStorage里面
-      //     console.log(res.data[0].permit_list)
-      //     sessionStorage.setItem('menuData', JSON.stringify(res.data[0].permit_list))
-      //     sessionStorage.setItem('user', this.user.creditid)
-      //     this.$router.push('/user')
-      //   })
-      //   .catch((error) => {
-      //     console.log(error)
-      //   })
-=======
       const params = this.qs.stringify(sunCitizenmes)
       this.$ajax({
         url: `/api/citizenMes/login?${params}`
@@ -114,7 +71,6 @@ export default {
         .catch((error) => {
           console.log(error)
         })
->>>>>>> 14b1ea7931f48ea5fb45ffc40eca01268e5cfb36
     }
   }
 }

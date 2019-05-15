@@ -32,31 +32,52 @@ const constantRoutes = [
   },
   {
     path: '/add',
-    component: () => import('../pages/users/addWorknews')
+    component: () => import('../pages/users/addWorknews'),
+    meta: {
+      requireLogin: true // 当前路由需要校验，不需要就不用写
+    }
   },
   {
     path: '/interact',
     component: () => import('../pages/interactBox/index'),
+    meta: {
+      requireLogin: true // 当前路由需要校验，不需要就不用写
+    },
     children: [
       {
         path: '/interact/vote',
-        component: () => import('../pages/interactBox/components/vote')
+        component: () => import('../pages/interactBox/components/vote'),
+        meta: {
+          requireLogin: true // 当前路由需要校验，不需要就不用写
+        }
       },
       {
         path: '/interact/public',
-        component: () => import('../pages/interactBox/components/public')
+        component: () => import('../pages/interactBox/components/public'),
+        meta: {
+          requireLogin: true // 当前路由需要校验，不需要就不用写
+        }
       },
       {
         path: '/interact/policy',
-        component: () => import('../pages/interactBox/components/policy')
+        component: () => import('../pages/interactBox/components/policy'),
+        meta: {
+          requireLogin: true // 当前路由需要校验，不需要就不用写
+        }
       },
       {
         path: '/interact/readLetters',
-        component: () => import('../pages/interactBox/components/read')
+        component: () => import('../pages/interactBox/components/read'),
+        meta: {
+          requireLogin: true // 当前路由需要校验，不需要就不用写
+        }
       },
       {
         path: '/interact/writeLetters',
-        component: () => import('../pages/interactBox/components/write')
+        component: () => import('../pages/interactBox/components/write'),
+        meta: {
+          requireLogin: true // 当前路由需要校验，不需要就不用写
+        }
       }
     ]
   },

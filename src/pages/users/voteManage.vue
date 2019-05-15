@@ -126,8 +126,8 @@ export default {
     handleOk () {
     },
     deleteSelected () {
-      const dataSource = [...this.dataSource]
-      this.dataSource = dataSource.filter(item => item.key !== key)
+      // const dataSource = [...this.dataSource]
+      // this.dataSource = dataSource.filter(item => item.key !== key)
     },
     showDetail (key) {
       this.visible = true

@@ -108,13 +108,13 @@ module.exports = new Promise((resolve, reject) => {
 })
 
 /**新闻接口的数据调用 */
-const jsonServer = require('json-server')
-const apiServer = jsonServer.create()
-const apiRouter = jsonServer.router('db.json')
-const middlewares = jsonServer.defaults()
+// const jsonServer = require('json-server')
+// const apiServer = jsonServer.create()
+// const apiRouter = jsonServer.router('db.json')
+// const middlewares = jsonServer.defaults()
 
-apiServer.use(middlewares)
-apiServer.use(apiRouter)
-apiServer.listen(3000, () => {
-  console.log('json server is running')
-})
+// apiServer.use(middlewares)
+// apiServer.use(apiRouter)
+// apiServer.listen(3000, () => {
+//   console.log('json server is running')
+// })
