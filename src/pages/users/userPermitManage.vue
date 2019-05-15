@@ -29,22 +29,31 @@
       </span>
       <template v-else>{{text}}</template>
     </template>
-     <a-dropdown slot="action">
+     <a-dropdown slot="edit">
         <a class="ant-dropdown-link" href="#">
-          Hover me <a-icon type="down" />
+          点我 <a-icon type="down" />
         </a>
-        <a-menu slot="overlay">
-        <a-menu-item>
+        <a-menu slot="overlay" @click="handMenuClick">
+        <a-menu-item key="1">
+            <a href="javascript:;">居民</a>
+        </a-menu-item>
+        <a-menu-item key="2">
+            <a href="javascript:;">警察</a>
+        </a-menu-item>
+        <a-menu-item key="3">
             <a href="javascript:;">片区管理员</a>
         </a-menu-item>
-        <a-menu-item>
-            <a href="javascript:;"></a>
+        <a-menu-item key="4">
+            <a href="javascript:;">系统管理员</a>
         </a-menu-item>
-        <a-menu-item>
-            <a href="javascript:;">3rd menu item</a>
+        <a-menu-item key="5">
+            <a href="javascript:;">局长</a>
         </a-menu-item>
         </a-menu>
   </a-dropdown>
+  <template slot="action" slot-scope="text, record">
+      <a-button type="primary" @click="submit(record.key)">确认</a-button>
+  </template>
   </a-table>
 </template>
 
@@ -53,22 +62,26 @@ const data = [
   {
     key: '1',
     citiname: 'John Brown',
-    citicreditid: '32231234'
+    citicreditid: '32231234',
+    identity: '居民'
   },
   {
     key: '2',
     citiname: 'Joe Black',
-    citicreditid: '3223521234'
+    citicreditid: '3223521234',
+    identity: '警察'
   },
   {
     key: '3',
     citiname: 'Jim Green',
-    citicreditid: '3223231234'
+    citicreditid: '3223231234',
+    identity: '片区管理员'
   },
   {
     key: '4',
     citiname: 'Jim Red',
-    citicreditid: '32213241234'
+    citicreditid: '32213241234',
+    identity: '系统管理员'
   }
 ]
 
@@ -77,6 +90,7 @@ export default {
     return {
       data,
       searchText: '',
+      choice: '',
       searchInput: null,
       columns: [
         {
@@ -88,7 +102,7 @@ export default {
             filterIcon: 'filterIcon',
             customRender: 'customRender'
           },
-          onFilter: (value, record) => record.name.toLowerCase().includes(value.toLowerCase()),
+          onFilter: (value, record) => record.citiname.toLowerCase().includes(value.toLowerCase()),
           onFilterDropdownVisibleChange: (visible) => {
             if (visible) {
               setTimeout(() => {
@@ -106,7 +120,7 @@ export default {
             filterIcon: 'filterIcon',
             customRender: 'customRender'
           },
-          onFilter: (value, record) => record.age.toLowerCase().includes(value.toLowerCase()),
+          onFilter: (value, record) => record.citicreditid.toLowerCase().includes(value.toLowerCase()),
           onFilterDropdownVisibleChange: (visible) => {
             if (visible) {
               setTimeout(() => {
@@ -116,15 +130,74 @@ export default {
           }
         },
         {
-          title: '身份',
+          title: '原身份',
           dataIndex: 'identity',
           key: 'identity',
-          scopedSlots: { customRender: 'action' }
+          scopedSlots: {
+            filterDropdown: 'filterDropdown',
+            filterIcon: 'filterIcon',
+            customRender: 'customRender'
+          },
+          onFilter: (value, record) => record.identity.toLowerCase().includes(value.toLowerCase()),
+          onFilterDropdownVisibleChange: (visible) => {
+            if (visible) {
+              setTimeout(() => {
+                this.searchInput.focus()
+              }, 0)
+            }
+          }
+        },
+        {
+          title: '修改身份',
+          dataIndex: 'edit',
+          key: 'x',
+          scopedSlots:
+          {
+            customRender: 'edit'
+          }
+        },
+        {
+          title: '确认',
+          scopedSlots:
+          {
+            customRender: 'action'
+          }
         }
       ]
     }
   },
   methods: {
+    handMenuClick (e) {
+      switch (e.key) {
+        case 1: 
+          this.choice = '1'
+          break
+        case 2:
+          this.choice = '2'
+        case 3:
+          this.choice = '3'
+        case 4:
+          this.choice = '4'
+        case 5:
+          this.choice = '5'
+      }
+    },
+    submit (key) {
+      const sunCitizenmes = {
+        Id: data[key].citicreditid,
+        roleId: this.choice
+      }
+      const params = this.qs.stringify(sunCitizenmes)
+      this.$ajax({
+        url: `api/citizenMes/modifypermit?$(params)`
+      })
+        .then((response) => {
+          alert('更新成功')
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    },
     handleMenuClick (e) {
       console.log('click', e)
     },
