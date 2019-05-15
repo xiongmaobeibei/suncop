@@ -12,11 +12,15 @@ import qs from 'qs'
 import store from './store/store'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 import 'swiper/dist/css/swiper.css'
-
 import VModal from 'vue-js-modal'
 
+<<<<<<< HEAD
 import {List, Avatar, Icon, Table, Tag, Divider, Input, Button, Modal, Tabs, Card, DatePicker} from 'ant-design-vue'
 [List, Avatar, Icon, Table, Tag, Divider, Input, Button, Modal, Tabs, Card, DatePicker].forEach(item => Vue.use(item))
+=======
+import { List, Avatar, Icon, Table, Tag, Divider, Input, Button, Modal, Tabs, Card, Layout, Menu, Select, Switch, Form, Cascader, notification, DatePicker } from 'ant-design-vue'
+[List, Avatar, Icon, Table, Tag, Divider, Input, Button, Modal, Tabs, Card, Layout, Menu, Select, Switch, Form, Cascader, notification, DatePicker].forEach(item => Vue.use(item))
+>>>>>>> 14b1ea7931f48ea5fb45ffc40eca01268e5cfb36
 
 Vue.use(VueAwesomeSwiper)
 
@@ -38,8 +42,6 @@ Vue.config.productionTip = false
 // Vue.http.options.emulateJSON = true
 
 Vue.use(VueResource)
-// Vue.use(VueAxios, axios)
-// Vue.use(VModal)
 Vue.use(VModal, { dialog: true })
 // 登录状态判断
 router.beforeEach((to, from, next) => {

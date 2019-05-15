@@ -31,6 +31,36 @@ const constantRoutes = [
     component: () => import('../pages/index/index')
   },
   {
+    path: '/add',
+    component: () => import('../pages/users/addWorknews')
+  },
+  {
+    path: '/interact',
+    component: () => import('../pages/interactBox/index'),
+    children: [
+      {
+        path: '/interact/vote',
+        component: () => import('../pages/interactBox/components/vote')
+      },
+      {
+        path: '/interact/public',
+        component: () => import('../pages/interactBox/components/public')
+      },
+      {
+        path: '/interact/policy',
+        component: () => import('../pages/interactBox/components/policy')
+      },
+      {
+        path: '/interact/readLetters',
+        component: () => import('../pages/interactBox/components/read')
+      },
+      {
+        path: '/interact/writeLetters',
+        component: () => import('../pages/interactBox/components/write')
+      }
+    ]
+  },
+  {
     path: '/updateCode',
     component: () => import('../pages/log/updateCode')
   },
