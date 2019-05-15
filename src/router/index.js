@@ -40,44 +40,26 @@ const constantRoutes = [
   {
     path: '/interact',
     component: () => import('../pages/interactBox/index'),
-    meta: {
-      requireLogin: true // 当前路由需要校验，不需要就不用写
-    },
     children: [
       {
         path: '/interact/vote',
-        component: () => import('../pages/interactBox/components/vote'),
-        meta: {
-          requireLogin: true // 当前路由需要校验，不需要就不用写
-        }
+        component: () => import('../pages/interactBox/components/vote')
       },
       {
         path: '/interact/public',
-        component: () => import('../pages/interactBox/components/public'),
-        meta: {
-          requireLogin: true // 当前路由需要校验，不需要就不用写
-        }
+        component: () => import('../pages/interactBox/components/public')
       },
       {
         path: '/interact/policy',
-        component: () => import('../pages/interactBox/components/policy'),
-        meta: {
-          requireLogin: true // 当前路由需要校验，不需要就不用写
-        }
+        component: () => import('../pages/interactBox/components/policy')
       },
       {
         path: '/interact/readLetters',
-        component: () => import('../pages/interactBox/components/read'),
-        meta: {
-          requireLogin: true // 当前路由需要校验，不需要就不用写
-        }
+        component: () => import('../pages/interactBox/components/read')
       },
       {
         path: '/interact/writeLetters',
-        component: () => import('../pages/interactBox/components/write'),
-        meta: {
-          requireLogin: true // 当前路由需要校验，不需要就不用写
-        }
+        component: () => import('../pages/interactBox/components/write')
       }
     ]
   },
@@ -87,24 +69,19 @@ const constantRoutes = [
   },
   {
     path: '/message/resident',
-    component: () => import('../pages/messageBox/resident'),
-    meta: {
-      requireLogin: true // 当前路由需要校验，不需要就不用写
-    }
+    component: () => import('../pages/messageBox/resident')
   },
   {
     path: '/message/admin',
-    component: () => import('../pages/messageBox/admin'),
-    meta: {
-      requireLogin: true // 当前路由需要校验，不需要就不用写
-    }
+    component: () => import('../pages/messageBox/admin')
   },
   {
     path: '/message/areaAdmin',
-    component: () => import('../pages/messageBox/areaAdmin'),
-    meta: {
-      requireLogin: true // 当前路由需要校验，不需要就不用写
-    }
+    component: () => import('../pages/messageBox/areaAdmin')
+  },
+  {
+    path: '/user/systemManage',
+    component: () => import('../pages/users/systemManage')
   },
   {
     path: '/vote',
@@ -113,9 +90,9 @@ const constantRoutes = [
   {
     path: '/user',
     component: () => import('../pages/users/master'),
-    meta: {
-      requireLogin: true // 当前路由需要校验，不需要就不用写
-    },
+    // meta: {
+    //   requireLogin: true // 当前路由需要校验，不需要就不用写
+    // },
     children: [
       {
         path: '/user/personality',
@@ -159,13 +136,10 @@ const constantRoutes = [
           requireLogin: true // 当前路由需要校验，不需要就不用写
         }
       },
-      {
-        path: '/user/systemManage',
-        component: () => import('../pages/users/systemManage'),
-        meta: {
-          requireLogin: true // 当前路由需要校验，不需要就不用写
-        }
-      },
+      // {
+      //   path: '/user/systemManage',
+      //   component: () => import('../pages/users/systemManage')
+      // },
       {
         path: '/user/userinfoManage',
         component: () => import('../pages/users/userinfoManage'),

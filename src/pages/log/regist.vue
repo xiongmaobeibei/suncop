@@ -48,14 +48,14 @@ export default {
         citiname: this.citiname,
         sex: this.sex,
         nation: this.nation,
-        address: this.address,
         phonenumber: this.phonenumber,
+        nativeaddress: this.nativeaddress,
         birthdat: this.birthdat,
         password: this.password
       }
       const params = this.qs.stringify(sunCitizenmes)
       this.$ajax({
-        url: `/api/citizenMes?${params}`,
+        url: `/api/citizenMes/register?${params}`,
         methods: 'get'
       })
         .then((response) => {

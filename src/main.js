@@ -13,6 +13,7 @@ import store from './store/store'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 import 'swiper/dist/css/swiper.css'
 import VModal from 'vue-js-modal'
+import Cookie from 'js-cookie'
 
 import { List, Avatar, Icon, Table, Tag, Divider, Input, Button, Modal, Tabs, Card, Layout, Menu, Select, Switch, Form, Cascader, notification, DatePicker } from 'ant-design-vue'
 [List, Avatar, Icon, Table, Tag, Divider, Input, Button, Modal, Tabs, Card, Layout, Menu, Select, Switch, Form, Cascader, notification, DatePicker].forEach(item => Vue.use(item))
@@ -32,6 +33,11 @@ axios.defaults.withCredentials = true
 Vue.prototype.qs = qs
 
 Vue.prototype.$ajax = axios
+
+Vue.prototype.cookie = Cookie
+Vue.prototype.getCookie = key => new Promise((resolve, reject) => {
+  resolve(Cookie.get(key))
+})
 
 Vue.config.productionTip = false
 // Vue.http.options.emulateJSON = true

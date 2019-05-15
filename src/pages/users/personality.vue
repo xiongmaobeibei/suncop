@@ -40,7 +40,7 @@
 export default {
   data () {
     return {
-      creditid: '',
+      credit_id: '',
       user: {
         'sex': '女',
         'citiname': '谭靖薇',
@@ -59,17 +59,16 @@ export default {
   },
   methods: {
     showMes () {
-      // this.creditid = sessionStorage.getItem('user')
-      // this.$ajax({
-      //     url: `/api/citizenMes/checkOne?${params}`,
-      //     methods: "get"
-      //   })
-      //     .then((response) => {
-      //       this.user = response.data
-      //     })
-      //     .catch((error) => {
-      //       console.log(error)
-      //     })
+      this.credit_id = sessionStorage.getItem('user')
+      let creditid = this.credit_id
+      this.$ajax({
+        url: `/api/citizenMes/selectbycreditid?${creditid}`,
+        methods: 'get'
+      }).then((response) => {
+        this.user = response.data
+      }).catch((error) => {
+        console.log(error)
+      })
     }
   }
 }

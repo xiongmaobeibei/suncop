@@ -2,9 +2,9 @@
     <div class="wrapper">
         <ul class="tab">
             <li class="item-title">>>> 个人中心</li>
-            <li v-for="item in currentNavItem" :key="item" class="tab-item">
+            <li v-for="item in (currentNavItem)" :key="item.name" class="tab-item">
               <router-link :to="item.path">{{item.name}}</router-link>
-              </li>
+            </li>
             <li class="tab-item" @click="logout">注销</li>
             <li class="tab-item" @click="backToindex">返回首页</li>
         </ul>
@@ -27,15 +27,17 @@ export default {
     backToindex () {
       this.$router.push('/index')
     },
-    showMenu () {
-      console.log(sessionStorage.getItem('menuData'))
-      this.currentNavItem = JSON.parse(sessionStorage.getItem('menuData'))
+    async getSessionStorage (key) {
+      return new Promise((resolve, reject) => {
+        resolve(sessionStorage.getItem('menuData'))
+      })
+    },
+    async showMenu () {
+      // console.log(await sessionStorage.getItem('menuData'))
+      // console.log(JSON.parse(sessionStorage.getItem('menuData')))
+      const menuData = await this.getSessionStorage('menuData')
+      this.currentNavItem = JSON.parse(menuData)
     }
-    // created () {
-    //   this.user = sessionStorage.getItem('user')
-    //   console.log(sessionStorage.getItem('menuData'))
-    //   this.currentNavItem = JSON.parse(sessionStorage.getItem('menuData'))
-    // }
   }
 }
 </script>

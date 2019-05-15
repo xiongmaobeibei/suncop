@@ -188,16 +188,14 @@ export default {
           console.log('Received values of form: ', values)
         } else {
           const sunCitizenmes = {
-            lettertitile: values.title,
-            // ownerEmail: values.cardId,
-            ownerEmail: 1,
-            lettercontent: values.content,
-            boxemail: 1
+            creditId: values.cardId,
+            LetterTitle: values.title,
+            LetterContent: values.content
           }
           console.log('success values of form: ', sunCitizenmes)
           const params = this.qs.stringify(sunCitizenmes)
           this.$ajax({
-            url: `/api/letter/addletter?${params}`
+            url: `/api/letter/addLetterByCardid?${params}`
           })
             .then((response) => {
               this.$notification.open({

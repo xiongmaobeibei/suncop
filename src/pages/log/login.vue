@@ -65,6 +65,7 @@ export default {
         .then((response) => {
           console.log(response)
           sessionStorage.setItem('menuData', JSON.stringify(response.data))
+          this.cookie.set('menuData', JSON.stringify(response.data))
           sessionStorage.setItem('user', this.citicreditid)
           this.$router.push('/user')
         })
