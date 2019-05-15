@@ -32,8 +32,9 @@ export default {
 
 <style lang="stylus" scoped rel="stylesheet/stylus">
   .wrapper
-    width 100%
+    width 80%
     background rgb(248,242,242)
+    margin auto
     .tab
       float left
       width 30%

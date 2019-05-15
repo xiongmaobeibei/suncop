@@ -24,17 +24,7 @@ Vue.use(VueAwesomeSwiper)
 //   let routes = JSON.parse(sessionStorage.getItem('menuData'))
 //   store.dispatch('add_Routes', routes)
 // }
-// 登录状态判断
-// router.beforeEach((to, from, next) => {
-//   if (!sessionStorage.getItem('user') && to.path !== '/login') {
-//     next({
-//       path: '/index',
-//       query: {redirect: to.fullPath}
-//     })
-//   } else {
-//     next()
-//   }
-// })
+
 Vue.prototype.baseURL = 'http://localhost:8080/api'
 
 axios.defaults.withCredentials = true
@@ -48,6 +38,20 @@ Vue.config.productionTip = false
 
 Vue.use(VueResource)
 Vue.use(VModal, { dialog: true })
+// 登录状态判断
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requireLogin)) {
+    if (sessionStorage.getItem('user')) {
+      next()
+    } else {
+      next({
+        path: '/'
+      })
+    }
+  } else {
+    next()
+  }
+})
 
 /* eslint-disable no-new */
 new Vue({

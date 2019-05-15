@@ -248,7 +248,7 @@
             },
             {
               "name": "管理登录用户信息",
-              "path": "/user/manageUserInfo"
+              "path": "/user/userinfoManage"
             },
             {
               "name": "添加工作动态",
@@ -278,7 +278,7 @@
             },
             {
               "name": "管理登录用户信息",
-              "path": "/user/manageUserInfo"
+              "path": "/user/userinfoManage"
             },
             {
               "name": "系统管理",
@@ -321,7 +321,37 @@
       "voteintro": "这是年度最佳警察",
       "votetimebegin": "2019/05/19",
       "votetimeend": "2019/08/30",
-      "ResultId": "001"
+      "ResultId": "001",
+      "voteItem": [
+        {
+          "itemID": 0,
+          "voteID": 1,
+          "itemCount": 10,
+          "itemName": "李四",
+          "itemIntro": "他是成都市龙泉驿区的一名普通的警察，立志除暴安良"
+        },
+        {
+          "itemID": 2,
+          "voteID": 1,
+          "itemCount": 7,
+          "itemName": "吴二",
+          "itemIntro": "他是成都市锦江区的一名普通的警察，立志除暴安良"
+        },
+        {
+          "itemID": 3,
+          "voteID": 1,
+          "itemCount": 50,
+          "itemName": "张三",
+          "itemIntro": "他是的一名成都市青羊区普通的警察，立志除暴安良"
+        },
+        {
+          "itemID": 4,
+          "voteID": 1,
+          "itemCount": 10,
+          "itemName": "李四",
+          "itemIntro": "他是成都龙泉驿区的一名普通的警察，立志除暴安良"
+        }
+      ]
     },
     {
       "voteID": 2,
