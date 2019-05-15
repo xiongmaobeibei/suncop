@@ -31,6 +31,10 @@ const constantRoutes = [
     component: () => import('../pages/index/index')
   },
   {
+    path: '/logmanage',
+    component: () => import('../pages/mylog')
+  },
+  {
     path: '/add',
     component: () => import('../pages/users/addWorknews'),
     meta: {
@@ -40,44 +44,26 @@ const constantRoutes = [
   {
     path: '/interact',
     component: () => import('../pages/interactBox/index'),
-    meta: {
-      requireLogin: true // 当前路由需要校验，不需要就不用写
-    },
     children: [
       {
         path: '/interact/vote',
-        component: () => import('../pages/interactBox/components/vote'),
-        meta: {
-          requireLogin: true // 当前路由需要校验，不需要就不用写
-        }
+        component: () => import('../pages/interactBox/components/vote')
       },
       {
         path: '/interact/public',
-        component: () => import('../pages/interactBox/components/public'),
-        meta: {
-          requireLogin: true // 当前路由需要校验，不需要就不用写
-        }
+        component: () => import('../pages/interactBox/components/public')
       },
       {
         path: '/interact/policy',
-        component: () => import('../pages/interactBox/components/policy'),
-        meta: {
-          requireLogin: true // 当前路由需要校验，不需要就不用写
-        }
+        component: () => import('../pages/interactBox/components/policy')
       },
       {
         path: '/interact/readLetters',
-        component: () => import('../pages/interactBox/components/read'),
-        meta: {
-          requireLogin: true // 当前路由需要校验，不需要就不用写
-        }
+        component: () => import('../pages/interactBox/components/read')
       },
       {
         path: '/interact/writeLetters',
-        component: () => import('../pages/interactBox/components/write'),
-        meta: {
-          requireLogin: true // 当前路由需要校验，不需要就不用写
-        }
+        component: () => import('../pages/interactBox/components/write')
       }
     ]
   },
@@ -105,10 +91,6 @@ const constantRoutes = [
     meta: {
       requireLogin: true // 当前路由需要校验，不需要就不用写
     }
-  },
-  {
-    path: '/vote',
-    component: () => import('../pages/vote/vote')
   },
   {
     path: '/user',
