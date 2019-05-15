@@ -31,13 +31,14 @@ export default {
       return new Promise((resolve, reject) => {
         resolve(sessionStorage.getItem('menuData'))
       })
-    },
-    async showMenu () {
-      console.log(await sessionStorage.getItem('menuData'))
-      console.log(JSON.parse(sessionStorage.getItem('menuData')))
-      const menuData = await this.getSessionStorage('menuData')
-      this.currentNavItem = JSON.parse(menuData)
     }
+    // ,
+    // async showMenu () {
+    //   console.log(await sessionStorage.getItem('menuData'))
+    //   console.log(JSON.parse(sessionStorage.getItem('menuData')))
+    //   const menuData = await this.getSessionStorage('menuData')
+    //   this.currentNavItem = JSON.parse(menuData)
+    // }
   }
 }
 </script>

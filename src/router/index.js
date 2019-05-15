@@ -72,22 +72,6 @@ const constantRoutes = [
     component: () => import('../pages/log/updateCode')
   },
   {
-    path: '/message/resident',
-    component: () => import('../pages/messageBox/resident')
-  },
-  {
-    path: '/message/admin',
-    component: () => import('../pages/messageBox/admin')
-  },
-  {
-    path: '/message/areaAdmin',
-    component: () => import('../pages/messageBox/areaAdmin')
-  },
-  {
-    path: '/user/systemManage',
-    component: () => import('../pages/users/systemManage')
-  },
-  {
     path: '/user',
     component: () => import('../pages/users/master'),
     // meta: {
@@ -116,30 +100,33 @@ const constantRoutes = [
         }
       },
       {
-        path: '/user/area_letterManage',
-        component: () => import('../pages/users/area_letterManage'),
+        path: '/user/area_manage', // 片区管理员管理信件
+        component: () => import('../pages/users/area_manage'),
         meta: {
           requireLogin: true // 当前路由需要校验，不需要就不用写
         }
       },
       {
-        path: '/user/letterReturn',
-        component: () => import('../pages/users/letterReturn'),
-        meta: {
-          requireLogin: true // 当前路由需要校验，不需要就不用写
-        }
+        path: '/user/admin_receive', // 局长查看收件箱
+        component: () => import('../pages/users/admin_receive')
+        // meta: {
+        //   requireLogin: true // 当前路由需要校验，不需要就不用写
+        // }
       },
       {
-        path: '/user/myletter',
-        component: () => import('../pages/users/myletter'),
-        meta: {
-          requireLogin: true // 当前路由需要校验，不需要就不用写
-        }
+        path: '/user/user_receive', // 收件箱
+        component: () => import('../pages/users/user_receive')
+        // meta: {
+        //   requireLogin: true // 当前路由需要校验，不需要就不用写
+        // }
       },
-      // {
-      //   path: '/user/systemManage',
-      //   component: () => import('../pages/users/systemManage')
-      // },
+      {
+        path: '/user/user_send', // 发件箱
+        component: () => import('../pages/users/user_send')
+        // meta: {
+        //   requireLogin: true // 当前路由需要校验，不需要就不用写
+        // }
+      },
       {
         path: '/user/userinfoManage',
         component: () => import('../pages/users/userinfoManage'),

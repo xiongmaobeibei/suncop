@@ -41,23 +41,6 @@
           <p>内容</p>
           <p style="font-weight: 400">{{modal.content}}</p>
         </main>
-        <footer>
-          <p>回复</p>
-          <div class="footer-form">
-            <a-textarea
-              placeholder="Basic usage"
-              :value="inputValue"
-              @change="e => this.inputValue = e.target.value"
-              :rows="4" />
-            <a-button
-                type="primary"
-                :loading="loading"
-                @click="onPressSendBtn"
-                class="btn-form">
-                发送
-              </a-button>
-          </div>
-        </footer>
       </div>
     </modal>
   </div>
