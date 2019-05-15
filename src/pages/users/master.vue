@@ -24,6 +24,10 @@ export default {
     this.showMenu()
   },
   methods: {
+    logout() {
+      sessionStorage.clear()
+      this.$router.push('/log')
+    },
     backToindex () {
       this.$router.push('/index')
     },
