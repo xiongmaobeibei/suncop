@@ -1,96 +1,81 @@
 <template>
-<div>
-  <div style="margin: 6px 10px 6px 10px">
-      <a-button
-        type="primary"
-        @click="deleteSelected()"
-        :disabled="!hasSelected"
-        :loading="loading"
+  <div>
+    <div style="margin: 6px 10px 6px 10px">
+        <a-button
+          type="primary"
+          @click="deleteSelected()"
+          :disabled="!hasSelected"
+        >
+          删除
+        </a-button>
+        <span style="margin-left: 8px">
+          <template v-if="hasSelected">
+            {{`选择了 ${selectedRowKeys.length} 项`}}
+          </template>
+        </span>
+    </div>
+    <a-modal
+        title="确认框"
+        :visible="deletevisible"
+        centered
+        @ok="handleOk"
+        @cancel="() => setModal1Visible(false)"
       >
-        删除
-      </a-button>
-      <span style="margin-left: 8px">
-        <template v-if="hasSelected">
-          {{`选择了 ${selectedRowKeys.length} 项`}}
-        </template>
-      </span>
-  </div>
-  <!-- <a-modal
-      title="详情界面"
-      v-model="visible"
-      @ok="handleOk"
+        <p>你确定要删除这些投票吗？</p>
+    </a-modal>
+    <a-modal
+      title="详情表"
+      centered
+      v-model="detailvisible"
     >
-      <h1></h1>
-      <p>Some contents...</p>
-      <p>Some contents...</p>
-  </a-modal> -->
-  <a-table :columns="columns"
-    :rowKey="record => record.login.uuid"
-    :dataSource="data"
-    :pagination="pagination"
-    :loading="loading"
-    @change="handleTableChange"
-    :rowSelection="{selectedRowKeys: selectedRowKeys, onChange: onSelectChange}"
-  >
-    <!-- <template slot="operation" slot-scope="text, record">
-      <a-popconfirm
-        v-if="data.length"
-        title="Sure to delete?"
-        @confirm="() => onDelete(record.key)">
-        <a href="javascript:;">Delete</a>
-      </a-popconfirm>
-     </template> -->
-     <template slot="name" slot-scope="name">
-      {{name.first}} {{name.last}}
-    </template>
-    <a slot="action" @click="() => showDetail(selectedRowKeys)">详情</a>
-    <!-- <template slot="name" slot-scope="text, record">
-        <editable-cell :text="text" @change="onCellChange(record.key, 'name', $event)"/>
+      <h1>{{ showdata.votename}}</h1>
+      <h2>投票类型：{{ showdata.voteType}}</h2>
+      <h2>投票介绍：{{ showdata.voteintro}}</h2>
+      <h3>投票时间： {{ showdata.votetimebegin}} -- {{ showdata.votetimeend}}</h3>
+    </a-modal>
+    <a-table :columns="columns"
+      :dataSource="data"
+      :pagination="pagination"
+      :scroll="{ y: 800 }"
+      @change="handleTableChange"
+      :rowSelection="{selectedRowKeys: selectedRowKeys, onChange: onSelectChange}"
+    >
+      <template slot="name" slot-scope="name">
+        {{name.first}} {{name.last}}
       </template>
-    <template slot="operation" slot-scope="text, record">
-        <a-popconfirm
-          v-if="dataSource.length"
-          title="Sure to delete?"
-          @confirm="() => onDelete(record.key)">
-          <a href="javascript:;">Delete</a>
-        </a-popconfirm>
-      </template> -->
-  </a-table>
-</div>
+      <!-- <a slot="action" @click="() => showDetail(record.key)">详情</a> -->
+      <template slot="action" slot-scope="text, record">
+        <a @click="() => showDetail(record)">详情</a>
+      </template>
+    </a-table>
+  </div>
 </template>
 <script>
-import reqwest from 'reqwest'
 const columns = [
   {
     title: '投票名称',
-    dataIndex: 'name',
-    // dataIndex: 'votename',
+    dataIndex: 'votename',
     sorter: true,
     width: '20%',
-    scopedSlots: { customRender: 'name' }
+    scopedSlots: { customRender: 'votename' }
   },
   {
     title: '投票类型',
-    dataIndex: 'gender',
-    // dataIndex: 'voteType',
-    // filters: [
-    //   { text: '单选', value: '单选' },
-    //   { text: '多选', value: '多选' }
-    // ],
+    dataIndex: 'voteType',
+    width: '20%',
     filters: [
-      { text: 'Male', value: 'male' },
-      { text: 'Female', value: 'female' }
-    ],
-    width: '20%'
+      { text: '单选', value: '单选' },
+      { text: '多选', value: '多选' }
+    ]
   },
   {
     title: '投票介绍',
-    // dataIndex: 'voteintro',
-    dataIndex: 'email'
+    dataIndex: 'voteintro',
+    width: '40%'
   },
   {
     title: '查看详情',
-    dataIndex: 'action',
+    dataIndex: '',
     key: 'x',
     scopedSlots:
     {
@@ -98,7 +83,6 @@ const columns = [
     }
   }
 ]
-
 export default {
   mounted () {
     this.fetch()
@@ -110,27 +94,61 @@ export default {
   },
   data () {
     return {
-      data: [],
+      data: [
+        {
+          votename: '投票1',
+          voteType: '单选',
+          voteintro: 'sdfhksjhdkf'
+        },
+        {
+          votename: '投票2',
+          voteType: '多选',
+          voteintro: 'sdfhksjh哈撒给房价回归dkf'
+        }
+      ],
+      showdata: {},
       pagination: {},
       loading: false,
-      visible: false,
+      deletevisible: false,
+      detailvisible: false,
+      detailItem: 0,
       columns,
       selectedRowKeys: []
     }
   },
   methods: {
-    onDelete (key) {
-      const dataSource = [...this.dataSource]
-      this.dataSource = dataSource.filter(item => item.key !== key)
-    },
     handleOk () {
+      for (var i = 0; i < this.selectedRowKeys.length; i++) {
+        var temp = {
+          creditId: this.data[this.selectedRowKeys[i]].voteID
+        }
+        let param = this.qs.stringify(temp)
+        this.$ajax({
+          url: `/api/voteMes/delete?${param}`,
+          methods: 'get'
+        }).then((response) => {
+          if (response.status === 200) {
+            alert('删除成功！')
+            this.$router.go(0)
+          }
+        }).catch((error) => {
+          console.log(error)
+        })
+      }
+      this.deletevisible = false
     },
     deleteSelected () {
-      // const dataSource = [...this.dataSource]
-      // this.dataSource = dataSource.filter(item => item.key !== key)
+      this.deletevisible = true
     },
-    showDetail (key) {
-      this.visible = true
+    showDetail (e) {
+      this.detailvisible = true
+      this.showdata = {
+        votename: e.votename,
+        voteType: e.voteType,
+        voteintro: e.voteintro,
+        votetimebegin: e.votetimebegin,
+        votetimeend: e.votetimeend
+      }
     },
     handleTableChange (pagination, filters, sorter) {
       console.log(pagination)
@@ -152,37 +170,20 @@ export default {
     fetch (params = {}) {
       console.log('params:', params)
       this.loading = true
-      // this.$ajax({
-      //   url: 'api/voteMes',
-      //   methods: "get"
-      // }).then((response) => {
-      //     const pagination = { ...this.pagination }
-      //     // Read total count from server
-      //     pagination.total = data.totalCount
-      //     // pagination.total = 200
-      //     this.loading = false
-      //     this.data = response.results
-      //     this.pagination = pagination
-      //   })
-      //   .catch((error) => {
-      //     console.log(error)
-      //   })
-      reqwest({
-        url: 'https://randomuser.me/api',
-        method: 'get',
-        data: {
-          results: 10,
-          ...params
-        },
-        type: 'json'
-      }).then((data) => {
+      this.$ajax({
+        url: '/api/voteMes',
+        methods: 'get'
+      }).then((response) => {
+        console.log(response)
         const pagination = { ...this.pagination }
         // Read total count from server
-        // pagination.total = data.totalCount
-        pagination.total = 200
+        pagination.total = response.data.length
+        // pagination.total = 200
         this.loading = false
-        this.data = data.results
+        this.data = response.data
         this.pagination = pagination
+      }).catch((error) => {
+        console.log(error)
       })
     }
   }
