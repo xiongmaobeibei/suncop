@@ -29,60 +29,43 @@
       </span>
       <template v-else>{{text}}</template>
     </template>
-     <a-dropdown slot="edit">
-        <a class="ant-dropdown-link" id="drop" href="#">
-          点我 <a-icon type="down" />
-        </a>
-        <a-menu slot="overlay" @click="handMenuClick">
-        <a-menu-item key="1">
-            <a href="javascript:;">居民</a>
-        </a-menu-item>
-        <a-menu-item key="2">
-            <a href="javascript:;">警察</a>
-        </a-menu-item>
-        <a-menu-item key="3">
-            <a href="javascript:;">片区管理员</a>
-        </a-menu-item>
-        <a-menu-item key="4">
-            <a href="javascript:;">系统管理员</a>
-        </a-menu-item>
-        <a-menu-item key="5">
-            <a href="javascript:;">局长</a>
-        </a-menu-item>
-        </a-menu>
-  </a-dropdown>
-  <template slot="action" slot-scope="text, record">
-      <a-button type="primary" @click="submit(record)">确认</a-button>
-  </template>
+      <template slot="edit">
+       <select name="public-choice" @change="getCouponSelected($event)">
+          <option v-for="coupon in couponList" :key="coupon.id" :value="coupon.id">{{coupon.name}}</option>
+      </select>
+      </template>
+      <template slot="action" slot-scope="text, record">
+          <a-button type="primary" @click="submit(record)">确认</a-button>
+      </template>
   </a-table>
 </template>
 
 <script>
 const data = [
-  {
-    key: '1',
-    citiname: 'John Brown',
-    citicreditid: '32231234',
-    identity: '居民'
-  },
-  {
-    key: '2',
-    citiname: 'Joe Black',
-    citicreditid: '3223521234',
-    identity: '警察'
-  },
-  {
-    key: '3',
-    citiname: 'Jim Green',
-    citicreditid: '3223231234',
-    identity: '片区管理员'
-  },
-  {
-    key: '4',
-    citiname: 'Jim Red',
-    citicreditid: '32213241234',
-    identity: '系统管理员'
-  }
+  // {
+  //   key: '1',
+  //   citiname: 'John Brown',
+  //   citicreditid: '32231234',
+  //   identity: '居民'
+  // },
+  // {
+  //   key: '2',
+  //   citiname: 'Joe Black',
+  //   citicreditid: '3223521234',
+  //   identity: '警察'
+  // },
+  // {
+  //   key: '3',
+  //   citiname: 'Jim Green',
+  //   citicreditid: '3223231234',
+  //   identity: '片区管理员'
+  // },
+  // {
+  //   key: '4',
+  //   citiname: 'Jim Red',
+  //   citicreditid: '32213241234',
+  //   identity: '系统管理员'
+  // }
 ]
 
 export default {
@@ -91,8 +74,30 @@ export default {
       data,
       searchText: '',
       choicecreditid: '',
-      choiceidentity: '',
+      choiceidentity: 0,
       searchInput: null,
+      couponList: [
+        {
+          id: 1,
+          name: '居民'
+        },
+        {
+          id: 2,
+          name: '警察'
+        },
+        {
+          id: 3,
+          name: '片区管理员'
+        },
+        {
+          id: 4,
+          name: '系统管理员'
+        },
+        {
+          id: 5,
+          name: '局长'
+        }
+      ],
       columns: [
         {
           title: '姓名',
@@ -168,42 +173,23 @@ export default {
     }
   },
   methods: {
-    handMenuClick ({ key }) {
-      // this.choice = e.citicreditid
-      var temp = document.getElementsById('drop')
-      var userarray = ['居民', '警察', '片区管理员', '系统管理员', '局长']
-      console.log(userarray[key])
-      temp.innerHTML = userarray[key]
-      this.choice = key
-      // switch (e.key) {
-      //   case 1:
-      //     this.choice = '1'
-      //     break
-      //   case 2:
-      //     this.choice = '2'
-      //     break
-      //   case 3:
-      //     this.choice = '3'
-      //     break
-      //   case 4:
-      //     this.choice = '4'
-      //     break
-      //   case 5:
-      //     this.choice = '5'
-      //     break
-      // }
+    getCouponSelected (event) {
+      this.choiceidentity = event.target.value
     },
     submit (key) {
+      console.log(key)
       const sunCitizenmes = {
-        Id: data[key].citicreditid,
-        roleId: this.choice
+        Id: key.citicreditid,
+        roleId: this.choiceidentity
       }
       const params = this.qs.stringify(sunCitizenmes)
       this.$ajax({
         url: `api/citizenMes/modifypermit?${params}`
       })
         .then((response) => {
-          alert('更新成功')
+          if (response.status === 200) {
+            alert('更新成功')
+          }
         })
         .catch((error) => {
           console.log(error)
@@ -221,7 +207,9 @@ export default {
         })
         .catch((error) => {
           console.log(error)
+          this.loadingdata()
         })
+      this.data.splice(i, 1)
     },
     handleSearch (selectedKeys, confirm) {
       confirm()

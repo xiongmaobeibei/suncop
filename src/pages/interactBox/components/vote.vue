@@ -2,7 +2,7 @@
 <div class="wrapper">
   <a-list :grid="{ gutter: 16, column: 4 }" :dataSource="data">
     <a-list-item slot="renderItem" slot-scope="item, index">
-      <a-card :title="item.vitename"><a-button type="primary" block @click="showVoteDetail(index)">进入投票</a-button></a-card>
+      <a-card :title="item.votename"><a-button type="primary" block @click="showVoteDetail(index)">进入投票</a-button></a-card>
     </a-list-item>
   </a-list>
   <a-modal v-model="visible" title="投票详情" onOk="handleOk">
