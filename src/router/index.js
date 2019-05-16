@@ -93,7 +93,7 @@ const constantRoutes = [
         }
       },
       {
-        path: '/user/addWorknews',
+        path: '/user/addWorkNews',
         component: () => import('../pages/users/addWorknews'),
         meta: {
           requireLogin: true // 当前路由需要校验，不需要就不用写
@@ -108,27 +108,27 @@ const constantRoutes = [
       },
       {
         path: '/user/admin_receive', // 局长查看收件箱
-        component: () => import('../pages/users/admin_receive')
-        // meta: {
-        //   requireLogin: true // 当前路由需要校验，不需要就不用写
-        // }
+        component: () => import('../pages/users/admin_receive'),
+        meta: {
+          requireLogin: true // 当前路由需要校验，不需要就不用写
+        }
       },
       {
         path: '/user/user_receive', // 收件箱
-        component: () => import('../pages/users/user_receive')
-        // meta: {
-        //   requireLogin: true // 当前路由需要校验，不需要就不用写
-        // }
+        component: () => import('../pages/users/user_receive'),
+        meta: {
+          requireLogin: true // 当前路由需要校验，不需要就不用写
+        }
       },
       {
         path: '/user/user_send', // 发件箱
-        component: () => import('../pages/users/user_send')
-        // meta: {
-        //   requireLogin: true // 当前路由需要校验，不需要就不用写
-        // }
+        component: () => import('../pages/users/user_send'),
+        meta: {
+          requireLogin: true // 当前路由需要校验，不需要就不用写
+        }
       },
       {
-        path: '/user/userinfoManage',
+        path: '/user/manageUserInfo',
         component: () => import('../pages/users/userinfoManage'),
         meta: {
           requireLogin: true // 当前路由需要校验，不需要就不用写

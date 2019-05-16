@@ -21,6 +21,12 @@ module.exports = {
         //这里理解成用'/api'代替target里面的地址，后面组件中我们掉接口时直接用api代替 比如我要调用'http://xxx.xxx.xxx.xx:8081/user/add'，直接写‘/api/user/add’即可
         }
       }
+      // '/aapi': {
+      //   changeOrigin: true,// 如果接口跨域，需要进行这个参数配置
+      //   target: 'http://localhost:3000',// 接口的域名
+      //   pathRewrite: {
+      //     '^/aapi': ''//后面可以使重写的新路径，一般不做更改
+      //   }
     },
 
     // proxyTable: {
@@ -30,15 +36,6 @@ module.exports = {
     //     pathRewrite: {
     //       '^/api': ''//后面可以使重写的新路径，一般不做更改
     //     }
-    //   }
-    // },
-    // proxyTable: {
-    //     '/api': {
-    //       changeOrigin: true,// 如果接口跨域，需要进行这个参数配置
-    //       target: 'http://localhost:3000',// 接口的域名
-    //       pathRewrite: {
-    //         '^/api': ''//后面可以使重写的新路径，一般不做更改
-    //       }
     //   }
     // },
 

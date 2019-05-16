@@ -71,7 +71,7 @@ export default {
   methods: {
     getLetters () {
       const sunCitizenmes = {
-        userid: '409005199806228266'
+        userid: sessionStorage.getItem('user')
       }
       const params = this.qs.stringify(sunCitizenmes)
       this.$ajax({

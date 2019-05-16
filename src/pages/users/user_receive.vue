@@ -76,26 +76,27 @@ export default {
   methods: {
     getLetters () {
       const sunCitizenmes = {
-        userid: '409005199806228266'
+        userid: sessionStorage.getItem('user')
       }
       const params = this.qs.stringify(sunCitizenmes)
       this.$ajax({
         url: `api/letters/resident?${params}`
       })
         .then((response) => {
-          console.log(response.data[0].returninfo)
-          this.data = response.data
-          // var i = 0
-          // var j = 0
-          // while (i < response.data.length) {
-          //   if (response.data[i].returninfo === '') {
-          //     i++
-          //   } else {
-          //     this.data[j] = response.data[i]
-          //     i++
-          //     j++
-          //   }
-          // }
+          var i = 0
+          var j = 0
+          var ming = []
+          while (i < response.data.length) {
+            var temp = response.data[i].returninfo
+            if (temp === null || temp === undefined || temp === '') {
+              i++
+            } else {
+              ming[j] = response.data[i]
+              i++
+              j++
+            }
+          }
+          this.data = ming
         })
         .catch((error) => {
           console.log(error)

@@ -169,17 +169,21 @@ export default {
   methods: {
     handMenuClick (e) {
       switch (e.key) {
-        case 1: 
+        case 1:
           this.choice = '1'
           break
         case 2:
           this.choice = '2'
+          break
         case 3:
           this.choice = '3'
+          break
         case 4:
           this.choice = '4'
+          break
         case 5:
           this.choice = '5'
+          break
       }
     },
     submit (key) {
@@ -189,7 +193,7 @@ export default {
       }
       const params = this.qs.stringify(sunCitizenmes)
       this.$ajax({
-        url: `api/citizenMes/modifypermit?$(params)`
+        url: `api/citizenMes/modifypermit?${params}`
       })
         .then((response) => {
           alert('更新成功')

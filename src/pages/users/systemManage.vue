@@ -106,7 +106,7 @@ export default {
 <style lang="stylus" scoped rel="stylesheet/stylus">
 .manage-box
   min-height 600px
-  width 70%
+  width 90%
   background-color #fff
   margin-top 55px
   margin-bottom 55px
@@ -116,7 +116,7 @@ export default {
     font-weight 600
 .system-box
   min-height 600px
-  width 70%
+  width 90%
   background-color #fff
   margin-top 55px
   margin-bottom 55px
