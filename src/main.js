@@ -13,8 +13,8 @@ import store from './store/store'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 import 'swiper/dist/css/swiper.css'
 import VModal from 'vue-js-modal'
-import { List, Dropdown, Avatar, Icon, Table, Tag, Divider, Input, Button, Modal, Tabs, Card, Layout, Menu, Select, Switch, Form, Cascader, notification, DatePicker } from 'ant-design-vue'
-[List, Dropdown, Avatar, Icon, Table, Tag, Divider, Input, Button, Modal, Tabs, Card, Layout, Menu, Select, Switch, Form, Cascader, notification, DatePicker].forEach(item => Vue.use(item))
+import { List, Dropdown, Avatar, Icon, Table, Tag, Divider, Input, Button, Modal, Tabs, Card, Layout, Menu, Select, Switch, Form, Cascader, notification, DatePicker, Radio } from 'ant-design-vue'
+[List, Dropdown, Avatar, Icon, Table, Tag, Divider, Input, Button, Modal, Tabs, Card, Layout, Menu, Select, Switch, Form, Cascader, notification, DatePicker, Radio].forEach(item => Vue.use(item))
 
 Vue.use(VueAwesomeSwiper)
 
