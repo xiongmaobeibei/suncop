@@ -51,6 +51,7 @@ export default {
   height 500px
   margin 120px auto 40px auto
   border-radius 30px
+  box-shadow 0 0 20px #888888
   .formbox
     padding-top 80px
     width 80%

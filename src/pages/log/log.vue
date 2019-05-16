@@ -12,7 +12,9 @@
               <router-link to="/log/updateCode">修改密码</router-link>
             </div>
         </div>
-        <router-view class="right-wrapper" @childFn='parentFn'></router-view>
+        <div class="right-wrapper" >
+          <router-view @childFn='parentFn'></router-view>
+        </div>
     </div>
 </template>
 <script>
@@ -53,7 +55,13 @@ export default {
           background rgb(248,242,242)
           margin 1px
     .right-wrapper
+        background-color white
         float right
         width 70%
         background rgb(82,130,170)
+        min-height 800px
+        background-image url('../users/bottom-pic.png')
+        background-repeat no-repeat
+        background-size 100% 100%
+        background-position bottom center
 </style>

@@ -8,7 +8,9 @@
             <li class="tab-item" @click="logout">注销</li>
             <li class="tab-item" @click="backToindex">返回首页</li>
         </ul>
-        <router-view class="right-wrapper"></router-view>
+        <div class="right-wrapper">
+          <router-view></router-view>
+        </div>
     </div>
 </template>
 <script>
@@ -57,7 +59,6 @@ export default {
 .wrapper
   width 80%
   margin auto
-  margin-top -30px
   background rgb(248,242,242)
   .tab
     float left
@@ -82,4 +83,10 @@ export default {
   .right-wrapper
     float right
     width 70%
+    background rgb(82,130,170)
+    min-height 800px
+    background-image url('../users/bottom-pic.png')
+    background-repeat no-repeat
+    background-size 100% 100%
+    background-position bottom center
 </style>

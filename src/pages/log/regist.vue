@@ -83,32 +83,33 @@ export default {
 
 <style lang="stylus" scoped rel="stylesheet/stylus">
     .wrapper
-        background rgb(82,130,170)
-        .formbox
-            width 80%
-            height 800px
-            margin 120px auto 120px auto
-            background white
-            padding 80px 150px 20px 150px
-            border-radius 30px
-            font-size 22px
-            line-height 60px
-            .title
-                display inline-block
-                width 30%
-            .input-box
-                width 60%
-                height 40px
-                border-radius 10px
-                border 1px solid #c8cccf
-            .button
-                width 80%
-                font-size 26px
-                color white
-                height 60px
-                margin-top 15px
-                margin-left 25px
-                line-height 60px
-                background rgb(82,130,170)
-                border 0
+      background-color rgba(0,0,0,0)
+      .formbox
+          width 80%
+          height 800px
+          margin 120px auto 120px auto
+          background white
+          padding 80px 150px 20px 150px
+          border-radius 30px
+          font-size 22px
+          line-height 60px
+          box-shadow 0 0 20px #888888
+          .title
+              display inline-block
+              width 30%
+          .input-box
+              width 60%
+              height 40px
+              border-radius 10px
+              border 1px solid #c8cccf
+          .button
+              width 80%
+              font-size 26px
+              color white
+              height 60px
+              margin-top 15px
+              margin-left 25px
+              line-height 60px
+              background rgb(82,130,170)
+              border 0
 </style>
