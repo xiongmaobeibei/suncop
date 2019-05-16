@@ -92,7 +92,7 @@ export default {
 
 <style lang="stylus" scoped rel="stylesheet/stylus">
   .wrapper
-    background rgb(82,130,170)
+    background-color rgba(0,0,0,0)
     .form
       width 50%
       height 400px
