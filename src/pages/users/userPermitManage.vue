@@ -30,7 +30,7 @@
       <template v-else>{{text}}</template>
     </template>
      <a-dropdown slot="edit">
-        <a class="ant-dropdown-link" href="#">
+        <a class="ant-dropdown-link" id="drop" href="#">
           点我 <a-icon type="down" />
         </a>
         <a-menu slot="overlay" @click="handMenuClick">
@@ -52,7 +52,7 @@
         </a-menu>
   </a-dropdown>
   <template slot="action" slot-scope="text, record">
-      <a-button type="primary" @click="submit(record.key)">确认</a-button>
+      <a-button type="primary" @click="submit(record)">确认</a-button>
   </template>
   </a-table>
 </template>
@@ -90,7 +90,8 @@ export default {
     return {
       data,
       searchText: '',
-      choice: '',
+      choicecreditid: '',
+      choiceidentity: '',
       searchInput: null,
       columns: [
         {
@@ -167,24 +168,30 @@ export default {
     }
   },
   methods: {
-    handMenuClick (e) {
-      switch (e.key) {
-        case 1:
-          this.choice = '1'
-          break
-        case 2:
-          this.choice = '2'
-          break
-        case 3:
-          this.choice = '3'
-          break
-        case 4:
-          this.choice = '4'
-          break
-        case 5:
-          this.choice = '5'
-          break
-      }
+    handMenuClick ({ key }) {
+      // this.choice = e.citicreditid
+      var temp = document.getElementsById('drop')
+      var userarray = ['居民', '警察', '片区管理员', '系统管理员', '局长']
+      console.log(userarray[key])
+      temp.innerHTML = userarray[key]
+      this.choice = key
+      // switch (e.key) {
+      //   case 1:
+      //     this.choice = '1'
+      //     break
+      //   case 2:
+      //     this.choice = '2'
+      //     break
+      //   case 3:
+      //     this.choice = '3'
+      //     break
+      //   case 4:
+      //     this.choice = '4'
+      //     break
+      //   case 5:
+      //     this.choice = '5'
+      //     break
+      // }
     },
     submit (key) {
       const sunCitizenmes = {
