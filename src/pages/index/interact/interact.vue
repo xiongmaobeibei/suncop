@@ -2,7 +2,7 @@
   <div class="interact-box">
     <div class="inter-btn">
       <div v-for="(item,index) in aArr" :key="index" >
-        <a href="item.ahref"><img :src="item.images"></a>
+        <router-link :to="item.ahref"><img :src="item.images"></router-link>
         <p>{{item.title}}</p>
       </div>
     </div>
@@ -10,18 +10,18 @@
       <a-tabs class="tab-btn" type="card" tabPosition="left">
         <a-tab-pane class="tab-content" tab="我要看" tabBarStyle="background-color:'red';" key="1">
           <ul>
-            <li><a href="#">行政规范性文件</a></li>
-            <li><a href="#">公开公示</a></li>
-            <li><a href="#">政策法规</a></li>
+            <li><router-link :to="{path:'/interact'}">行政规范性文件</router-link></li>
+            <li><router-link :to="{path:'/interact'}">公开公示</router-link></li>
+            <li><router-link :to="{path:'/interact'}">政策法规</router-link></li>
           </ul>
         </a-tab-pane>
         <a-tab-pane class="tab-content" tab="我要评" key="2">
           <ul>
-            <li><a href="#">在线访谈</a></li>
-            <li><a href="#">热点答复</a></li>
-            <li><a href="#">局长信箱</a></li>
-            <li><a href="#">投票通道</a></li>
-            <li><a href="#">意见征集</a></li>
+            <li><router-link :to="{path:'/interact'}">在线访谈</router-link></li>
+            <li><router-link :to="{path:'/interact'}">热点答复</router-link></li>
+            <li><router-link :to="{path:'/interact'}">局长信箱</router-link></li>
+            <li><router-link :to="{path:'/interact'}">投票通道</router-link></li>
+            <li><router-link :to="{path:'/interact'}">意见征集</router-link></li>
           </ul>
         </a-tab-pane>
       </a-tabs>
@@ -41,22 +41,22 @@ export default {
         {
           images: i1,
           title: '投票通道',
-          ahref: '#'
+          ahref: '/interact'
         },
         {
           images: i2,
           title: '局长信箱',
-          ahref: '#'
+          ahref: '/interact'
         },
         {
           images: i3,
           title: '热点答复',
-          ahref: '#'
+          ahref: '/interact'
         },
         {
           images: i4,
           title: '意见征集',
-          ahref: '#'
+          ahref: '/interact'
         }
       ]
     }

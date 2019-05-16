@@ -3,15 +3,15 @@
     <div class="manage-box">
         <p style="padding-left: 1em">操作日志管理</p>
         <a-table :columns="columns1" :dataSource="mdata" :pagination="pagination" size='middle'>
-            <span slot="createtime" slot-scope="text" class="content">{{identifyObj[text]}}</span>
+            <span slot="create_time" slot-scope="text" class="content">{{identifyObj[text]}}</span>
             <span slot="url" slot-scope="text" class="content">{{text}}</span>
-            <span slot="userid" slot-scope="text" class="content">{{text}}</span>
+            <span slot="user_id" slot-scope="text" class="content">{{text}}</span>
         </a-table>
     </div>
     <div class="system-box">
         <p style="padding-left: 1em">系统日志管理</p>
         <a-table :columns="columns2" :dataSource="sdata" :pagination="pagination" size='middle'>
-            <span slot="lever" slot-scope="text" class="content">{{identifyObj[text]}}</span>
+            <span slot="level" slot-scope="text" class="content">{{identifyObj[text]}}</span>
             <span slot="logger" slot-scope="text" class="content">{{text}}</span>
             <span slot="time" slot-scope="text" class="content">{{text}}</span>
             <span slot="message" slot-scope="text" class="content">{{text}}</span>
@@ -23,10 +23,10 @@
 
 const columns1 = [{
   title: '触发时间',
-  dataIndex: 'createtime',
-  key: 'createtime',
+  dataIndex: 'create_time',
+  key: 'create_time',
   // 按发件日期长度排序
-  sorter: (a, b) => new Date(a.createtime).getTime() - new Date(b.createtime).getTime()
+  sorter: (a, b) => new Date(a.create_time).getTime() - new Date(b.create_time).getTime()
 }, {
   title: '路径',
   dataIndex: 'url',
@@ -34,16 +34,16 @@ const columns1 = [{
   // 按名字长度排序
 }, {
   title: '操作用户',
-  dataIndex: 'userid',
-  key: 'userid',
-  scopedSlots: { customRender: 'userid' }
+  dataIndex: 'user_id',
+  key: 'user_id',
+  scopedSlots: { customRender: 'user_id' }
 }]
 
 const columns2 = [{
   title: '等级',
-  dataIndex: 'lever',
-  key: 'lever',
-  sorter: (a, b) => a.lever - b.lever
+  dataIndex: 'level',
+  key: 'level',
+  sorter: (a, b) => a.level - b.level
 }, {
   title: '日志',
   dataIndex: 'logger',
@@ -106,7 +106,7 @@ export default {
 <style lang="stylus" scoped rel="stylesheet/stylus">
 .manage-box
   min-height 600px
-  width 8rem
+  width 90%
   background-color #fff
   margin-top 55px
   margin-bottom 55px
@@ -116,7 +116,7 @@ export default {
     font-weight 600
 .system-box
   min-height 600px
-  width 8rem
+  width 90%
   background-color #fff
   margin-top 55px
   margin-bottom 55px

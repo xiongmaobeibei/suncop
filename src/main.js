@@ -32,6 +32,11 @@ Vue.prototype.qs = qs
 
 Vue.prototype.$ajax = axios
 
+// Vue.prototype.cookie = Cookie
+// Vue.prototype.getCookie = key => new Promise((resolve, reject) => {
+//   resolve(Cookie.get(key))
+// })
+
 Vue.config.productionTip = false
 // Vue.http.options.emulateJSON = true
 

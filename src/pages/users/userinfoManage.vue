@@ -23,11 +23,9 @@
       <p>你确定要删除这些用户吗？</p>
   </a-modal>
   <a-table :columns="columns"
-    :rowKey="record => record.login.uuid"
     :dataSource="data"
     :pagination="pagination"
     :scroll="{ x: 1300, y: 800 }"
-    :loading="loading"
     @change="handleTableChange"
     :rowSelection="{selectedRowKeys: selectedRowKeys, onChange: onSelectChange}"
   >
@@ -39,53 +37,41 @@
 </div>
 </template>
 <script>
-import reqwest from 'reqwest'
 const columns = [
   {
     title: '姓名',
-    dataIndex: 'name',
-    // dataIndex: 'citiname',
+    dataIndex: 'citiname',
     sorter: true,
     width: '10%',
-    scopedSlots: { customRender: 'name' }
-    // scopedSlots: { customRender: 'citiname' }
+    scopedSlots: { customRender: 'citiname' }
   },
   {
     title: '身份证号码',
-    // dataIndex: 'citicreditid',
-    dataIndex: 'email',
+    dataIndex: 'citicreditid',
     width: '15%'
   },
   {
     title: '性别',
-    dataIndex: 'gender',
-    // dataIndex: 'voteType',
-    // filters: [
-    //   { text: 'M', value: '男' },
-    //   { text: 'FM', value: '女' }
-    // ],
+    dataIndex: 'sex',
     filters: [
-      { text: 'Male', value: 'male' },
-      { text: 'Female', value: 'female' }
+      { text: 'M', value: '男' },
+      { text: 'FM', value: '女' }
     ],
     width: '10%'
   },
   {
     title: '籍贯',
-    // dataIndex: 'nativeaddress',
-    dataIndex: 'email',
+    dataIndex: 'nativeaddress',
     width: '20%'
   },
   {
     title: '联系电话',
-    // dataIndex: 'phonenumber',
-    dataIndex: 'email',
+    dataIndex: 'phonenumber',
     width: '15%'
   },
   {
     title: '出生日期',
-    // dataIndex: 'birthday',
-    dataIndex: 'email',
+    dataIndex: 'birthday',
     width: '20%'
   },
   {
@@ -121,13 +107,17 @@ export default {
   methods: {
     handleOk () {
       for (var i = 0; i < this.selectedRowKeys.length; i++) {
-        var param = this.selectedRowKeys[i]
+        var temp = {
+          creditId: this.data[this.selectedRowKeys[i]].citicreditid
+        }
+        let param = this.qs.stringify(temp)
         this.$ajax({
           url: `/api/citizenMes/deleteuser?${param}`,
           methods: 'get'
         }).then((response) => {
-          if (response !== 200) {
+          if (response.status === 200) {
             alert('删除成功！')
+            this.$router.go(0)
           }
         }).catch((error) => {
           console.log(error)
@@ -160,38 +150,39 @@ export default {
     fetch (params = {}) {
       console.log('params:', params)
       this.loading = true
-      // this.$ajax({
-      //   url: '/api/citizenMes/all',
-      //   methods: "get"
-      // }).then((response) => {
-      //     const pagination = { ...this.pagination }
-      //     // Read total count from server
-      //     pagination.total = data.totalCount
-      //     // pagination.total = 200
-      //     this.loading = false
-      //     this.data = response.results
-      //     this.pagination = pagination
-      //   })
-      //   .catch((error) => {
-      //     console.log(error)
-      //   })
-      reqwest({
-        url: 'https://randomuser.me/api',
-        method: 'get',
-        data: {
-          results: 10,
-          ...params
-        },
-        type: 'json'
-      }).then((data) => {
+      this.$ajax({
+        url: '/api/citizenMes/all',
+        methods: 'get'
+      }).then((response) => {
+        console.log(response.data)
         const pagination = { ...this.pagination }
         // Read total count from server
-        // pagination.total = data.totalCount
-        pagination.total = 200
+        pagination.total = this.data.length
+        // pagination.total = 200
         this.loading = false
-        this.data = data.results
+        this.data = response.data
         this.pagination = pagination
       })
+        .catch((error) => {
+          console.log(error)
+        })
+      // reqwest({
+      //   url: 'https://randomuser.me/api',
+      //   method: 'get',
+      //   data: {
+      //     results: 10,
+      //     ...params
+      //   },
+      //   type: 'json'
+      // }).then((data) => {
+      //   const pagination = { ...this.pagination }
+      //   // Read total count from server
+      //   // pagination.total = data.totalCount
+      //   pagination.total = 200
+      //   this.loading = false
+      //   this.data = data.results
+      //   this.pagination = pagination
+      // })
     }
   }
 }

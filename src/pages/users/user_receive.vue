@@ -76,7 +76,7 @@ export default {
   methods: {
     getLetters () {
       const sunCitizenmes = {
-        userid: this.userid
+        userid: sessionStorage.getItem('user')
       }
       const params = this.qs.stringify(sunCitizenmes)
       this.$ajax({
@@ -85,15 +85,18 @@ export default {
         .then((response) => {
           var i = 0
           var j = 0
+          var ming = []
           while (i < response.data.length) {
-            if (response.data[i].returninfo === '') {
+            var temp = response.data[i].returninfo
+            if (temp === null || temp === undefined || temp === '') {
               i++
             } else {
-              this.data[j] = response.data[i]
+              ming[j] = response.data[i]
               i++
               j++
             }
           }
+          this.data = ming
         })
         .catch((error) => {
           console.log(error)

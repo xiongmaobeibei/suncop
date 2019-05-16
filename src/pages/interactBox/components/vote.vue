@@ -73,5 +73,5 @@ export default {
 <style lang="stylus" scoped>
 .wrapper
   margin 80px auto 50px auto
-  width 60%
+  width 100%
 </style>

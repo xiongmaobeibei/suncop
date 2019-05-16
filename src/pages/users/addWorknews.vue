@@ -53,21 +53,6 @@
                 </a-form-item>
                 <a-form-item
                 v-bind="formItemLayout"
-                label="发布时间"
-                >
-                    <a-date-picker
-                        v-decorator="[
-                        'time',
-                        {
-                            rules: [{ required: true, message: '请选择时间!' }]
-                        }
-                        ]"
-                        show-time
-                        format="YYYY-MM-DD HH:mm:ss"
-                    />
-                </a-form-item>
-                <a-form-item
-                v-bind="formItemLayout"
                 label="新闻内容"
                 >
                     <a-textarea
@@ -127,15 +112,15 @@ export default {
           console.log(err)
         } else {
           const sunCitizenmes = {
-            newtype: values.type,
-            newtitle: values.title,
-            newcontent: values.content,
-            newdate: values.time.format('YYYY-MM-DD HH:mm:ss')
+            Type: values.type,
+            title: values.title,
+            content: values.content,
+            author: sessionStorage.getItem('user')
           }
           console.log(sunCitizenmes)
           const params = this.qs.stringify(sunCitizenmes)
           this.$ajax({
-            url: `/api/policenews/release?${params}`
+            url: `/api/webinfo/addWebInfo?${params}`
           })
             .then((response) => {
               console.log(response.data)
@@ -143,10 +128,6 @@ export default {
             .catch((error) => {
               console.log(error)
             })
-        //   const addnews = {
-        //     // 'newtitle': fieldsValue.time
-        //     // 'newdate': fieldsValue['time'].format('YYYY-MM-DD HH:mm:ss')
-        //   }
         }
       })
     }
@@ -157,6 +138,7 @@ export default {
 <style lang="stylus" scoped rel="stylesheet/stylus">
 .add-box
     width 50%
+    min-height 600px
     height auto
     background-color #F4F4F4
     padding 5px 10px

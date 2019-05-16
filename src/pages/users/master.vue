@@ -2,9 +2,9 @@
     <div class="wrapper">
         <ul class="tab">
             <li class="item-title">>>> 个人中心</li>
-            <li v-for="item in currentNavItem" :key="item" class="tab-item">
+            <li v-for="item in currentNavItem" :key="item.id" class="tab-item">
               <router-link :to="item.path">{{item.name}}</router-link>
-              </li>
+            </li>
             <li class="tab-item" @click="logout">注销</li>
             <li class="tab-item" @click="backToindex">返回首页</li>
         </ul>
@@ -20,26 +20,36 @@ export default {
       currentNavItem: []
     }
   },
-  mounted: function () {
+  mounted () {
     this.showMenu()
   },
   methods: {
-    logout() {
+    logout () {
       sessionStorage.clear()
       this.$router.push('/log')
     },
     backToindex () {
       this.$router.push('/index')
     },
-    showMenu () {
-      console.log(sessionStorage.getItem('menuData'))
-      this.currentNavItem = JSON.parse(sessionStorage.getItem('menuData'))
-    }
-    // created () {
-    //   this.user = sessionStorage.getItem('user')
-    //   console.log(sessionStorage.getItem('menuData'))
-    //   this.currentNavItem = JSON.parse(sessionStorage.getItem('menuData'))
+    // async getSessionStorage (key) {
+    //   return new Promise((resolve, reject) => {
+    //     resolve(sessionStorage.getItem('menuData'))
+    //   })
     // }
+    // ,
+    showMenu () {
+      // console.log(await sessionStorage.getItem('menuData'))
+      console.log(JSON.parse(sessionStorage.getItem('menuData')))
+      const menuData = sessionStorage.getItem('menuData')
+      this.currentNavItem = JSON.parse(menuData)
+      // let index = document.getElementsByClassName('tab-item')
+      // for (var i = 0; i < this.currentNavItem.length; i++) {
+      //   let newitem = document.createElement('li')
+      //   console.log(this.currentNavItem[i].name)
+      //   newitem.innerHTML = this.currentNavItem[i].name
+      //   index.before(newitem)
+      // }
+    }
   }
 }
 </script>

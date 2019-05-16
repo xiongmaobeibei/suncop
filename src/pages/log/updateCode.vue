@@ -22,7 +22,7 @@ export default {
   methods: {
     doupdate () {
       const sunCitizenmes = {
-        citicreditid: this.citicreditid,
+        userid: this.citicreditid,
         password: this.newcode
       }
       const params = this.qs.stringify(sunCitizenmes)
@@ -31,7 +31,8 @@ export default {
         methods: 'get'
       })
         .then((response) => {
-          if (response !== 200) {
+          console.log(response)
+          if (response === 1) {
             alert('OK')
           }
         })

@@ -40,17 +40,17 @@
 export default {
   data () {
     return {
-      creditid: '',
+      credit_id: '',
       user: {
-        'sex': '女',
-        'citiname': '谭靖薇',
-        'citicreditid': '512000328',
-        'password': '123456',
-        'nation': '汉族',
-        'address': '四川省成都市',
-        'email': '12312@126.com',
-        'birthday': '1998年X年X月',
-        'phonenumber': '37647263'
+        'sex': '',
+        'citiname': '',
+        'citicreditid': '',
+        'password': '',
+        'nation': '',
+        'address': '',
+        'email': '',
+        'birthday': '',
+        'phonenumber': ''
       }
     }
   },
@@ -59,17 +59,20 @@ export default {
   },
   methods: {
     showMes () {
-      // this.creditid = sessionStorage.getItem('user')
-      // this.$ajax({
-      //     url: `/api/citizenMes/checkOne?${params}`,
-      //     methods: "get"
-      //   })
-      //     .then((response) => {
-      //       this.user = response.data
-      //     })
-      //     .catch((error) => {
-      //       console.log(error)
-      //     })
+      this.credit_id = sessionStorage.getItem('user')
+      let temp = {
+        creditid: this.credit_id
+      }
+      let params = this.qs.stringify(temp)
+      this.$ajax({
+        url: `/api/citizenMes/selectbycreditid?${params}`,
+        methods: 'get'
+      }).then((response) => {
+        console.log(response.data)
+        this.user = response.data
+      }).catch((error) => {
+        console.log(error)
+      })
     }
   }
 }
