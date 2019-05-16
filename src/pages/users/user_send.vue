@@ -37,7 +37,7 @@
 <script>
 const columns = [{
   title: '发件人',
-  dataIndex: 'owneremail',
+  dataIndex: 'sunCitizenmes.citiname',
   key: 'owneremail',
   // 按名字长度排序
   sorter: (a, b) => a.owneremail.length - b.owneremail.length
@@ -119,7 +119,7 @@ export default {
     },
     onPressDel (e) {
       const i = this.data.findIndex(item => item.key === e.key)
-      this.id = i
+      this.id = i + 1
       this.showModal()
     },
     onPressCheck (e) {
@@ -136,7 +136,8 @@ export default {
 </script>
 <style lang="stylus" scoped>
 .sendBox
-  width 8rem
+  width 80%
+  margin 50px auto
   background-color #fff
   margin-bottom 55px
   border-radius 10px
@@ -144,6 +145,7 @@ export default {
     margin-top 1em
     padding-left 1em
     font-weight 500
+    font-size 22px
 .detailBox
   width 100%
   height 100%

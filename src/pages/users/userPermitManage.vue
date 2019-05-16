@@ -209,7 +209,7 @@ export default {
           console.log(error)
           this.loadingdata()
         })
-      this.data.splice(i, 1)
+      // this.data.splice(i, 1)
     },
     handleSearch (selectedKeys, confirm) {
       confirm()
