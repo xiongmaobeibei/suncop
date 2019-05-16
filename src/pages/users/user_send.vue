@@ -24,6 +24,14 @@
         </footer>
       </div>
     </modal>
+    <a-modal
+      title="Title"
+      :visible="visible"
+      @ok="handleOk"
+      @cancel="handleCancel"
+    >
+      <p>{{ModalText}}</p>
+    </a-modal>
   </div>
 </template>
 <script>
@@ -65,10 +73,35 @@ export default {
         title: '',
         content: '',
         letterTime: ''
-      }
+      },
+      ModalText: '确认删除该条信件？',
+      id: ''
     }
   },
   methods: {
+    showModal () {
+      this.visible = true
+    },
+    handleOk (e) {
+      const sunCitizenmes = {
+        letterid: this.data[this.id].letterid
+      }
+      const params = this.qs.stringify(sunCitizenmes)
+      this.$ajax({
+        url: `/api/letters/deleteByletterid?${params}`
+      })
+        .then((response) => {
+          console.log(response.data)
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+      this.visible = false
+      this.data.splice(this.id, 1)
+    },
+    handleCancel (e) {
+      this.visible = false
+    },
     getLetters () {
       const sunCitizenmes = {
         userid: sessionStorage.getItem('user')
@@ -86,20 +119,8 @@ export default {
     },
     onPressDel (e) {
       const i = this.data.findIndex(item => item.key === e.key)
-      const sunCitizenmes = {
-        letterid: this.data[i].letterid
-      }
-      const params = this.qs.stringify(sunCitizenmes)
-      this.$ajax({
-        url: `/api/letters/deleteByletterid?${params}`
-      })
-        .then((response) => {
-          console.log(response.data)
-        })
-        .catch((error) => {
-          console.log(error)
-        })
-      this.data.splice(i, 1)
+      this.id = i
+      this.showModal()
     },
     onPressCheck (e) {
       this.modal = {

@@ -109,7 +109,7 @@ export default {
       e.preventDefault()
       this.form.validateFields((err, values) => {
         if (err) {
-          console.log(err)
+          this.alert('请标准填写！')
         } else {
           const sunCitizenmes = {
             Type: values.type,
