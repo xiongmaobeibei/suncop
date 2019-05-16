@@ -23,15 +23,29 @@
                     阳光精神：海纳百川 追求卓越 开明睿智 大气谦和
                 </div>
             </div>
-            <div class="image-wrapper"></div>
+            <div v-if="isShowimg" class="image-wrapper"></div>
+            <video v-if="isShowvideo" class="video-box" muted autoplay loop>
+                <source src="../../components/header/sunpolice.mp4" type="video/mp4">
+            </video>
+            <a-button type="primary" style="background-color:rgb(14,30,45);font-size:20px;border:none;" icon="down-circle" class="change-btn" @click="changeimg" />
         </div>
     </div>
 </template>
 <script>
 export default {
+  data () {
+    return {
+      isShowimg: true,
+      isShowvideo: false
+    }
+  },
   methods: {
     jumpLog () {
       this.$router.push('/log')
+    },
+    changeimg () {
+      this.isShowimg = !this.isShowimg
+      this.isShowvideo = !this.isShowvideo
     }
   }
 }
@@ -82,11 +96,12 @@ export default {
               display inline-block
               border 0px
               border-radius 15px
-              background-color orange
+              color white
+              background-color #005e9a
     .bottom
         background-color rgb(14,30,45)
         width 100%
-        height 680px
+        height auto
         .title
             color:#99FFFF
             height 150px
@@ -120,6 +135,12 @@ export default {
         .image-wrapper
             height 650px
             bg-image('u2')
-            background-size 100% 430px
+            background-size 100% 550px
             background-repeat no-repeat
+        .video-box
+            height auto
+            width 100%
+            zoom -1
+        .change-btn
+            margin 0 50%
 </style>
