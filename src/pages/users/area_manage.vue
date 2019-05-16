@@ -191,7 +191,7 @@ export default {
         url: `/api/letter/setletterpermit?${params}`
       })
         .then((response) => {
-          console.log(response.data)
+          alert('已通过')
         })
         .catch((error) => {
           console.log(error)
@@ -208,7 +208,7 @@ export default {
         url: `/api/letters/deleteByletterid?${params}`
       })
         .then((response) => {
-          console.log(response.data)
+          alert('已删除')
         })
         .catch((error) => {
           console.log(error)
@@ -217,9 +217,9 @@ export default {
     },
     onPressCheck (e) {
       this.modal = {
-        source: e.identify,
+        source: e.sunCitizenmes.identity,
         content: e.lettercontent,
-        userName: e.owneremail
+        userName: e.sunCitizenmes.citiname
       }
       this.$modal.show('message-detail')
     }
@@ -230,9 +230,8 @@ export default {
 .receiveBox
   min-height 600px
   width 800px
+  margin 50px auto
   background-color #fff
-  margin-top 55px
-  margin-bottom 55px
   border-radius 10px
   padding-top 1em
   p

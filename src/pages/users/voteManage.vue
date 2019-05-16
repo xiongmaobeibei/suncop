@@ -119,7 +119,7 @@ export default {
     handleOk () {
       for (var i = 0; i < this.selectedRowKeys.length; i++) {
         var temp = {
-          creditId: this.data[this.selectedRowKeys[i]].voteID
+          voteID: this.data[this.selectedRowKeys[i]].voteid
         }
         let param = this.qs.stringify(temp)
         this.$ajax({

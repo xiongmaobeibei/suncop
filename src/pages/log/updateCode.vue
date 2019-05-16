@@ -74,9 +74,11 @@ export default {
         height 40px
         line-height 35px
     .button
-        width 80%
-        margin-left 5%
-        font-size 26px
+        width 30%
+        margin-left 35%
+        height 45px
+        line-height 45px
+        font-size 22px
         color white
         background rgb(82,130,170)
         border 0

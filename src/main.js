@@ -13,8 +13,8 @@ import store from './store/store'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 import 'swiper/dist/css/swiper.css'
 import VModal from 'vue-js-modal'
-import { List, Dropdown, Avatar, Icon, Table, Tag, Divider, Input, Button, Modal, Tabs, Card, Layout, Menu, Select, Switch, Form, Cascader, notification, DatePicker, Collapse } from 'ant-design-vue'
-[List, Dropdown, Avatar, Icon, Table, Tag, Divider, Input, Button, Modal, Tabs, Card, Layout, Menu, Select, Switch, Form, Cascader, notification, DatePicker, Collapse].forEach(item => Vue.use(item))
+import { List, Dropdown, Avatar, Icon, Table, Tag, Divider, Input, Button, Modal, Tabs, Card, Layout, Menu, Select, Switch, Form, Cascader, notification, DatePicker, Collapse, Radio } from 'ant-design-vue'
+[List, Dropdown, Avatar, Icon, Table, Tag, Divider, Input, Button, Modal, Tabs, Card, Layout, Menu, Select, Switch, Form, Cascader, notification, DatePicker, Collapse, Radio].forEach(item => Vue.use(item))
 
 Vue.use(VueAwesomeSwiper)
 
@@ -43,19 +43,23 @@ Vue.config.productionTip = false
 Vue.use(VueResource)
 Vue.use(VModal, { dialog: true })
 // 登录状态判断
-// router.beforeEach((to, from, next) => {
-//   if (to.matched.some(record => record.meta.requireLogin)) {
-//     if (sessionStorage.getItem('user')) {
-//       next()
-//     } else {
-//       next({
-//         path: '/'
-//       })
-//     }
-//   } else {
-//     next()
-//   }
-// })
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requireLogin)) {
+    if (sessionStorage.getItem('user')) {
+      next()
+    } else {
+      next({
+        path: '/'
+      })
+    }
+  } else if (to.name === '/log/login') {
+    if (sessionStorage.getItem('user')) {
+      next('/')
+    }
+  } else {
+    next()
+  }
+})
 
 /* eslint-disable no-new */
 new Vue({

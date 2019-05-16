@@ -31,17 +31,6 @@ const constantRoutes = [
     component: () => import('../pages/index/index')
   },
   {
-    path: '/logmanage',
-    component: () => import('../pages/mylog')
-  },
-  {
-    path: '/add',
-    component: () => import('../pages/users/addWorknews'),
-    meta: {
-      requireLogin: true // 当前路由需要校验，不需要就不用写
-    }
-  },
-  {
     path: '/interact',
     component: () => import('../pages/interactBox/index'),
     children: [
@@ -74,9 +63,9 @@ const constantRoutes = [
   {
     path: '/user',
     component: () => import('../pages/users/master'),
-    // meta: {
-    //   requireLogin: true // 当前路由需要校验，不需要就不用写
-    // },
+    meta: {
+      requireLogin: true // 当前路由需要校验，不需要就不用写
+    },
     children: [
       {
         path: '/user/personality',
@@ -109,6 +98,13 @@ const constantRoutes = [
       {
         path: '/user/admin_receive', // 局长查看收件箱
         component: () => import('../pages/users/admin_receive'),
+        meta: {
+          requireLogin: true // 当前路由需要校验，不需要就不用写
+        }
+      },
+      {
+        path: '/user/admin_send', // 局长查看收件箱
+        component: () => import('../pages/users/admin_send'),
         meta: {
           requireLogin: true // 当前路由需要校验，不需要就不用写
         }

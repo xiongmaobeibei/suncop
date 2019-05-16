@@ -137,7 +137,8 @@ export default {
 
 <style lang="stylus" scoped rel="stylesheet/stylus">
 .add-box
-    width 50%
+    width 60%
+    margin 50px auto
     min-height 600px
     height auto
     background-color #F4F4F4
