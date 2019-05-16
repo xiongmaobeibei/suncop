@@ -52,6 +52,8 @@ export default {
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
     @import "../../common/stylus/mixin";
+    .wrapper
+        width 100%
     .top
         margin 0
         padding 0

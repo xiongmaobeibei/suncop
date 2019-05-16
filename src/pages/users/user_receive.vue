@@ -29,13 +29,20 @@
         </footer>
       </div>
     </modal>
-    <v-dialog/>
+    <a-modal
+      title="Title"
+      :visible="visible"
+      @ok="handleOk"
+      @cancel="handleCancel"
+    >
+      <p>{{ModalText}}</p>
+    </a-modal>
   </div>
 </template>
 <script>
 const columns = [{
-  title: '发件人',
-  dataIndex: 'sendp',
+  title: '收件人',
+  dataIndex: 'sunCitizenmes.citiname',
   key: 'sendp'
 }, {
   title: '日期',
@@ -70,10 +77,36 @@ export default {
         userName: '',
         returnMessage: '',
         letterTime: ''
-      }
+      },
+      visible: false,
+      ModalText: '确认删除该条信件？',
+      id: ''
     }
   },
   methods: {
+    showModal () {
+      this.visible = true
+    },
+    handleOk (e) {
+      const sunCitizenmes = {
+        letterid: this.data[this.id].letterid
+      }
+      const params = this.qs.stringify(sunCitizenmes)
+      this.$ajax({
+        url: `/api/letters/deleteByletterid?${params}`
+      })
+        .then((response) => {
+          console.log(response.data)
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+      this.visible = false
+      this.data.splice(this.id, 1)
+    },
+    handleCancel (e) {
+      this.visible = false
+    },
     getLetters () {
       const sunCitizenmes = {
         userid: sessionStorage.getItem('user')
@@ -88,6 +121,7 @@ export default {
           var ming = []
           while (i < response.data.length) {
             var temp = response.data[i].returninfo
+            console.log()
             if (temp === null || temp === undefined || temp === '') {
               i++
             } else {
@@ -107,7 +141,7 @@ export default {
         letterid: e.letterid,
         title: e.lettertitle,
         content: e.lettercontent,
-        userName: e.owneremail,
+        userName: e.sunCitizenmes.citiname,
         returnMessage: e.returninfo,
         letterTime: e.lettertime
       }
@@ -115,36 +149,23 @@ export default {
     },
     onPressDel (e) {
       const i = this.data.findIndex(item => item.key === e.key)
-      const sunCitizenmes = {
-        letterid: this.data[i].letterid
-      }
-      const params = this.qs.stringify(sunCitizenmes)
-      this.$ajax({
-        url: `/api/letters/deleteByletterid?${params}`
-      })
-        .then((response) => {
-          console.log(response.data)
-        })
-        .catch((error) => {
-          console.log(error)
-        })
-      this.data.splice(i, 1)
+      this.id = i + 1
+      this.showModal()
     }
   }
 }
 </script>
 <style lang="stylus" scoped>
 .receiveBox
-  width 8rem
+  width 80%
+  margin 50px auto
   background-color #fff
-  margin-top 55px
-  margin-bottom 55px
-  border-radius 10px
   min-height 600px
   p
     margin-top 1em
     padding-left 1em
     font-weight 500
+    font-size 22px
 footer
   margin-top 50px
   text-align right

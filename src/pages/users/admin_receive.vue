@@ -11,7 +11,7 @@
         <a href="javascript:" @click="onPressCheck(record)">详情</a>
       </span>
     </a-table>
-    <modal name="message-detail" height="auto" :scrollable="true">
+    <a-modal name="message-detail" height="auto" :scrollable="true" :visible="isShow">
       <div class="modal-box">
         <header>
           <p>发件人: {{modal.userName}}</p>
@@ -38,30 +38,40 @@
           </div>
         </footer>
       </div>
-    </modal>
+    </a-modal>
+    <a-modal
+      title="Title"
+      :visible="visible"
+      @ok="handleOk"
+      @cancel="handleCancel"
+    >
+      <p>{{ModalText}}</p>
+    </a-modal>
   </div>
 </template>
 <script>
 const identifyObj = {
-  'admin': '管理员',
-  'police': '警察',
-  'resident': '居民'
+  '系统管理员': '系统管理员',
+  '片区管理员': '片区管理员',
+  '警察': '警察',
+  '居民': '居民'
 }
 const columns = [{
-  dataIndex: 'identify',
+  dataIndex: 'sunCitizenmes.identity',
   title: '身份',
   key: 'identify',
   scopedSlots: { customRender: 'identify' },
   // 筛选发件人的身份
   filters: [
-    { text: '管理员', value: 'admin' },
-    { text: '警察', value: 'police' },
-    { text: '居民', value: 'resident' }
+    { text: '系统管理员', value: '系统管理员' },
+    { text: '片区管理员', value: '片区管理员' },
+    { text: '警察', value: '警察' },
+    { text: '居民', value: '居民' }
   ],
   onFilter: (value, record) => record.identify.indexOf(value) === 0
 }, {
   title: '发件人',
-  dataIndex: 'owneremail',
+  dataIndex: 'sunCitizenmes.citiname',
   key: 'owneremail',
   // 按名字长度排序
   sorter: (a, b) => a.owneremail.length - b.owneremail.length
@@ -90,7 +100,7 @@ export default {
     return {
       data: [],
       columns,
-      visible: false,
+      isShow: false,
       inputValue: '',
       loading: false,
       modal: {
@@ -99,17 +109,77 @@ export default {
         content: '',
         userName: ''
       },
-      identifyObj
+      identifyObj,
+      visible: false,
+      ModalText: '',
+      isDel: true,
+      id: ''
     }
   },
   methods: {
+    showModal () {
+      this.visible = true
+    },
+    handleOk (e) {
+      if (this.isDel === true) {
+        const sunCitizenmes = {
+          letterid: this.data[this.id].letterid
+        }
+        const params = this.qs.stringify(sunCitizenmes)
+        this.$ajax({
+          url: `/api/letters/deleteByletterid?${params}`
+        })
+          .then((response) => {
+            console.log(response.data)
+          })
+          .catch((error) => {
+            console.log(error)
+          })
+        this.visible = false
+        this.data.splice(this.id, 1)
+      } else {
+        const sunCitizenmes = {
+          id: this.data[this.id].letterid,
+          returnText: this.inputValue
+        }
+        const params = this.qs.stringify(sunCitizenmes)
+        this.$ajax({
+          url: `/api/letter/return?${params}`
+        })
+          .then((response) => {
+          })
+          .catch((error) => {
+            console.log(error)
+          })
+        this.data.splice(this.id, 1)
+        this.visible = false
+        this.isShow = false
+        this.inputValue = ''
+      }
+    },
+    handleCancel (e) {
+      this.visible = false
+    },
     getLetters () {
       this.$ajax({
         url: `/api/letter/capitalseeletters`
       })
         .then((response) => {
-          console.log(response.data)
-          this.data = response.data
+          var i = 0
+          var j = 0
+          var ming = []
+          while (i < response.data.length) {
+            var temp = response.data[i].returninfo
+            console.log()
+            if (temp === null || temp === undefined || temp === '') {
+              ming[j] = response.data[i]
+              i++
+              j++
+            } else {
+              i++
+            }
+          }
+          this.data = ming
         })
         .catch((error) => {
           console.log(error)
@@ -117,63 +187,43 @@ export default {
     },
     onPressDel (e) {
       const i = this.data.findIndex(item => item.key === e.key)
-      const sunCitizenmes = {
-        letterid: this.data[i].letterid
-      }
-      const params = this.qs.stringify(sunCitizenmes)
-      this.$ajax({
-        url: `/api/letters/deleteByletterid?${params}`
-      })
-        .then((response) => {
-          console.log(response.data)
-        })
-        .catch((error) => {
-          console.log(error)
-        })
-      this.data.splice(i, 1)
+      this.ModalText = '确认删除该条信件？'
+      this.id = i + 1
+      this.visible = true
+      this.isDel = true
+      this.showModal()
     },
     onPressCheck (e) {
+      const i = this.data.findIndex(item => item.key === e.key)
+      this.id = i
       this.modal = {
         letterid: e.letterid,
-        source: e.identify,
+        source: e.sunCitizenmes.identity,
         content: e.lettercontent,
-        userName: e.owneremail
+        userName: e.sunCitizenmes.citiname
       }
-      this.$modal.show('message-detail')
+      this.isShow = true
+      this.isDel = false
     },
     onPressSendBtn () {
       // TODO: 这里需要后端提供方法发送信息
-      const sunCitizenmes = {
-        id: this.modal.letterid,
-        returnText: this.inputValue
-      }
-      const params = this.qs.stringify(sunCitizenmes)
-      this.$ajax({
-        url: `/api/letter/return?${params}`
-      })
-        .then((response) => {
-          console.log(response.data)
-        })
-        .catch((error) => {
-          console.log(error)
-        })
-      this.loading = true
-      setTimeout(() => { this.loading = false }, 2000)
+      this.ModalText = '确认回复该条信件？'
+      this.showModal()
     }
   }
 }
 </script>
 <style lang="stylus" scoped>
 .receiveBox
-  min-height 600px
-  width 8rem
+  width 80%
+  margin 50px auto
   background-color #fff
-  margin-top 55px
-  margin-bottom 55px
-  border-radius 10px
-  padding-top 1em
+  min-height 600px
   p
-    font-weight 600
+    margin-top 1em
+    padding-left 1em
+    font-weight 500
+    font-size 22px
   main
     // min-height 10em
   .footer-form

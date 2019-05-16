@@ -25,8 +25,8 @@
     <a-table :rowSelection="rowSelection" hideDefaultSelections=true :columns="columns" :dataSource="data" :pagination="pagination" size='middle'>
       <span slot="identify" slot-scope="text" class="content">{{identifyObj[text]}}</span>
       <span slot="owneremail" slot-scope="text" class="content">{{text}}</span>
-      <span slot="lettertitle" slot-scope="text" class="content">{{text}}</span>
       <span slot="lettertime" slot-scope="text" class="content">{{text}}</span>
+      <span slot="lettertitle" slot-scope="text" class="content">{{text}}</span>
       <span slot="action" slot-scope="text, record">
         <a href="javascript:" @click="onPressDel(record)">删除</a>
         <a href="javascript:" @click="onPressCheck(record)">详情</a>
@@ -47,25 +47,27 @@
 </template>
 <script>
 const identifyObj = {
-  'admin': '管理员',
-  'police': '警察',
-  'resident': '居民'
+  '系统管理员': '系统管理员',
+  '片区管理员': '片区管理员',
+  '警察': '警察',
+  '居民': '居民'
 }
 const columns = [{
-  dataIndex: 'identify',
+  dataIndex: 'sunCitizenmes.identity',
   title: '身份',
   key: 'identify',
   scopedSlots: { customRender: 'identify' },
   // 筛选发件人的身份
   filters: [
-    { text: '管理员', value: 'admin' },
-    { text: '警察', value: 'police' },
-    { text: '居民', value: 'resident' }
+    { text: '系统管理员', value: '系统管理员' },
+    { text: '片区管理员', value: '片区管理员' },
+    { text: '警察', value: '警察' },
+    { text: '居民', value: '居民' }
   ],
   onFilter: (value, record) => record.identify.indexOf(value) === 0
 }, {
   title: '发件人',
-  dataIndex: 'owneremail',
+  dataIndex: 'sunCitizenmes.citiname',
   key: 'owneremail',
   // 按名字长度排序
   sorter: (a, b) => a.owneremail.length - b.owneremail.length
@@ -189,7 +191,7 @@ export default {
         url: `/api/letter/setletterpermit?${params}`
       })
         .then((response) => {
-          console.log(response.data)
+          alert('已通过')
         })
         .catch((error) => {
           console.log(error)
@@ -206,7 +208,7 @@ export default {
         url: `/api/letters/deleteByletterid?${params}`
       })
         .then((response) => {
-          console.log(response.data)
+          alert('已删除')
         })
         .catch((error) => {
           console.log(error)
@@ -215,9 +217,9 @@ export default {
     },
     onPressCheck (e) {
       this.modal = {
-        source: e.identify,
+        source: e.sunCitizenmes.identity,
         content: e.lettercontent,
-        userName: e.owneremail
+        userName: e.sunCitizenmes.citiname
       }
       this.$modal.show('message-detail')
     }
@@ -228,9 +230,8 @@ export default {
 .receiveBox
   min-height 600px
   width 800px
+  margin 50px auto
   background-color #fff
-  margin-top 55px
-  margin-bottom 55px
   border-radius 10px
   padding-top 1em
   p

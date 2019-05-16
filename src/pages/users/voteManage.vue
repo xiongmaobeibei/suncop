@@ -29,9 +29,18 @@
       v-model="detailvisible"
     >
       <h1>{{ showdata.votename}}</h1>
-      <h2>投票类型：{{ showdata.voteType}}</h2>
+      <h2>投票类型：{{ showdata.votetype}}</h2>
       <h2>投票介绍：{{ showdata.voteintro}}</h2>
-      <h3>投票时间： {{ showdata.votetimebegin}} -- {{ showdata.votetimeend}}</h3>
+      <h2>投票时间： {{ showdata.votetimebegin}} -- {{ showdata.votetimeend}}</h2>
+      <h2>投票选项:
+      <!-- <li v-for="tab in showdata.voteitems" :key="tab.id">
+        {{ tab.itemid }}: {{ tab.itemname }} --- {{ tab.itemintro }}
+        </li> -->
+      <li v-for="item in showdata.voteitems" :key="item.id" class="tab-item">
+        {{ item.itemid }}： &nbsp;&nbsp; {{ item.itemname }} --- 票数：{{ item.itemcount }}
+        <br/> 介绍：{{ item.itemintro }}
+      </li>
+      </h2>
     </a-modal>
     <a-table :columns="columns"
       :dataSource="data"
@@ -61,7 +70,7 @@ const columns = [
   },
   {
     title: '投票类型',
-    dataIndex: 'voteType',
+    dataIndex: 'votetype',
     width: '20%',
     filters: [
       { text: '单选', value: '单选' },
@@ -94,18 +103,7 @@ export default {
   },
   data () {
     return {
-      data: [
-        {
-          votename: '投票1',
-          voteType: '单选',
-          voteintro: 'sdfhksjhdkf'
-        },
-        {
-          votename: '投票2',
-          voteType: '多选',
-          voteintro: 'sdfhksjh哈撒给房价回归dkf'
-        }
-      ],
+      data: [],
       showdata: {},
       pagination: {},
       loading: false,
@@ -113,14 +111,15 @@ export default {
       detailvisible: false,
       detailItem: 0,
       columns,
-      selectedRowKeys: []
+      selectedRowKeys: [],
+      voteitems: []
     }
   },
   methods: {
     handleOk () {
       for (var i = 0; i < this.selectedRowKeys.length; i++) {
         var temp = {
-          creditId: this.data[this.selectedRowKeys[i]].voteID
+          voteID: this.data[this.selectedRowKeys[i]].voteid
         }
         let param = this.qs.stringify(temp)
         this.$ajax({
@@ -147,7 +146,8 @@ export default {
         voteType: e.voteType,
         voteintro: e.voteintro,
         votetimebegin: e.votetimebegin,
-        votetimeend: e.votetimeend
+        votetimeend: e.votetimeend,
+        voteitems: e.sunVoteitems
       }
     },
     handleTableChange (pagination, filters, sorter) {
@@ -171,7 +171,7 @@ export default {
       console.log('params:', params)
       this.loading = true
       this.$ajax({
-        url: '/api/voteMes',
+        url: '/api/voteDetail/all',
         methods: 'get'
       }).then((response) => {
         console.log(response)

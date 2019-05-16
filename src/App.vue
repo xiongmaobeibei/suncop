@@ -1,5 +1,5 @@
 <template>
-  <div :style="{height: '100%', display: 'flex', flexDirection: 'column'}" id="app">
+  <div :style="{width: '100%', height: '100%', display: 'flex', flexDirection: 'column'}" id="app">
     <v-header class="header"/>
     <div class="body">
       <router-view @touser='jumptouser'></router-view>

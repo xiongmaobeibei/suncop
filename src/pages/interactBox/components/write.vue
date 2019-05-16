@@ -136,6 +136,14 @@
           </a-button>
         </a-form-item>
       </a-form>
+      <a-modal
+        title="Title"
+        :visible="visible"
+        @ok="handleOk"
+        @cancel="handleCancel"
+      >
+        <p>{{ModalText}}</p>
+      </a-modal>
     </div>
   </div>
 </template>
@@ -163,6 +171,9 @@ const residences = [{
 export default {
   data () {
     return {
+      values: {},
+      ModalText: '确认发送该条信件？',
+      visible: false,
       confirmDirty: false,
       residences,
       formItemLayout: {
@@ -179,34 +190,43 @@ export default {
   },
   beforeCreate () {
     this.form = this.$form.createForm(this)
+    this.notification = this.$no
   },
   methods: {
-    handleSubmit  (e) {
+    showModal () {
+      this.visible = true
+    },
+    handleOk (e) {
+      const sunCitizenmes = {
+        creditId: this.values.cardId,
+        LetterTitle: this.values.title,
+        LetterContent: this.values.content
+      }
+      console.log('success values of form: ', sunCitizenmes)
+      const params = this.qs.stringify(sunCitizenmes)
+      this.$ajax({
+        url: `/api/letter/addLetterByCardid?${params}`
+      })
+        .then((response) => {
+          this.visible = false
+          this.form.resetFields()
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    },
+    handleCancel (e) {
+      this.visible = false
+    },
+    handleSubmit (e) {
+      console.log(this)
       e.preventDefault()
       this.form.validateFieldsAndScroll((err, values) => {
         if (err) {
-          console.log('Received values of form: ', values)
+          console.log('Received values of form: ', err)
         } else {
-          const sunCitizenmes = {
-            creditId: values.cardId,
-            LetterTitle: values.title,
-            LetterContent: values.content
-          }
-          console.log('success values of form: ', sunCitizenmes)
-          const params = this.qs.stringify(sunCitizenmes)
-          this.$ajax({
-            url: `/api/letter/addLetterByCardid?${params}`
-          })
-            .then((response) => {
-              this.$notification.open({
-                message: '发送成功',
-                description: '发送成功！感谢你的意见和互动！感谢你的支持~',
-                icon: <a-icon type="smile" style="color: #108ee9" />
-              })
-            })
-            .catch((error) => {
-              console.log(error)
-            })
+          this.values = values
+          this.showModal()
         }
       })
     },
